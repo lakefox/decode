@@ -2,7 +2,6 @@
 	import SvelteMarkdown from 'svelte-markdown';
 	/** @type {import('./$types').PageData} */
 	export let data;
-	console.log(data);
 	let images = (
 		data.content.match(/!\[[^\]]*\]\((?<filename>.*?)(?=\"|\))(?<optionalpart>\".*\")?\)/g) || []
 	).map((e) => {
