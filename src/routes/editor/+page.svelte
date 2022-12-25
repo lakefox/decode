@@ -45,11 +45,7 @@
 			active: docs[docIndex].active,
 			slug: docs[docIndex].slug
 		};
-		pb.collection('posts')
-			.update(docs[docIndex].id, doc)
-			.then(async () => {
-				await getPosts();
-			});
+		pb.collection('posts').update(docs[docIndex].id, doc);
 	}
 	function add() {
 		let doc = {
