@@ -1,7 +1,7 @@
 <script>
 	import PocketBase from '/node_modules/pocketbase/dist/pocketbase.es.mjs';
 	import { browser } from '$app/environment';
-	const pb = new PocketBase('http://127.0.0.1:8090');
+	const pb = new PocketBase('http://127.0.0.1:3100');
 	let user = {};
 	let assets = [];
 	let search = '';
