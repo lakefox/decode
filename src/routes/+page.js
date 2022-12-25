@@ -9,13 +9,21 @@ export function load({ params }) {
             .getList(1, 50)
             .then((e) => {
                 let docs = e.items.map((a) => {
+                    console.log(a);
+                    let images = (a.content
+                        .match(/!\[[^\]]*\]\((?<filename>.*?)(?=\"|\))(?<optionalpart>\".*\")?\)/g) || [])
+                        .map((e) => {
+                            let a = e.slice(2, -1).split('](');
+                            return { name: a[0], url: a[1] };
+                        });
                     return {
                         title: a.title,
                         description: a.description,
                         content: a.content,
                         id: a.id,
                         active: a.active,
-                        slug: a.slug
+                        slug: a.slug,
+                        images: images
                     };
                 });
                 resolve({ docs: docs });

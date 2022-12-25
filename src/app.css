@@ -44,3 +44,14 @@ h5,
 h6 {
     --typography-spacing-vertical: 10px;
 }
+
+p:has(img) {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+}
+
+p>img {
+    max-width: 90%;
+    width: 500px;
+}

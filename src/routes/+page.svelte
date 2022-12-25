@@ -1,10 +1,15 @@
 <script>
 	/** @type {import('./$types').PageData} */
 	export let data;
+	console.log(data);
 </script>
 
 <svelte:head>
 	<title>DECODE</title>
+	<meta
+		name="description"
+		content="Welcome to DECODE, a website featuring high quality tutorials on programming and other topics. Our goal is to help you learn and grow in your field, whether you're a beginner or an experienced developer. Our tutorials are carefully crafted to provide you with the knowledge and skills you need to succeed. Explore our diverse range of topics and start learning today!"
+	/>
 </svelte:head>
 
 <nav>
@@ -17,11 +22,33 @@
 	{#each data.docs as doc}
 		{#if doc.active}
 			<article>
+				{#if doc.images.length > 0}
+					<img
+						class="prevImgTop"
+						src={doc.images[0].url}
+						alt={doc.images[0].name}
+						title={doc.images[0].name}
+					/>
+				{/if}
 				<hgroup>
 					<a href="/{doc.slug}">
-						<h1>{doc.title}</h1>
+						{#if doc.images.length > 0}
+							<img
+								class="prevImgSide"
+								src={doc.images[0].url + '?thumb=100x100'}
+								alt={doc.images[0].name}
+								title={doc.images[0].name}
+							/>
+						{/if}
+						<h1>
+							{doc.title}
+						</h1>
 					</a>
-					<h2>{doc.description}</h2>
+					{#if doc.description.length > 200}
+						<h2>{doc.description.slice(0, -100)}...</h2>
+					{:else}
+						<h2>{doc.description}</h2>
+					{/if}
 				</hgroup>
 			</article>
 		{/if}
@@ -40,12 +67,33 @@
 		display: flex;
 		flex-direction: column;
 	}
-	section > main > img {
-		margin-bottom: 20px;
-	}
 	#favicon {
 		height: 25px;
 		margin-top: -5px;
 		margin-right: 5px;
+	}
+	.prevImgSide {
+		width: 100px;
+		border-radius: 10px;
+		margin-right: 20px;
+	}
+	.prevImgTop {
+		display: none;
+	}
+	a {
+		display: flex;
+		align-items: center;
+	}
+	@media only screen and (max-width: 700px) {
+		.prevImgSide {
+			display: none;
+		}
+		.prevImgTop {
+			display: block;
+			width: 100%;
+			border-radius: 10px;
+			margin-right: 20px;
+			margin-bottom: 15px;
+		}
 	}
 </style>

@@ -2,12 +2,23 @@
 	import SvelteMarkdown from 'svelte-markdown';
 	/** @type {import('./$types').PageData} */
 	export let data;
+	console.log(data);
+	let images = (
+		data.content.match(/!\[[^\]]*\]\((?<filename>.*?)(?=\"|\))(?<optionalpart>\".*\")?\)/g) || []
+	).map((e) => {
+		let a = e.slice(2, -1).split('](');
+		return { name: a[0], url: a[1] };
+	});
 </script>
 
 <svelte:head>
 	<title>DECODE - {data.title}</title>
-	<meta name="description" content={data.description} />
+	<meta property="og:title" content={data.title} />
+	<meta property="og:description" content={data.description} />
 	<meta name="keywords" content={data.slug.split('-').join(' ')} />
+	{#if images.length > 0}
+		<meta property="og:image" content={images[0].url} />
+	{/if}
 </svelte:head>
 
 <nav>
@@ -43,9 +54,6 @@
 		display: flex;
 		flex-direction: column;
 		margin-bottom: 200px;
-	}
-	section > main > img {
-		margin-bottom: 20px;
 	}
 	#title {
 		margin-bottom: 10px;

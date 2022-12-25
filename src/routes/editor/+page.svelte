@@ -195,9 +195,6 @@
 		margin: auto;
 		display: flex;
 	}
-	section > main > img {
-		margin-bottom: 20px;
-	}
 	#title {
 		margin-bottom: 10px;
 	}

@@ -14,8 +14,7 @@
 				await getImages();
 			})
 			.catch((e) => {
-				console.log(e);
-				// window.location.pathname = '/login';
+				window.location.pathname = '/login';
 			});
 	}
 
@@ -51,7 +50,7 @@
 </script>
 
 <svelte:head>
-	<title>DECODE Editor</title>
+	<title>DECODE Upload</title>
 </svelte:head>
 
 <nav>
@@ -128,9 +127,6 @@
 		margin: 2.5%;
 		display: flex;
 		align-items: center;
-	}
-	#title {
-		margin-bottom: 10px;
 	}
 	a {
 		color: #fff !important;
