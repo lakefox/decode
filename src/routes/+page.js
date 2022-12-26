@@ -1,6 +1,6 @@
 import { error } from '@sveltejs/kit';
 import PocketBase from '/node_modules/pocketbase/dist/pocketbase.es.mjs';
-const pb = new PocketBase('http://127.0.0.1:3100');
+const pb = new PocketBase('https://api.decode.sh/');
 
 /** @type {import('./$types').PageLoad} */
 export function load({ params }) {

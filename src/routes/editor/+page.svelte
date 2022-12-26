@@ -2,7 +2,7 @@
 	import SvelteMarkdown from 'svelte-markdown';
 	import PocketBase from '/node_modules/pocketbase/dist/pocketbase.es.mjs';
 	import { browser } from '$app/environment';
-	const pb = new PocketBase('http://127.0.0.1:3100');
+	const pb = new PocketBase('https://api.decode.sh/');
 	let user = {};
 	let docs = [
 		{
@@ -25,7 +25,7 @@
 				getPosts();
 			})
 			.catch(() => {
-				window.location.pathname = '/login';
+				// window.location.pathname = '/login';
 			});
 	}
 
