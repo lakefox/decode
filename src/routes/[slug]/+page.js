@@ -8,7 +8,27 @@ export function load({ params }) {
         pb.collection('posts').getList(1, 50, {
             filter: `slug = "${params.slug}"`
         }).then((data) => {
-            resolve(Object.assign({}, data.items[0]));
+            pb.collection('posts').getList(1, 50).then((posts) => {
+                let res = Object.assign({}, data.items[0]);
+                res.recommendations = posts.items.sort(() => (Math.random() > 0.5) ? 1 : -1).filter(e => e.active).filter(e => e.id != res.id).slice(0, 4).map((a) => {
+                    let images = (a.content
+                        .match(/!\[[^\]]*\]\((?<filename>.*?)(?=\"|\))(?<optionalpart>\".*\")?\)/g) || [])
+                        .map((e) => {
+                            let a = e.slice(2, -1).split('](');
+                            return { name: a[0], url: a[1] };
+                        });
+                    return {
+                        title: a.title,
+                        description: a.description,
+                        content: a.content,
+                        id: a.id,
+                        active: a.active,
+                        slug: a.slug,
+                        images: images
+                    };
+                });
+                resolve(res);
+            });
         });
     }).catch(() => {
         throw error(404, 'Not found');

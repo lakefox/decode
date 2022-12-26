@@ -9,7 +9,6 @@ export function load({ params }) {
             .getList(1, 50)
             .then((e) => {
                 let docs = e.items.map((a) => {
-                    console.log(a);
                     let images = (a.content
                         .match(/!\[[^\]]*\]\((?<filename>.*?)(?=\"|\))(?<optionalpart>\".*\")?\)/g) || [])
                         .map((e) => {

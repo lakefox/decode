@@ -38,6 +38,43 @@
 	<div id="editorCont">
 		<SvelteMarkdown source={data.content} />
 	</div>
+	{#if data.recommendations.length > 0}
+		<div id="recommendations">
+			<h1>Read More</h1>
+			{#each data.recommendations as rec}
+				<article>
+					{#if rec.images.length > 0}
+						<img
+							class="prevImgTop"
+							src={rec.images[0].url}
+							alt={rec.images[0].name}
+							title={rec.images[0].name}
+						/>
+					{/if}
+					<hgroup>
+						<a href="/{rec.slug}">
+							{#if rec.images.length > 0}
+								<img
+									class="prevImgSide"
+									src={rec.images[0].url + '?thumb=100x100'}
+									alt={rec.images[0].name}
+									title={rec.images[0].name}
+								/>
+							{/if}
+							<h1>
+								{rec.title}
+							</h1>
+						</a>
+						{#if rec.description.length > 200}
+							<h2>{rec.description.slice(0, -100)}...</h2>
+						{:else}
+							<h2>{rec.description}</h2>
+						{/if}
+					</hgroup>
+				</article>
+			{/each}
+		</div>
+	{/if}
 </main>
 
 <style>
@@ -60,9 +97,32 @@
 	a {
 		color: #fff !important;
 	}
+	#editorCont {
+		margin-bottom: 200px;
+	}
 	#favicon {
 		height: 25px;
 		margin-top: -5px;
 		margin-right: 5px;
+	}
+	.prevImgSide {
+		width: 100px;
+		border-radius: 10px;
+		margin-right: 20px;
+	}
+	.prevImgTop {
+		display: none;
+	}
+	@media only screen and (max-width: 700px) {
+		.prevImgSide {
+			display: none;
+		}
+		.prevImgTop {
+			display: block;
+			width: 100%;
+			border-radius: 10px;
+			margin-right: 20px;
+			margin-bottom: 15px;
+		}
 	}
 </style>
