@@ -1,5 +1,6 @@
 <script>
 	import SvelteMarkdown from 'svelte-markdown';
+	import { browser } from '$app/environment';
 	/** @type {import('./$types').PageData} */
 	export let data;
 	let images = (
@@ -8,6 +9,38 @@
 		let a = e.slice(2, -1).split('](');
 		return { name: a[0], url: a[1] };
 	});
+
+	let assignedVars = {};
+
+	function parseInputs(content) {
+		content = content
+			.replace(/\@\[\w+\]\{\w+\}/g, (e) => {
+				let vars = e.slice(2, -1).split(']{');
+				assignedVars[vars[0]] = vars[1];
+				return `<input type="text" data-name="${vars[0]}" onkeyup="fillVars(this)" value="${vars[1]}">`;
+			})
+			.replace(/\$\{\w+\}/g, (e) => {
+				return assignedVars[e.slice(2, -1)];
+			});
+		return content;
+	}
+
+	let contentCopy = parseInputs(data.content);
+
+	if (browser) {
+		window.fillVars = (e) => {
+			assignedVars[e.dataset.name] = e.value;
+			contentCopy = data.content
+				.replace(/\$\{\w+\}/g, (e) => {
+					return assignedVars[e.slice(2, -1)];
+				})
+				.replace(/\@\[\w+\]\{\w+\}/g, (e) => {
+					let vars = e.slice(2, -1).split(']{');
+					assignedVars[vars[0]] = vars[1];
+					return `<input type="text" data-name="${vars[0]}" onkeyup="fillVars(this)" value="${vars[1]}">`;
+				});
+		};
+	}
 </script>
 
 <svelte:head>
@@ -36,7 +69,7 @@
 		<h2 id="sub-title">{data.description}</h2>
 	</hgroup>
 	<div id="editorCont">
-		<SvelteMarkdown source={data.content} />
+		<SvelteMarkdown source={contentCopy} />
 	</div>
 	{#if data.recommendations.length > 0}
 		<div id="recommendations">
