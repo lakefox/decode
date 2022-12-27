@@ -55,3 +55,15 @@ p>img {
     max-width: 90%;
     width: 500px;
 }
+
+code:hover:before {
+    content: attr(data-before);
+    font-family: var(--font-family);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--code-color);
+    float: right;
+    cursor: pointer;
+    padding: 3px;
+    border-bottom-left-radius: 0.25rem;
+}

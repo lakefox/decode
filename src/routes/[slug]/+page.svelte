@@ -1,6 +1,7 @@
 <script>
 	import SvelteMarkdown from 'svelte-markdown';
 	import { browser } from '$app/environment';
+	import { onMount } from 'svelte';
 	/** @type {import('./$types').PageData} */
 	export let data;
 	let images = (
@@ -40,6 +41,19 @@
 					return `<input type="text" data-name="${vars[0]}" onkeyup="fillVars(this)" value="${vars[1]}">`;
 				});
 		};
+		onMount(() => {
+			let code = document.querySelectorAll('code');
+			for (let i = 0; i < code.length; i++) {
+				code[i].setAttribute('data-before', 'COPY');
+				code[i].onclick = (e) => {
+					navigator.clipboard.writeText(code[i].innerText);
+					e.target.setAttribute('data-before', 'COPIED!');
+				};
+				code[i].onmouseleave = (e) => {
+					e.target.setAttribute('data-before', 'COPY');
+				};
+			}
+		});
 	}
 </script>
 
