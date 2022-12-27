@@ -2,6 +2,7 @@
 	import SvelteMarkdown from 'svelte-markdown';
 	import PocketBase from '/node_modules/pocketbase/dist/pocketbase.es.mjs';
 	import { browser } from '$app/environment';
+	import autosize from 'svelte-autosize';
 	const pb = new PocketBase('https://api.decode.sh/');
 	let user = {};
 	let docs = [
@@ -165,6 +166,7 @@
 				<div id="editorCont">
 					{#if showEditor}
 						<textarea
+							use:autosize
 							bind:value={docs[docIndex].content}
 							cols="30"
 							rows="50"
