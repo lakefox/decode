@@ -16,6 +16,7 @@
 	function actionWhenInViewport(e) {
 		const observer = new IntersectionObserver((entries) => {
 			let cl = [...document.querySelector('#search').classList];
+			console.log(cl);
 			if (entries[0].isIntersecting) {
 				// element in viewport
 				if (cl.indexOf('stick2') > 0) {
