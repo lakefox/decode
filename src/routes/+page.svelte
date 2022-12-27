@@ -19,7 +19,7 @@
 			console.log(cl);
 			if (entries[0].isIntersecting) {
 				// element in viewport
-				if (cl.indexOf('stick2') > 0) {
+				if (cl.indexOf('stick2') >= 0) {
 					document.querySelector('#search').classList.toggle('stick2');
 				}
 			} else {
