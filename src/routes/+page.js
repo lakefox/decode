@@ -22,8 +22,13 @@ export function load({ params }) {
                         id: a.id,
                         active: a.active,
                         slug: a.slug,
-                        images: images
+                        images: images,
+                        created: a.created
                     };
+                }).sort((a, b) => {
+                    let ad = new Date(a.created);
+                    let bd = new Date(b.created);
+                    return bd.getTime() - ad.getTime();
                 });
                 resolve({ docs: docs });
             });
