@@ -13,6 +13,7 @@
 
 		return dd + '/' + mm + '/' + yyyy;
 	}
+	let search = '';
 </script>
 
 <svelte:head>
@@ -30,41 +31,49 @@
 </nav>
 
 <main>
+	<div>
+		<h1>Search</h1>
+		<input type="search" placeholder={data.docs[0].title} bind:value={search} />
+	</div>
 	{#each data.docs as doc}
 		{#if doc.active}
-			<article>
-				{#if doc.images.length > 0}
-					<img
-						class="prevImgTop"
-						src={doc.images[0].url}
-						alt={doc.images[0].name}
-						title={doc.images[0].name}
-					/>
-				{/if}
-				<hgroup>
-					<a href="/{doc.slug}">
-						{#if doc.images.length > 0}
-							<img
-								class="prevImgSide"
-								src={doc.images[0].url + '?thumb=100x100'}
-								alt={doc.images[0].name}
-								title={doc.images[0].name}
-							/>
-						{/if}
-						<h1>
-							{doc.title}
-						</h1>
-					</a>
-					{#if doc.description.length > 200}
-						<h2>{doc.description.slice(0, -100)}...</h2>
-					{:else}
-						<h2>{doc.description}</h2>
+			{#if search == '' || `${doc.title} ${doc.description} ${doc.content}`
+					.toLowerCase()
+					.indexOf(search.toLowerCase()) > -1}
+				<article>
+					{#if doc.images.length > 0}
+						<img
+							class="prevImgTop"
+							src={doc.images[0].url}
+							alt={doc.images[0].name}
+							title={doc.images[0].name}
+						/>
 					{/if}
-				</hgroup>
-				<div class="timestamp">
-					{timestamp(doc.created)}
-				</div>
-			</article>
+					<hgroup>
+						<a href="/{doc.slug}">
+							{#if doc.images.length > 0}
+								<img
+									class="prevImgSide"
+									src={doc.images[0].url + '?thumb=100x100'}
+									alt={doc.images[0].name}
+									title={doc.images[0].name}
+								/>
+							{/if}
+							<h1>
+								{doc.title}
+							</h1>
+						</a>
+						{#if doc.description.length > 200}
+							<h2>{doc.description.slice(0, -100)}...</h2>
+						{:else}
+							<h2>{doc.description}</h2>
+						{/if}
+					</hgroup>
+					<div class="timestamp">
+						{timestamp(doc.created)}
+					</div>
+				</article>
+			{/if}
 		{/if}
 	{/each}
 </main>
