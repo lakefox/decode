@@ -53,6 +53,12 @@
 					e.target.setAttribute('data-before', 'COPY');
 				};
 			}
+			let a = document.querySelectorAll('a');
+			for (let i = 0; i < a.length; i++) {
+				if (a[i].target == '') {
+					a[i].target = '_top';
+				}
+			}
 		});
 	}
 </script>
