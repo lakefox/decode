@@ -1,7 +1,6 @@
 <script>
 	/** @type {import('./$types').PageData} */
 	export let data;
-	console.log(data);
 	function timestamp(ts) {
 		const today = new Date(ts);
 		const yyyy = today.getFullYear();
@@ -14,6 +13,23 @@
 		return dd + '/' + mm + '/' + yyyy;
 	}
 	let search = '';
+	function actionWhenInViewport(e) {
+		const observer = new IntersectionObserver((entries) => {
+			let cl = [...document.querySelector('#search').classList];
+			if (entries[0].isIntersecting) {
+				// element in viewport
+				if (cl.indexOf('stick2') > 0) {
+					document.querySelector('#search').classList.toggle('stick2');
+				}
+			} else {
+				if (cl.indexOf('stick2') == -1) {
+					document.querySelector('#search').classList.toggle('stick2');
+				}
+			}
+		});
+
+		observer.observe(e);
+	}
 </script>
 
 <svelte:head>
@@ -32,8 +48,8 @@
 
 <main>
 	<div>
-		<h1>Search</h1>
-		<input type="search" placeholder={data.docs[0].title} bind:value={search} />
+		<h1 use:actionWhenInViewport>Search</h1>
+		<input type="search" id="search" placeholder={data.docs[0].title} bind:value={search} />
 	</div>
 	{#each data.docs as doc}
 		{#if doc.active}
