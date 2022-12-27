@@ -99,7 +99,7 @@
 						/>
 					{/if}
 					<hgroup>
-						<a href="/{rec.slug}">
+						<a href="/{rec.slug}" target="_top">
 							{#if rec.images.length > 0}
 								<img
 									class="prevImgSide"
