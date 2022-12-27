@@ -94,6 +94,24 @@
 		docs[docIndex].active = !docs[docIndex].active;
 		save();
 	}
+
+	function actionWhenInViewport(e) {
+		const observer = new IntersectionObserver((entries) => {
+			let cl = [...document.querySelector('#buttonCont').classList];
+			if (entries[0].isIntersecting) {
+				// element in viewport
+				if (cl.indexOf('stick') > 0) {
+					document.querySelector('#buttonCont').classList.toggle('stick');
+				}
+			} else {
+				if (cl.indexOf('stick') == -1) {
+					document.querySelector('#buttonCont').classList.toggle('stick');
+				}
+			}
+		});
+
+		observer.observe(e);
+	}
 </script>
 
 <svelte:head>
@@ -127,6 +145,7 @@
 			</div>
 
 			<div style="width: 100%;">
+				<div id="buttonGhost" use:actionWhenInViewport />
 				<div id="buttonCont">
 					<input
 						type="text"

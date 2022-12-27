@@ -67,3 +67,10 @@ code:hover:before {
     padding: 3px;
     border-bottom-left-radius: 0.25rem;
 }
+
+.stick {
+    width: calc(90% - 300px);
+    max-width: 850px;
+    position: fixed;
+    top: 10px;
+}
