@@ -16,15 +16,18 @@
 	function actionWhenInViewport(e) {
 		const observer = new IntersectionObserver((entries) => {
 			let cl = [...document.querySelector('#search').classList];
-			console.log(cl);
 			if (entries[0].isIntersecting) {
 				// element in viewport
 				if (cl.indexOf('stick2') >= 0) {
 					document.querySelector('#search').classList.toggle('stick2');
+					document.querySelector('#search').style.width =
+						document.querySelector('main').getBoundingClientRect().width + 'px';
 				}
 			} else {
 				if (cl.indexOf('stick2') == -1) {
 					document.querySelector('#search').classList.toggle('stick2');
+					document.querySelector('#search').style.width =
+						document.querySelector('main').getBoundingClientRect().width + 'px';
 				}
 			}
 		});
@@ -53,44 +56,42 @@
 		<input type="search" id="search" placeholder={data.docs[0].title} bind:value={search} />
 	</div>
 	{#each data.docs as doc}
-		{#if doc.active}
-			{#if search == '' || `${doc.title} ${doc.description} ${doc.content}`
-					.toLowerCase()
-					.indexOf(search.toLowerCase()) > -1}
-				<article>
-					{#if doc.images.length > 0}
-						<img
-							class="prevImgTop"
-							src={doc.images[0].url}
-							alt={doc.images[0].name}
-							title={doc.images[0].name}
-						/>
-					{/if}
-					<hgroup>
-						<a href="/{doc.slug}">
-							{#if doc.images.length > 0}
-								<img
-									class="prevImgSide"
-									src={doc.images[0].url + '?thumb=100x100'}
-									alt={doc.images[0].name}
-									title={doc.images[0].name}
-								/>
-							{/if}
-							<h1>
-								{doc.title}
-							</h1>
-						</a>
-						{#if doc.description.length > 200}
-							<h2>{doc.description.slice(0, -100)}...</h2>
-						{:else}
-							<h2>{doc.description}</h2>
+		{#if search == '' || `${doc.title} ${doc.description} ${doc.content}`
+				.toLowerCase()
+				.indexOf(search.toLowerCase()) > -1}
+			<article>
+				{#if doc.images.length > 0}
+					<img
+						class="prevImgTop"
+						src={doc.images[0].url}
+						alt={doc.images[0].name}
+						title={doc.images[0].name}
+					/>
+				{/if}
+				<hgroup>
+					<a href="/{doc.slug}">
+						{#if doc.images.length > 0}
+							<img
+								class="prevImgSide"
+								src={doc.images[0].url + '?thumb=100x100'}
+								alt={doc.images[0].name}
+								title={doc.images[0].name}
+							/>
 						{/if}
-					</hgroup>
-					<div class="timestamp">
-						{timestamp(doc.created)}
-					</div>
-				</article>
-			{/if}
+						<h1>
+							{doc.title}
+						</h1>
+					</a>
+					{#if doc.description.length > 200}
+						<h2>{doc.description.slice(0, -100)}...</h2>
+					{:else}
+						<h2>{doc.description}</h2>
+					{/if}
+				</hgroup>
+				<div class="timestamp">
+					{timestamp(doc.created)}
+				</div>
+			</article>
 		{/if}
 	{/each}
 </main>

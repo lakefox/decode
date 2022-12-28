@@ -29,7 +29,7 @@ export function load({ params }) {
                     let ad = new Date(a.created);
                     let bd = new Date(b.created);
                     return bd.getTime() - ad.getTime();
-                });
+                }).filter(e => e.active);
                 resolve({ docs: docs });
             });
     }).catch(() => {
