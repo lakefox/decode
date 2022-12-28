@@ -94,24 +94,6 @@
 		docs[docIndex].active = !docs[docIndex].active;
 		save();
 	}
-
-	function actionWhenInViewport(e) {
-		const observer = new IntersectionObserver((entries) => {
-			let cl = [...document.querySelector('#buttonCont').classList];
-			if (entries[0].isIntersecting) {
-				// element in viewport
-				if (cl.indexOf('stick') > 0) {
-					document.querySelector('#buttonCont').classList.toggle('stick');
-				}
-			} else {
-				if (cl.indexOf('stick') == -1) {
-					document.querySelector('#buttonCont').classList.toggle('stick');
-				}
-			}
-		});
-
-		observer.observe(e);
-	}
 </script>
 
 <svelte:head>
@@ -129,23 +111,23 @@
 <body>
 	<main>
 		{#key update}
-			<div id="selector">
-				<select bind:value={docIndex}>
-					{#each docs as d, i}
-						<option value={i}>{d.title}</option>
-					{/each}
-				</select>
-				<button class="blue fitW" on:click={add}> New </button>
-				{#if docs[docIndex].active}
-					<button class="fitW" style="background: center;" on:click={publish}>Unpublish</button>
-				{:else}
-					<button class="fitW" on:click={publish}>Publish</button>
-				{/if}
-				<button class="red fitW" on:click={deletePost}>Delete</button>
+			<div class="sticky">
+				<div id="selector">
+					<select bind:value={docIndex}>
+						{#each docs as d, i}
+							<option value={i}>{d.title}</option>
+						{/each}
+					</select>
+					<button class="blue fitW" on:click={add}> New </button>
+					{#if docs[docIndex].active}
+						<button class="fitW" style="background: center;" on:click={publish}>Unpublish</button>
+					{:else}
+						<button class="fitW" on:click={publish}>Publish</button>
+					{/if}
+					<button class="red fitW" on:click={deletePost}>Delete</button>
+				</div>
 			</div>
-
-			<div style="width: 100%;">
-				<div id="buttonGhost" use:actionWhenInViewport />
+			<div class="sticky wM320">
 				<div id="buttonCont">
 					<input
 						type="text"
@@ -164,6 +146,8 @@
 						}}>View {buttonText}</button
 					>
 				</div>
+			</div>
+			<div class="content">
 				<hgroup>
 					<h1
 						contenteditable="true"
@@ -211,6 +195,7 @@
 		max-width: 1100px;
 		margin: auto;
 		display: flex;
+		flex-wrap: wrap;
 	}
 	#title {
 		margin-bottom: 10px;
@@ -224,6 +209,7 @@
 	#buttonCont {
 		display: flex;
 		justify-content: flex-end;
+		width: 100%;
 	}
 	#selector {
 		display: flex;
@@ -249,5 +235,20 @@
 		height: 25px;
 		margin-top: -5px;
 		margin-right: 5px;
+	}
+	.sticky {
+		position: -webkit-sticky;
+		position: sticky;
+		top: 10px;
+		height: min-content;
+	}
+	.content {
+		margin-left: 320px;
+		margin-top: -250px;
+		width: 100%;
+		max-width: 780px;
+	}
+	.wM320 {
+		width: calc(100% - 320px);
 	}
 </style>
