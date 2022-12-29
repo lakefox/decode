@@ -79,6 +79,7 @@
 	<title>DECODE - {data.title}</title>
 	<meta property="og:title" content={data.title} />
 	<meta property="og:description" content={data.description} />
+	<meta property="description" content={data.description} />
 	<meta name="keywords" content={data.slug.split('-').join(' ')} />
 	{#if images.length > 0}
 		<meta property="og:image" content={images[0].url} />
