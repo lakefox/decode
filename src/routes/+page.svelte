@@ -39,6 +39,7 @@
 							src={doc.images[0].url}
 							alt={doc.images[0].name}
 							title={doc.images[0].name}
+							loading="lazy"
 						/>
 					{/if}
 					<hgroup>
@@ -49,6 +50,7 @@
 									src={doc.images[0].url + '?thumb=100x100'}
 									alt={doc.images[0].name}
 									title={doc.images[0].name}
+									loading="lazy"
 								/>
 							{/if}
 							<h1>
