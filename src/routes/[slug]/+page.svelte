@@ -12,16 +12,64 @@
 	});
 
 	let assignedVars = {};
+	let assignedHidden = {};
+	let assignedItterators = {};
 
 	function parseInputs(content) {
+		// vars
 		content = content
-			.replace(/\@\[\w+\]\{\w+\}/g, (e) => {
+			.replace(/\@\[[a-zA-Z0-9\.\s]+\]\{[a-zA-Z0-9\.\s]+\}/g, (e) => {
 				let vars = e.slice(2, -1).split(']{');
 				assignedVars[vars[0]] = vars[1];
 				return `<input type="text" data-name="${vars[0]}" onkeyup="fillVars(this)" value="${vars[1]}">`;
 			})
-			.replace(/\$\{\w+\}/g, (e) => {
+			.replace(/\$\{[a-zA-Z0-9\.\s]+\}/g, (e) => {
 				return assignedVars[e.slice(2, -1)];
+			});
+		// hidden
+		content = content
+			.replace(/\!\[[a-zA-Z0-9\.\s]+\]\{[a-zA-Z0-9\.\s]+\}/g, (e) => {
+				let vars = e.slice(2, -1).split(']{');
+				if (vars[1] == 'true') {
+					assignedHidden[vars[0]] = true;
+				} else {
+					assignedHidden[vars[0]] = false;
+				}
+				return `<input type="checkbox" data-name="${
+					vars[0]
+				}" onchange="fillVars(this)" id="switch" name="switch" role="switch" ${
+					assignedHidden[vars[0]] ? 'checked' : ''
+				}>`;
+			})
+			.replace(/\!\{[a-zA-Z0-9\.\s]+\}[\s\S]+\!\{\/[a-zA-Z0-9\.\s]+\}/g, (e) => {
+				let name = e.slice(2, e.indexOf('}'));
+				if (assignedHidden[name]) {
+					return e.slice(3 + name.length, -4 - name.length);
+				} else {
+					return '';
+				}
+			});
+		// itters
+		content = content
+			.replace(/\#\[[a-zA-Z0-9\.\s]+\]\{[a-zA-Z0-9\.\s\,]+\}/g, (e) => {
+				let vars = e.slice(2, -1).split(']{');
+				assignedItterators[vars[0]] = {
+					value: 1,
+					params: vars[1].split(',')
+				};
+				return `<input type="number" data-name="${vars[0]}" onchange="fillVars(this)" value="1">`;
+			})
+			.replace(/\#\{[a-zA-Z0-9\.\s]+\}[\s\S]+\#\{\/[a-zA-Z0-9\.\s]+\}/g, (e) => {
+				let name = e.slice(2, e.indexOf('}'));
+				let cont = e.slice(3 + name.length, -4 - name.length);
+				let text = '';
+				for (let i = 0; i < assignedItterators[name].value; i++) {
+					if (assignedItterators[name].params.length > 1) {
+						cont = cont.replaceAll(`#{${assignedItterators[name].params[1].trim()}}`, i);
+					}
+					text += cont.replaceAll(`#{${assignedItterators[name].params[0].trim()}}`, 1);
+				}
+				return text;
 			});
 		return content;
 	}
@@ -30,18 +78,66 @@
 
 	if (browser) {
 		window.fillVars = (e) => {
-			assignedVars[e.dataset.name] = e.value;
+			if (e.type == 'text') {
+				assignedVars[e.dataset.name] = e.value;
+			} else if (e.type == 'checkbox') {
+				assignedHidden[e.dataset.name] = e.checked;
+			} else if (e.type == 'number') {
+				assignedItterators[e.dataset.name].value = parseFloat(e.value);
+			}
 			contentCopy = data.content
-				.replace(/\$\{\w+\}/g, (e) => {
+				.replace(/\$\{[a-zA-Z0-9\.\s]+\}/g, (e) => {
 					return assignedVars[e.slice(2, -1)];
 				})
-				.replace(/\@\[\w+\]\{\w+\}/g, (e) => {
+				.replace(/\@\[[a-zA-Z0-9\.\s]+\]\{[a-zA-Z0-9\.\s]+\}/g, (e) => {
 					let vars = e.slice(2, -1).split(']{');
 					assignedVars[vars[0]] = vars[1];
 					return `<input type="text" data-name="${vars[0]}" onkeyup="fillVars(this)" value="${vars[1]}">`;
+				})
+				.replace(/\!\{[a-zA-Z0-9\.\s]+\}[\s\S]+\!\{\/[a-zA-Z0-9\.\s]+\}/g, (e) => {
+					let name = e.slice(2, e.indexOf('}'));
+					if (assignedHidden[name]) {
+						return e.slice(3 + name.length, -4 - name.length);
+					} else {
+						return '';
+					}
+				})
+				.replace(/\!\[[a-zA-Z0-9\.\s]+\]\{[a-zA-Z0-9\.\s]+\}/g, (e) => {
+					let vars = e.slice(2, -1).split(']{');
+					return `<input type="checkbox" data-name="${
+						vars[0]
+					}" onchange="fillVars(this)" id="switch" name="switch" role="switch" ${
+						assignedHidden[vars[0]] ? 'checked' : ''
+					}>`;
+				})
+				.replace(/\#\[[a-zA-Z0-9\.\s]+\]\{[a-zA-Z0-9\.\s\,]+\}/g, (e) => {
+					let vars = e.slice(2, -1).split(']{');
+					return `<input type="number" data-name="${vars[0]}" onchange="fillVars(this)" value="1">`;
+				})
+				.replace(/\#\{[a-zA-Z0-9\.\s]+\}[\s\S]+\#\{\/[a-zA-Z0-9\.\s]+\}/g, (e) => {
+					let name = e.slice(2, e.indexOf('}'));
+					let cont = e.slice(3 + name.length, -4 - name.length);
+					let text = '';
+					for (let i = 0; i < assignedItterators[name].value; i++) {
+						console.log(i, assignedItterators[name].params);
+						let contCopy = cont.toString();
+						if (assignedItterators[name].params.length > 1) {
+							contCopy = contCopy.replaceAll(
+								`#{${assignedItterators[name].params[1].trim()}}`,
+								i.toString()
+							);
+						}
+						text += contCopy.replaceAll(
+							`#{${assignedItterators[name].params[0].trim()}}`,
+							assignedItterators[name].value
+						);
+					}
+					return text;
 				});
+			parseCodes();
 		};
-		onMount(() => {
+
+		function parseCodes() {
 			let code = document.querySelectorAll('code');
 			for (let i = 0; i < code.length; i++) {
 				code[i].setAttribute('data-before', 'COPY');
@@ -53,6 +149,10 @@
 					e.target.setAttribute('data-before', 'COPY');
 				};
 			}
+		}
+
+		onMount(() => {
+			parseCodes();
 			let a = document.querySelectorAll('a');
 			for (let i = 0; i < a.length; i++) {
 				if (a[i].target == '') {
