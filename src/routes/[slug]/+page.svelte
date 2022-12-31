@@ -57,7 +57,9 @@
 					value: 1,
 					params: vars[1].split(',')
 				};
-				return `<input type="number" data-name="${vars[0]}" onchange="fillVars(this)" value="1">`;
+				return `<input type="number" data-name="${vars[0]}" onchange="fillVars(this)" value="${
+					assignedItterators[vars[0]].value
+				}">`;
 			})
 			.replace(/\#\{[a-zA-Z0-9\.\s]+\}[\s\S]+\#\{\/[a-zA-Z0-9\.\s]+\}/g, (e) => {
 				let name = e.slice(2, e.indexOf('}'));
@@ -67,7 +69,10 @@
 					if (assignedItterators[name].params.length > 1) {
 						cont = cont.replaceAll(`#{${assignedItterators[name].params[1].trim()}}`, i);
 					}
-					text += cont.replaceAll(`#{${assignedItterators[name].params[0].trim()}}`, 1);
+					text += cont.replaceAll(
+						`#{${assignedItterators[name].params[0].trim()}}`,
+						assignedItterators[name].value
+					);
 				}
 				return text;
 			});
@@ -83,7 +88,7 @@
 			} else if (e.type == 'checkbox') {
 				assignedHidden[e.dataset.name] = e.checked;
 			} else if (e.type == 'number') {
-				assignedItterators[e.dataset.name].value = parseFloat(e.value);
+				assignedItterators[e.dataset.name].value = parseInt(e.value);
 			}
 			contentCopy = data.content
 				.replace(/\$\{[a-zA-Z0-9\.\s]+\}/g, (e) => {
@@ -91,7 +96,6 @@
 				})
 				.replace(/\@\[[a-zA-Z0-9\.\s]+\]\{[a-zA-Z0-9\.\s]+\}/g, (e) => {
 					let vars = e.slice(2, -1).split(']{');
-					assignedVars[vars[0]] = vars[1];
 					return `<input type="text" data-name="${vars[0]}" onkeyup="fillVars(this)" value="${vars[1]}">`;
 				})
 				.replace(/\!\{[a-zA-Z0-9\.\s]+\}[\s\S]+\!\{\/[a-zA-Z0-9\.\s]+\}/g, (e) => {
@@ -110,16 +114,11 @@
 						assignedHidden[vars[0]] ? 'checked' : ''
 					}>`;
 				})
-				.replace(/\#\[[a-zA-Z0-9\.\s]+\]\{[a-zA-Z0-9\.\s\,]+\}/g, (e) => {
-					let vars = e.slice(2, -1).split(']{');
-					return `<input type="number" data-name="${vars[0]}" onchange="fillVars(this)" value="1">`;
-				})
 				.replace(/\#\{[a-zA-Z0-9\.\s]+\}[\s\S]+\#\{\/[a-zA-Z0-9\.\s]+\}/g, (e) => {
 					let name = e.slice(2, e.indexOf('}'));
 					let cont = e.slice(3 + name.length, -4 - name.length);
 					let text = '';
 					for (let i = 0; i < assignedItterators[name].value; i++) {
-						console.log(i, assignedItterators[name].params);
 						let contCopy = cont.toString();
 						if (assignedItterators[name].params.length > 1) {
 							contCopy = contCopy.replaceAll(
@@ -133,6 +132,10 @@
 						);
 					}
 					return text;
+				})
+				.replace(/\#\[[a-zA-Z0-9\.\s]+\]\{[a-zA-Z0-9\.\s\,]+\}/g, (e) => {
+					let vars = e.slice(2, -1).split(']{');
+					return `<input type="number" data-name="${vars[0]}" onchange="fillVars(this)" value="1">`;
 				});
 			parseCodes();
 		};
@@ -285,5 +288,8 @@
 	#timestamp {
 		text-align: right;
 		color: var(--muted-color);
+	}
+	input[type='checkbox'] {
+		margin-bottom: 20px;
 	}
 </style>
