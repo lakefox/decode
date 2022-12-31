@@ -289,7 +289,4 @@
 		text-align: right;
 		color: var(--muted-color);
 	}
-	input[type='checkbox'] {
-		margin-bottom: 20px;
-	}
 </style>
