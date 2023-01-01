@@ -17,38 +17,6 @@
 
 	function parseInputs(content) {
 		// vars
-		content = content
-			.replace(/\@\[[a-zA-Z0-9\.\s]+\]\{[a-zA-Z0-9\.\s]+\}/g, (e) => {
-				let vars = e.slice(2, -1).split(']{');
-				assignedVars[vars[0]] = vars[1];
-				return `<input type="text" data-name="${vars[0]}" onkeyup="fillVars(this)" value="${vars[1]}">`;
-			})
-			.replace(/\$\{[a-zA-Z0-9\.\s]+\}/g, (e) => {
-				return assignedVars[e.slice(2, -1)];
-			});
-		// hidden
-		content = content
-			.replace(/\!\[[a-zA-Z0-9\.\s]+\]\{[a-zA-Z0-9\.\s]+\}/g, (e) => {
-				let vars = e.slice(2, -1).split(']{');
-				if (vars[1] == 'true') {
-					assignedHidden[vars[0]] = true;
-				} else {
-					assignedHidden[vars[0]] = false;
-				}
-				return `<input type="checkbox" data-name="${
-					vars[0]
-				}" onchange="fillVars(this)" id="switch" name="switch" role="switch" ${
-					assignedHidden[vars[0]] ? 'checked' : ''
-				}>`;
-			})
-			.replace(/\!\{[a-zA-Z0-9\.\s]+\}[\s\S]+\!\{\/[a-zA-Z0-9\.\s]+\}/g, (e) => {
-				let name = e.slice(2, e.indexOf('}'));
-				if (assignedHidden[name]) {
-					return e.slice(3 + name.length, -4 - name.length);
-				} else {
-					return '';
-				}
-			});
 		// itters
 		content = content
 			.replace(/\#\[[a-zA-Z0-9\.\s]+\]\{[a-zA-Z0-9\.\s\,]+\}/g, (e) => {
@@ -76,6 +44,38 @@
 				}
 				return text;
 			});
+		// hidden
+		content = content
+			.replace(/\!\[[a-zA-Z0-9\.\s]+\]\{[a-zA-Z0-9\.\s]+\}/g, (e) => {
+				let vars = e.slice(2, -1).split(']{');
+				if (vars[1] == 'true') {
+					assignedHidden[vars[0]] = true;
+				} else {
+					assignedHidden[vars[0]] = false;
+				}
+				return `<input type="checkbox" data-name="${
+					vars[0]
+				}" onchange="fillVars(this)" id="switch" name="switch" role="switch" ${
+					assignedHidden[vars[0]] ? 'checked' : ''
+				}>`;
+			})
+			.replace(/\!\{[a-zA-Z0-9\.\s]+\}[\s\S]+\!\{\/[a-zA-Z0-9\.\s]+\}/g, (e) => {
+				let name = e.slice(2, e.indexOf('}'));
+				if (assignedHidden[name]) {
+					return e.slice(3 + name.length, -4 - name.length);
+				} else {
+					return '';
+				}
+			});
+		content = content
+			.replace(/\@\[[a-zA-Z0-9\.\s]+\]\{[a-zA-Z0-9\.\s]+\}/g, (e) => {
+				let vars = e.slice(2, -1).split(']{');
+				assignedVars[vars[0]] = vars[1];
+				return `<input type="text" data-name="${vars[0]}" onkeyup="fillVars(this)" value="${vars[1]}">`;
+			})
+			.replace(/\$\{[a-zA-Z0-9\.\s]+\}/g, (e) => {
+				return assignedVars[e.slice(2, -1)];
+			});
 		return content;
 	}
 
@@ -91,29 +91,6 @@
 				assignedItterators[e.dataset.name].value = parseInt(e.value);
 			}
 			contentCopy = data.content
-				.replace(/\$\{[a-zA-Z0-9\.\s]+\}/g, (e) => {
-					return assignedVars[e.slice(2, -1)];
-				})
-				.replace(/\@\[[a-zA-Z0-9\.\s]+\]\{[a-zA-Z0-9\.\s]+\}/g, (e) => {
-					let vars = e.slice(2, -1).split(']{');
-					return `<input type="text" data-name="${vars[0]}" onkeyup="fillVars(this)" value="${vars[1]}">`;
-				})
-				.replace(/\!\{[a-zA-Z0-9\.\s]+\}[\s\S]+\!\{\/[a-zA-Z0-9\.\s]+\}/g, (e) => {
-					let name = e.slice(2, e.indexOf('}'));
-					if (assignedHidden[name]) {
-						return e.slice(3 + name.length, -4 - name.length);
-					} else {
-						return '';
-					}
-				})
-				.replace(/\!\[[a-zA-Z0-9\.\s]+\]\{[a-zA-Z0-9\.\s]+\}/g, (e) => {
-					let vars = e.slice(2, -1).split(']{');
-					return `<input type="checkbox" data-name="${
-						vars[0]
-					}" onchange="fillVars(this)" id="switch" name="switch" role="switch" ${
-						assignedHidden[vars[0]] ? 'checked' : ''
-					}>`;
-				})
 				.replace(/\#\{[a-zA-Z0-9\.\s]+\}[\s\S]+\#\{\/[a-zA-Z0-9\.\s]+\}/g, (e) => {
 					let name = e.slice(2, e.indexOf('}'));
 					let cont = e.slice(3 + name.length, -4 - name.length);
@@ -136,6 +113,29 @@
 				.replace(/\#\[[a-zA-Z0-9\.\s]+\]\{[a-zA-Z0-9\.\s\,]+\}/g, (e) => {
 					let vars = e.slice(2, -1).split(']{');
 					return `<input type="number" data-name="${vars[0]}" onchange="fillVars(this)" value="1">`;
+				})
+				.replace(/\!\{[a-zA-Z0-9\.\s]+\}[\s\S]+\!\{\/[a-zA-Z0-9\.\s]+\}/g, (e) => {
+					let name = e.slice(2, e.indexOf('}'));
+					if (assignedHidden[name]) {
+						return e.slice(3 + name.length, -4 - name.length);
+					} else {
+						return '';
+					}
+				})
+				.replace(/\!\[[a-zA-Z0-9\.\s]+\]\{[a-zA-Z0-9\.\s]+\}/g, (e) => {
+					let vars = e.slice(2, -1).split(']{');
+					return `<input type="checkbox" data-name="${
+						vars[0]
+					}" onchange="fillVars(this)" id="switch" name="switch" role="switch" ${
+						assignedHidden[vars[0]] ? 'checked' : ''
+					}>`;
+				})
+				.replace(/\$\{[a-zA-Z0-9\.\s]+\}/g, (e) => {
+					return assignedVars[e.slice(2, -1)];
+				})
+				.replace(/\@\[[a-zA-Z0-9\.\s]+\]\{[a-zA-Z0-9\.\s]+\}/g, (e) => {
+					let vars = e.slice(2, -1).split(']{');
+					return `<input type="text" data-name="${vars[0]}" onkeyup="fillVars(this)" value="${vars[1]}">`;
 				});
 			parseCodes();
 		};
