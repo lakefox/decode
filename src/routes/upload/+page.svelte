@@ -23,7 +23,6 @@
 			filter: `author = "${user.id}"`
 		});
 		assets = res.items;
-		console.log(assets);
 	}
 	function upload() {
 		const formData = new FormData();
