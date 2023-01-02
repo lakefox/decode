@@ -3,6 +3,8 @@
 	import PocketBase from '/node_modules/pocketbase/dist/pocketbase.es.mjs';
 	import { browser } from '$app/environment';
 	import autosize from 'svelte-autosize';
+	import urlSlug from 'url-slug';
+
 	const pb = new PocketBase('https://api.decode.sh/');
 	let user = {};
 	let docs = [
@@ -94,6 +96,8 @@
 		docs[docIndex].active = !docs[docIndex].active;
 		save();
 	}
+
+	$: docs[docIndex].slug = urlSlug(docs[docIndex].title);
 </script>
 
 <svelte:head>
@@ -129,16 +133,7 @@
 			</div>
 			<div class="sticky wM320">
 				<div id="buttonCont">
-					<input
-						type="text"
-						bind:value={docs[docIndex].slug}
-						placeholder={docs[docIndex].title
-							.toLowerCase()
-							.split(' ')
-							.join('-')
-							.replace('&nbsp;', '')}
-						on:keyup={save}
-					/>
+					<input type="text" bind:value={docs[docIndex].slug} on:keyup={save} />
 					<button
 						on:click={() => {
 							showEditor = !showEditor;
