@@ -16,7 +16,6 @@
 	let assignedItterators = {};
 
 	function parseInputs(content) {
-		// vars
 		// itters
 		content = content
 			.replace(/\#\[[a-zA-Z0-9\.\s]+\]\{[a-zA-Z0-9\.\s\,]+\}/g, (e) => {
@@ -67,6 +66,7 @@
 					return '';
 				}
 			});
+		// vars
 		content = content
 			.replace(/\@\[[a-zA-Z0-9\.\s]+\]\{[a-zA-Z0-9\.\s]+\}/g, (e) => {
 				let vars = e.slice(2, -1).split(']{');

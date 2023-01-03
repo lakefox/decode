@@ -7,7 +7,7 @@ export function GET({ params }) {
     return new Promise((resolve, reject) => {
         pb.collection('posts').getList(1, 100).then((data) => {
             console.log(data);
-            let rss = data.items.map((a) => {
+            let rss = data.items.filter(e => e.active).map((a) => {
                 let images = (a.content
                     .match(/!\[[^\]]*\]\((?<filename>.*?)(?=\"|\))(?<optionalpart>\".*\")?\)/g) || [])
                     .map((e) => {
