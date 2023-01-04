@@ -4,7 +4,7 @@ import { createCanvas } from "canvas";
 export function GET({ params, url }) {
     return new Promise((resolve, reject) => {
         let width = 900;
-        let height = 400
+        let height = 400;
         if (url.searchParams.get("thumb")) {
             width = parseInt(url.searchParams.get("thumb").split("x")[0]);
             height = parseInt(url.searchParams.get("thumb").split("x")[1]);
@@ -16,7 +16,6 @@ export function GET({ params, url }) {
             return e.charCodeAt();
         }).join(''));
         let rng = random(seed);
-
 
         let min = 54;
         let max = 177;

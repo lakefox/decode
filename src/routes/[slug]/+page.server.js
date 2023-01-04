@@ -27,7 +27,7 @@ export function load({ params }) {
                         images: images
                     };
                 });
-                res.timestamp = timestamp(res.created);
+                res.timestamp = timestamp(res.published);
                 resolve(res);
             });
         });

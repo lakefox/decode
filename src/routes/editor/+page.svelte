@@ -46,7 +46,8 @@
 			description: docs[docIndex].description,
 			author: docs[docIndex].author,
 			active: docs[docIndex].active,
-			slug: docs[docIndex].slug
+			slug: docs[docIndex].slug,
+			published: docs[docIndex].published || 0
 		};
 		pb.collection('posts').update(docs[docIndex].id, doc);
 	}
@@ -94,6 +95,7 @@
 
 	function publish() {
 		docs[docIndex].active = !docs[docIndex].active;
+		docs[docIndex].published = new Date().getTime();
 		save();
 	}
 

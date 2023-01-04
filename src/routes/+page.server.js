@@ -24,12 +24,11 @@ export function load({ params }) {
                         slug: a.slug,
                         images: images,
                         created: a.created,
-                        timestamp: timestamp(a.created)
+                        timestamp: timestamp(a.published),
+                        published: a.published
                     };
                 }).sort((a, b) => {
-                    let ad = new Date(a.created);
-                    let bd = new Date(b.created);
-                    return bd.getTime() - ad.getTime();
+                    return b.published - a.published;
                 }).filter(e => e.active);
                 resolve({ docs: docs });
             });
