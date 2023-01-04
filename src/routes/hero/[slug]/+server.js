@@ -17,6 +17,7 @@ export function GET({ params, url }) {
         }).join(''));
         let rng = random(seed);
 
+
         let min = 54;
         let max = 177;
 
