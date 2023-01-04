@@ -14,7 +14,9 @@
 
 <nav>
 	<ul>
-		<li><img id="favicon" src="/favicon.png" alt="Logo" /><strong>DECODE</strong></li>
+		<li>
+			<img id="favicon" src="/favicon.png" alt="Logo" /><a href="/"><strong>DECODE</strong></a>
+		</li>
 	</ul>
 </nav>
 
@@ -108,5 +110,8 @@
 	}
 	#title {
 		text-transform: uppercase;
+	}
+	a {
+		color: #fff !important;
 	}
 </style>
