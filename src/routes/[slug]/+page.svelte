@@ -2,6 +2,7 @@
 	import SvelteMarkdown from 'svelte-markdown';
 	import { browser } from '$app/environment';
 	import { onMount } from 'svelte';
+
 	/** @type {import('./$types').PageData} */
 	export let data;
 	let images = (
