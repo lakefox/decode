@@ -1,4 +1,0 @@
-# Creating 3d Map of the World with D3.js and Mapping Data to it.
-Description
-
-Content
