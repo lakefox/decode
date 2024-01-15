@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Setting Up GitHub Pages</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/"
+        ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
+      >
+    </nav>
+    <main><h1>Setting Up GitHub Pages</h1>
+<p>GitHub Pages is a free service offered by GitHub that allows you to create a website or blog for your project, personal brand, or business. By default, GitHub Pages provides a subdomain for your site, such as username.github.io. However, you can also use a custom domain name for your site, which can help you establish your brand and make your site more memorable.</p>
+<p>In this tutorial, we will guide you through the steps to set up GitHub Pages with a custom domain.</p>
+<h3>Prerequisites</h3>
+<p>Before you begin, you will need the following:</p>
+<ul>
+<li>A GitHub account</li>
+<li>A GitHub repository with your website files</li>
+<li>A custom domain name that you own</li>
+</ul>
+<h3>Create a CNAME file</h3>
+<p>The first step is to create a CNAME file in the root of your repository. This file tells GitHub Pages which domain name to use for your site. To create the CNAME file, follow these steps:</p>
+<ul>
+<li>In your local repository, create a new file named <code>CNAME</code> (all uppercase).</li>
+<li>Open the file in a text editor.</li>
+<li>Add your custom domain name on a new line, without any prefixes like &quot;http://&quot; or &quot;www&quot;. Then save the file.</li>
+</ul>
+<p>For example, if your custom domain is &quot;example.com&quot;, the contents of the file should be:</p>
+<pre><code>example.com
+</code></pre>
+<h3>Configure DNS settings</h3>
+<p>The next step is to configure the DNS settings for your custom domain name. You will need to add two DNS records: one for the root domain (e.g., example.com) and one for the www subdomain (e.g., www.example.com).</p>
+<p>Here's how to do it:</p>
+<ul>
+<li>Log in to your domain registrar's website and navigate to the DNS settings for your domain.</li>
+<li>Create a new A record with your root domain (e.g., example.com) as the host and the IP address 185.199.108.153.</li>
+<li>Create three more A records with your root domain as the host and the following IP addresses:</li>
+</ul>
+<pre><code>185.199.109.153
+185.199.110.153
+185.199.111.153
+</code></pre>
+<p>These four IP addresses belong to GitHub's servers, and they are used to host your website files.</p>
+<blockquote>
+<p>Note: The DNS changes may take some time to propagate, so it may take a few hours for your custom domain to start working with GitHub Pages.</p>
+</blockquote>
+<h3>Update GitHub Pages settings</h3>
+<p>The final step is to update the GitHub Pages settings for your repository to use your custom domain name.</p>
+<p>Here's how to do it:</p>
+<ul>
+<li>In your GitHub repository, click on &quot;Settings&quot; at the top.</li>
+<li>Scroll down to the &quot;GitHub Pages&quot; section.</li>
+<li>Under &quot;Custom domain&quot;, enter your custom domain name (e.g., example.com).</li>
+<li>Click &quot;Save&quot;.
+After a few minutes, your website should be accessible using your custom domain name.</li>
+</ul>
+<h3>Conclusion</h3>
+<p>Congratulations! You have successfully set up GitHub Pages with a custom domain. With this setup, you can create a professional-looking website or blog that reflects your brand or business.</p>
+</main>
+  </body>
+</html>

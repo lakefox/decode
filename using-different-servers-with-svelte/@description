@@ -1,0 +1,1 @@
+Svelte by default uses the Node.JS http module as it's router. Here we will talk about using Express or Polka as middleware to implement API routes.

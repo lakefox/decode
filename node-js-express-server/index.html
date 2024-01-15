@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Node JS Express Server</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/"
+        ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
+      >
+    </nav>
+    <main><h1>Node JS Express Server</h1>
+<p>Even though Node JS has a built in HTTP request handler using a web server framework can reduce the amount of code and increase the reliability of your site. There are many options to choose from however express is one of the most popular for it's easy to use syntax and wide support.</p>
+<h4>Installation</h4>
+<pre><code>npm install express --save
+</code></pre>
+<h5>Hello World</h5>
+<p>Here is a simple <code>Hello World</code> server that listens on port 3000. To start a server create an instance of <code>express()</code>, like in line 2. Add the listeners, <code>app.get</code> for get requests and <code>app.post</code> for post requests. If you followed the <a href="https://decode.sh/node-js-http-webserver">Node JS HTTP Webserver</a> tutorial, express works very simular however all you need to send data is <code>res.send</code>. To start the server call <code>app.listen(port)</code> just like using the HTTP module.</p>
+<pre><code>const express = require('express');
+const app = express();
+
+app.get('/', function (req, res) {
+  res.send('Hello World');
+});
+
+app.listen(3000);
+</code></pre>
+<h5>Routing</h5>
+<p>Express makes routing easy with the <code>.get</code>/<code>.post</code> functions, the first argument, in this case <code>'/hello'</code> is the path. In this example, if you were to go to <code>http://localhost:3000/hello</code> you would see <code>You're on /hello!</code>.</p>
+<pre><code>app.get('/hello', function (req, res) {
+  res.send('You're on /hello!');
+});
+</code></pre>
+<p>If you want to add wildcard paths you can add a wildcard marker <code>*</code> at any point in your path. This will route to anything with <code>/hello/</code> in front of it. To see what URL you are serving use <code>req.url</code>.</p>
+<pre><code>app.get('/hello/*', function (req, res) {
+  res.send('You're on &quot; + req.url);
+});
+</code></pre>
+<p>This is a very basic tutorial on how to use express to process <code>POST</code> body data, serve static files, or serve content with CORS enabled check out our tutorial on <a href="https://decode.sh/express-plugins">Express Plugins</a>.</p>
+</main>
+  </body>
+</html>

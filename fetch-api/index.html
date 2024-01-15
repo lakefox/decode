@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Fetch API</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/"
+        ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
+      >
+    </nav>
+    <main><h1>Fetch API</h1>
+<p>The Fetch API is a interface for making http requests using javascript in the browser and with node version +18. If you are familiar with the XMLHttpRequest or ajax() from jQuery this will feel familiar.</p>
+<h4>Concepts</h4>
+<p>The fetch api is built on <a href="https://decode.sh/promises-vs-callbacks" title="Promises VS Callbacks">promises</a> and returns a <code>Response</code> object that will need further processing depending on the data parsing you want. The <code>fetch()</code> function takes two arguments, the request URL and the parameters. Then returns a <code>Response</code> object that will further process your data.</p>
+<h4>Usage</h4>
+<p>Here is a simple example of a fetch request to an RSS feed. The RSS feed is in plain text so we process it using the <code>response.text()</code> method. There is also <code>.json()</code>, <code>.blob()</code>, <code>.formData()</code> and <code>.arrayBuffer()</code>.</p>
+<pre><code>fetch('https://decode.sh/rss&quot;)
+  .then((response) =&gt; response.text())
+  .then((data) =&gt; console.log(data));
+</code></pre>
+<h4>Fetching an image</h4>
+<p>When fetching binary data, like an image, you will want to convert it to a blob. Then you can create an object URL and use it like a file.</p>
+<pre><code>const image = document.querySelector(&quot;#image&quot;);
+fetch(&quot;https://decode.sh/favicon.png&quot;)
+  .then((response) =&gt; response.blob())
+  .then((blob) =&gt; {
+    const objectURL = URL.createObjectURL(blob);
+    image.src = objectURL;
+  });
+</code></pre>
+<h4>Adding Parameters</h4>
+<p>Along with the URL, fetch takes an options parameter, this allows you to set headers and make POST requests. Here's a breakdown of what can be added to the options.</p>
+<ul>
+<li>method
+<ul>
+<li>The request method (GET or POST).</li>
+</ul>
+</li>
+<li>headers
+<ul>
+<li>Any headers you want to include.</li>
+</ul>
+</li>
+<li>body
+<ul>
+<li>The body you want to send. Can be a Blob, ArrayBuffer, TypedArray, DataView, FormData, URLSearchParams, a string object or literal, or a ReadableStream</li>
+</ul>
+</li>
+<li>mode
+<ul>
+<li>The request mode you want to use i.e. (cors, no-cors...)</li>
+</ul>
+</li>
+<li>credentials
+<ul>
+<li>Controls what the browser does with credentials.</li>
+</ul>
+</li>
+</ul>
+<p>For a more exhaustive list of fetch parameters see:
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/fetch#parameters" title="Fetch API Documentation">MDN</a></p>
+<h4>Fetch POST Request</h4>
+<p>Here is a basic POST request example, it is broken out into a function that can be reused and returns the <code>Response</code> object that the <code>fetch</code> function returns.</p>
+<p>Check out: <a href="https://decode.sh/http-headers-basics" title="Basics of headers">HTTP Headers Basics</a></p>
+<pre><code>async function postData(url = '', data = {}) {
+        // Default options are marked with *
+        const response = await fetch(url, {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, *cors, same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+            body: JSON.stringify(data) // body data type must match &quot;Content-Type&quot; header
+        });
+        return response;
+    }
+
+// NOTE: this URL is not a real URL
+postDate(&quot;https://decode.sh/post/example&quot;, {
+	test: &quot;Hello&quot;
+}).then(res =&gt; res.json())
+.then((data) =&gt; {
+	console.log(data);
+})
+</code></pre>
+</main>
+  </body>
+</html>

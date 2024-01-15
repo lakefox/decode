@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>CSS Marquee Replacement</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/"
+        ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
+      >
+    </nav>
+    <main><h1>CSS Marquee Replacement</h1>
+<p>The HTML marquee tag, which was used to create scrolling text or images on a web page, has been deprecated and is no longer supported in modern web development. This means that while it may still work in some older web browsers, it is not considered a valid HTML element in current web development standards and should not be used in new or updated websites.</p>
+<p>There are several reasons why the <code>&lt;marquee&gt;</code> tag was deprecated:</p>
+<ol>
+<li>
+<p>Accessibility: Scrolling text or images can be distracting for users and can make it difficult for users with visual impairments to read the content on a page.</p>
+</li>
+<li>
+<p>User experience: The scrolling effect can also be distracting and annoying for users, and can make it difficult to read the content.</p>
+</li>
+<li>
+<p>Compatibility: The <code>&lt;marquee&gt;</code> tag is not well supported across different web browsers, and can cause inconsistencies in the way the page is displayed.</p>
+</li>
+</ol>
+<p>The main reason however was that HTML was never meant to act as a styling language, it is a markup language.</p>
+<p>Modern alternatives: There are more modern and flexible ways to achieve similar effects, such as using CSS and JavaScript. These methods provide more control and customization options and are better supported across different web browsers.</p>
+<p>Here is an example of how you can achieve the same effect as the HTML <code>&lt;marquee&gt;</code> tag using CSS:</p>
+<h5>HTML</h5>
+<pre><code>&lt;div class=&quot;marquee&quot; data-text=&quot;This is some scrolling text!&quot;/&gt;
+</code></pre>
+<h5>CSS</h5>
+<pre><code>.marquee {
+  width: 300px;
+  height: 50px;
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee:before {
+  content: attr(data-text);
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 100%;
+  height: 100%;
+  animation: marquee 5s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    left: 100%;
+  }
+  to {
+    left: -100%;
+  }
+}
+</code></pre>
+<p>In this example, the text is  added to the content of the :before pseudo-element using <code>attr</code> to get the contents of the <code>data-text</code> attribute. The animation then moves the text from right to left until it disappears completely off the left edge of the container.</p>
+</main>
+  </body>
+</html>

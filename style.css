@@ -1,0 +1,44 @@
+@font-face {
+  font-family: Comic Mono;
+  font-weight: normal;
+  src: url(./ComicMono.ttf);
+}
+
+html {
+  font-family: Comic Mono;
+}
+
+nav > a > img {
+  height: 31px;
+  margin-right: 7px;
+  width: auto;
+}
+
+nav > a {
+  font-size: 35px;
+  display: flex;
+  align-items: center;
+  font-family: sans-serif;
+  font-weight: 700;
+  color: #000;
+  text-decoration: none;
+}
+#list {
+  margin-top: 100px;
+  font-size: 18px;
+}
+main {
+  width: 90%;
+  max-width: 900px;
+  margin: auto;
+  margin-bottom: 100px;
+}
+pre {
+  padding: 10px;
+  border-radius: 3px;
+  overflow: auto;
+}
+
+img {
+  width: 100%;
+}

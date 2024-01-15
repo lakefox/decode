@@ -1,0 +1,1 @@
+Classes are blueprints for creating objects (a type of data structure), providing initial values for state (using a constructor), and implementations of behavior (member functions or methods). They support inheritance and polymorphism, which are fundamental concepts in object-oriented programming.

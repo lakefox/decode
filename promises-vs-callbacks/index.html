@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Promises VS Callbacks</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/"
+        ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
+      >
+    </nav>
+    <main><h1>Promises VS Callbacks</h1>
+<p>Promises and callbacks are both ways to handle asynchronous code in JavaScript. A callback is a function passed as an argument to another function and executed after the first function has been completed. A Promise is an object that is returned immediately, representing a value that may not be available yet. Promises are more powerful than callbacks because they provide a way to compose asynchronous operations and methods to handle errors. Promises also provide better readability and maintainability by eliminating the need for nested code blocks.</p>
+<h4>Promises</h4>
+<p>Promises are object that are returned as soon as you call them allow the thread to continue processing and will return once the process inside the promise is complete. Here is a simple example:</p>
+<pre><code>function oneSecond(msg) {
+	return new Promise((resolve) =&gt; {
+		setTimeout(()=&gt;{
+			resolve(msg);
+		}, 1000);
+	});
+}
+
+oneSecond(&quot;Hello World&quot;).then((msg) =&gt; {
+	console.log(msg);
+});
+console.log(&quot;Promise called!&quot;);
+</code></pre>
+<p>The expected output of this should look like this:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>&gt; &#34;Promise called!&#34;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>&gt; &#34;Hello Word&#34;
+</span></span></code></pre><p>As you can see the main process has continued to run letting the code in the promise complete in its own time.</p>
+<h4>Callbacks</h4>
+<p>Callbacks work similarly to promises, below is the same example written with a callback instead.</p>
+<pre><code>function oneSecond(msg, callback) {
+	setTimeout(()=&gt;{
+		callback(msg);
+	}, 1000);
+}
+
+oneSecond(&quot;Hello World&quot;, (msg) =&gt; {
+	console.log(msg);
+});
+console.log(&quot;Callback called!&quot;);
+</code></pre>
+<h4>Differences</h4>
+<p>Promises are returned by the main function while callbacks are not called until the code inside has been completed. Promises also have a couple of other features like the ability to run asynchronously and synchronously using the <code>await</code> keyword. Below is an example using the same <code>oneSecond()</code> function above.</p>
+<pre><code>let msg = await oneSecond(&quot;Hello World&quot;);
+console.log(msg);
+console.log(&quot;Promise called&quot;);
+</code></pre>
+<p>The output would look like this because the thread waits for the promise to fulfill itself before continuing.</p>
+<pre><code>&gt; &quot;Hellow World&quot;
+&gt; &quot;Promise called&quot;
+</code></pre>
+<p>Another feature of promises is the ability to reject the promise if an error occurs.</p>
+<pre><code>function oneSecond(msg) {
+	return new Promise((resolve, reject) =&gt; {
+		if (msg.length &lt; 5) {
+			setTimeout(() =&gt; {
+				resolve(msg);
+			}, 1000);
+		} else {
+			reject(&quot;Message too long&quot;);
+		}
+	});
+}
+
+oneSecond(&quot;Hello World&quot;).then((msg) =&gt; {
+	console.log(msg);
+}).catch((err) =&gt; {
+	console.log(err);
+})
+console.log(&quot;Promise called!&quot;);
+</code></pre>
+<p>The output would look like this.</p>
+<pre><code>&gt; &quot;Message too long&quot;
+&gt; &quot;Promise called&quot;
+</code></pre>
+<p>The error message shows first because the if statement doesn't ever call the <code>setTimeout</code> function because the message is greater than 5 characters. When the reject function is called, the output skips all of the <code>then</code> statements and just to the <code>catch</code> statement that handles all rejections.</p>
+</main>
+  </body>
+</html>

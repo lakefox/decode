@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Setting up Node.JS for production</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/"
+        ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
+      >
+    </nav>
+    <main><h1>Setting up Node.JS for production</h1>
+<p>Node.js is a popular JavaScript runtime that allows developers to build server-side applications with JavaScript. PM2 is a process manager for Node.js applications that helps to keep your applications running smoothly and automatically restart them in the event of any failures. Here's a guide on how to set up Node.js with PM2 and Let's Encrypt:</p>
+<p><img src="./node.png" alt="Node JS Logo" /></p>
+<h2>Overview</h2>
+<ul>
+<li>Install Node.JS</li>
+<li>Install and configure PM2</li>
+<li>Setting up Let's Encrypt</li>
+</ul>
+<h2>Prerequisites</h2>
+<ul>
+<li><a href="https://decode.sh/how-to-setup-nginx-server-blocks-for-multiple-sites-ubuntu">How to setup Nginx server blocks for multiple sites - Ubuntu</a></li>
+</ul>
+<p>First, make sure you have Node.js installed on your system. If you don't have it already, you can install it from the official website or by following the steps below.</p>
+<h3>Installing Node.JS</h3>
+<p>Download <code>NVM</code> via curl and install it.</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+</span></span></code></pre><p>Export <code>NVM</code> as a command to your terminal.</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>export NVM_DIR<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/.nvm&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>  <span style="color:#f92672">[</span> -s <span style="color:#e6db74">&#34;</span>$NVM_DIR<span style="color:#e6db74">/nvm.sh&#34;</span> <span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\.</span> <span style="color:#e6db74">&#34;</span>$NVM_DIR<span style="color:#e6db74">/nvm.sh&#34;</span>  <span style="color:#75715e"># This loads nvm</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>  <span style="color:#f92672">[</span> -s <span style="color:#e6db74">&#34;</span>$NVM_DIR<span style="color:#e6db74">/bash_completion&#34;</span> <span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\.</span> <span style="color:#e6db74">&#34;</span>$NVM_DIR<span style="color:#e6db74">/bash_completion&#34;</span>  <span style="color:#75715e"># This loads nvm bash_completion</span>
+</span></span></code></pre><p>Restart your terminal</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>source ~/.bash_profile
+</span></span></code></pre><p>Install Node.js's latest <code>lts</code> version</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>nvm install --lts
+</span></span></code></pre><h3>Installing PM2</h3>
+<p>Next, install PM2 using the following command:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>npm install -g pm2
+</span></span></code></pre><p>Now, you can start a new Node.js application using PM2 with the following command:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>pm2 start app.js
+</span></span></code></pre><p>Replace &quot;app.js&quot; with the name of your Node.js script file. This will start your application and keep it running in the background.</p>
+<p>To view the status of your application, use the following command:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>pm2 status
+</span></span></code></pre><p>This will show you the status of all the applications managed by PM2, including their process ID, name, and current status.</p>
+<p>If you need to stop an application, you can use the following command:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>pm2 stop app
+</span></span></code></pre><p>To restart an application, use the following command:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>pm2 restart app
+</span></span></code></pre><p>By using PM2 to manage your Node.js applications, you can ensure that they are always running and automatically restart them in the event of any failures. This can save you a lot of time and effort in the long run.</p>
+<h3>Using HTTPS with Certbot</h3>
+<p>Let's Encrypt is a free, automated, and open certificate authority that provides SSL/TLS certificates to secure websites and protect them from cyber threats.</p>
+<p>Install the Certbot client, which is a command-line tool that allows you to request and renew SSL/TLS certificates from Let's Encrypt. You can install Certbot from the official website or with the command below.</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>sudo apt install certbot python3-certbot-nginx
+</span></span></code></pre><p>Before we get started run we will need to delete the old <code>Nginx HTTP</code> and allow the full Nginx profile to pass through your firewall.</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>sudo ufw allow <span style="color:#e6db74">&#39;Nginx Full&#39;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>sudo ufw delete allow <span style="color:#e6db74">&#39;Nginx HTTP&#39;</span>
+</span></span></code></pre><p>Once Certbot is installed, run the following command to obtain a certificate for your Nginx server:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>sudo certbot --nginx -d example.com -d www.example.com
+</span></span></code></pre><p>The <code>-d</code> flag is used for assigning a domain/sub-domains to your certificate. Replace <code>example.com</code> with your domain.</p>
+<p>That's it! Your Nginx server is now secured with a Let's Encrypt SSL/TLS certificate. Let's Encrypt certificates are valid for 90 days, so it's important to set up a renewal process to ensure that your certificate doesn't expire. You can use the Certbot client to automatically renew your certificate by running the following command:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>sudo systemctl status certbot.timer
+</span></span></code></pre></main>
+  </body>
+</html>

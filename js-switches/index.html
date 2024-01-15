@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>JS Switches</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/"
+        ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
+      >
+    </nav>
+    <main><h1>JS Switches</h1>
+<p>The switch statement is a control structure used to perform multiple operations based on different cases, often as an alternative to if-else statements.</p>
+<p>Here's the basic syntax:</p>
+<h2>Syntax</h2>
+<pre><code>switch (expression) {
+  case value1:
+    // code to be executed if expression matches value1
+    break;
+  case value2:
+    // code to be executed if expression matches value2
+    break;
+  ...
+  default:
+    // code to be executed if expression doesn't match any cases
+}
+</code></pre>
+<ul>
+<li><code>expression</code> is the value that is being tested against each case.</li>
+<li><code>value1</code>, <code>value2</code>, ... are the possible values for the expression.</li>
+<li><code>break</code> is used to exit the switch statement and prevent execution from continuing to the next case.</li>
+<li><code>default</code> is an optional case that will be executed if none of the other cases match the expression.</li>
+</ul>
+<h3>Example 1:</h3>
+<pre><code>let day = &quot;Monday&quot;;
+switch (day) {
+  case &quot;Monday&quot;:
+    console.log(&quot;Today is Monday.&quot;);
+    break;
+  case &quot;Tuesday&quot;:
+    console.log(&quot;Today is Tuesday.&quot;);
+    break;
+  case &quot;Wednesday&quot;:
+    console.log(&quot;Today is Wednesday.&quot;);
+    break;
+  default:
+    console.log(&quot;Today is some other day.&quot;);
+}
+// Output: Today is Monday.
+</code></pre>
+<h3>Example 2:</h3>
+<pre><code>let grade = &quot;A&quot;;
+switch (grade) {
+  case &quot;A&quot;:
+    console.log(&quot;Excellent!&quot;);
+    break;
+  case &quot;B&quot;:
+    console.log(&quot;Good.&quot;);
+    break;
+  case &quot;C&quot;:
+    console.log(&quot;OK.&quot;);
+    break;
+  case &quot;D&quot;:
+    console.log(&quot;You need to work harder.&quot;);
+    break;
+  case &quot;F&quot;:
+    console.log(&quot;Fail.&quot;);
+    break;
+  default:
+    console.log(&quot;Invalid grade.&quot;);
+}
+// Output: Excellent!
+</code></pre>
+<p>Note that switch statements are commonly used for testing simple equality between the expression and the cases, but it is also possible to use other types of comparison (e.g. greater than, less than) and logical operators inside the cases.</p>
+</main>
+  </body>
+</html>

@@ -1,0 +1,1 @@
+JavaScript provides several built-in methods that can be used to extract different parts of a URL. Here is a tutorial on how to extract the protocol, hostname, pathname, and query parameters of a URL in JavaScript.

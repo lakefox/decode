@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Generating Images Based on a URL Slug</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/"
+        ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
+      >
+    </nav>
+    <main><h1>Generating Images Based on a URL Slug</h1>
+<p>Welcome to our tutorial on dynamically generating images using Node.js! In this post, we'll be exploring a technique for creating images on the fly based on the URL slug of a webpage. This can be a powerful tool for creating personalized, dynamic content for your website or application. Whether you're looking to create unique product images, customized social media graphics, or any other type of dynamic image, this tutorial will show you how to get started with Node.js. So let's dive in!</p>
+<h3>Prerequisites</h3>
+<ul>
+<li><a href="/generating-random-colors-on-a-range">Generating Random Colors on a Range</a></li>
+<li><a href="/using-canvas-in-node-js">Using Canvas in Node JS</a></li>
+<li><a href="/seeded-random-number-generator-in-js">Seeded Random Number Generator in JS</a></li>
+</ul>
+<p><img src="/og/post/Generating%20Images%20Based%20on%20a%20URL%20Slug" alt="Hero" /></p>
+<p>Generating images based on a URL slug is useful to give your content a fresh look without having to manually create and upload images every time. In this tutorial, we will learn how to create a svelte endpoint that generates images like the one above.</p>
+<p>This is how the endpoint will work once complete:</p>
+<pre><code>&lt;image src=&quot;https://decode.sh/hero/Generating%20Images%20Based%20on%20a%20URL%20Slug&quot;&gt;&lt;/image&gt;
+</code></pre>
+<p>The prerequisites linked above cover most of what we will be using, however, there is one part we will need to add first to tie everything together. The seeded random number generator needs an integer as a seed so we will need to convert our slug into an integer. We can take our slug and loop through each character getting their keycodes and adding them to an integer. You could add them to a variable set to <code>0</code> to get a cumulative number, however, that can easily over lap reducing the amount of different images you can generate. To fix this we will get their char codes using <code>charCodeAt()</code>, then store that in an array, join the array, and parse the integer from there. This can be done in &quot;one&quot; line like below:</p>
+<pre><code>let seed = parseInt(params.slug.split('').map((e) =&gt; {
+            return e.charCodeAt();
+        }).join(''));
+</code></pre>
+<h3>Helper functions</h3>
+<p>As a reminder, I've taken the seeded random and the color generator functions and put them below, if you would like to learn more read the prerequisites.</p>
+<h5>Seeded Random</h5>
+<pre><code>function random(seed) {
+    var m = 2 ** 35 - 31
+    var a = 185852
+    var s = seed % m
+    return function () {
+        return (s = s * a % m) / m
+    }
+}
+</code></pre>
+<h5>Color Generator</h5>
+<p>The Color function has an update, because we need to use the seeded random function we will need to pass it to the function each time we call it.</p>
+<pre><code>function color(min, max, rng) {
+    let c = [min, max, Math.floor(rng() * (max - min)) + min].sort(() =&gt;
+        rng() &gt; 0.5 ? 1 : -1
+    );
+    return `rgb(${c[0]},${c[1]},${c[2]})`;
+}
+</code></pre>
+<h3>Setting up</h3>
+<p>Here is the basic Svelte endpoint format we will be using with all the modules imported and the helper functions defined. For the rest of the tutorial assume the code examples are going in the promise function where it says <code>your code</code>.</p>
+<pre><code>import { error } from '@sveltejs/kit';
+import { createCanvas } from &quot;canvas&quot;;
+
+export function GET({ params, url }) {
+    return new Promise((resolve, reject) =&gt; {
+		// your code
+    }).catch(() =&gt; {
+        throw error(404, 'Not found');
+    })
+}
+
+function random(seed) {
+    var m = 2 ** 35 - 31
+    var a = 185852
+    var s = seed % m
+    return function () {
+        return (s = s * a % m) / m
+    }
+}
+
+function color(min, max, rng) {
+    let c = [min, max, Math.floor(rng() * (max - min)) + min].sort(() =&gt;
+        rng() &gt; 0.5 ? 1 : -1
+    );
+    return `rgb(${c[0]},${c[1]},${c[2]})`;
+}
+</code></pre>
+<h3>Initiating the Canvas</h3>
+<p>Use the <code>createCanvas</code> function in the <code>canvas</code> module to create a server-side canvas, then create a 2d context just like you would in the browser.</p>
+<pre><code>let width = 900;
+let height = 400;
+const canvas = createCanvas(width, height);
+const ctx = canvas.getContext('2d');
+</code></pre>
+<h3>Seeding the random number generator</h3>
+<p><code>params</code> is an object passed to us from the endpoint that contains the URL information.</p>
+<pre><code>let seed = parseInt(params.slug.split('').map((e) =&gt; {
+            return e.charCodeAt();
+        }).join(''));
+let rng = random(seed);
+</code></pre>
+<h3>Drawing the image</h3>
+<p>We firsts need to set the <code>min</code> and <code>max</code> variables for the color function. Then we can draw three rectangles using <code>fillRect</code> that are each a third apart from each other and are the height of the canvas.</p>
+<pre><code>let min = 54;
+let max = 177;
+
+ctx.fillStyle = color(min, max, rng);
+ctx.fillRect(0, 0, 300, height);
+ctx.fillStyle = color(min, max, rng);
+ctx.fillRect(width / 3, 0, 300, height);
+ctx.fillStyle = color(min, max, rng);
+ctx.fillRect((width / 3) * 2, 0, 300, height);
+</code></pre>
+<h3>Sending the Image to the Client</h3>
+<p>Sending the image as a buffer to the client can be done by converting the canvas into a buffer and resolving the promise with a <code>Response</code> object.</p>
+<pre><code>resolve(new Response(canvas.toBuffer(&quot;image/jpeg&quot;)));
+</code></pre>
+</main>
+  </body>
+</html>

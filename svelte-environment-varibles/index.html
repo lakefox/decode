@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Svelte Environment Varibles</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/"
+        ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
+      >
+    </nav>
+    <main><h1>Svelte Environment Varibles</h1>
+<p>Environment variables are values that can be passed to an application at runtime, that influence the behavior or configuration of the application. They are stored in key-value pairs and can be used to store sensitive information, such as passwords, API keys, or configuration settings. This information is made available to the application through the operating system, so the application can use it without having to hardcode the values into the codebase.</p>
+<p><img src="./svelte_env_FsR372L332.webp" alt="Svelte + Env" /></p>
+<p>In Svelte, you can use environment variables by accessing the process.env object, which holds all the environment variables available to your application.</p>
+<p>For example, to use an environment variable named API_KEY in a Svelte component, you would do the following:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span><span style="color:#66d9ef">import</span> {<span style="color:#a6e22e">API_KEY</span>} <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;$env/static/private&#39;</span>;<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>NOTE: Svelte will not allow environment variables to be sent to the client side
+</span></span></code></pre><p>With Svelte Kit, you can use environment variables during the build process by adding a .env file to the root of your project, and then referencing the variables via <code>$env/static/private</code>. The environment variables declared in the .env file will be made available to your application at run time.</p>
+<p>Here's an example .env file:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>API_KEY<span style="color:#f92672">=</span>abc123
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>SITE_NAME<span style="color:#f92672">=</span>decode.sh
+</span></span></code></pre><h2>Client-Side Environment Variables</h2>
+<p>Svelte will block access to any variable stored in your <code>.env</code> file if you are using the above method. If you know what you are potentially doing you can use the method below to send variables to the client side, be careful not to leak any sensitive data out this way.</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">as</span> <span style="color:#a6e22e">dotenv</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;dotenv&#34;</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#a6e22e">dotenv</span>.<span style="color:#a6e22e">config</span>();
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span><span style="color:#66d9ef">let</span> { <span style="color:#a6e22e">SITE_NAME</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>;
+</span></span></code></pre></main>
+  </body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Install Tailwind CSS Svelte</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/"
+        ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
+      >
+    </nav>
+    <main><h1>Install Tailwind CSS Svelte</h1>
+<p>Tailwind CSS is a CSS framework designed to be used with modular predefined classes instead of custom classes for each element. We will go over how to install Tailwind CSS and set it up to build with Svelte.</p>
+<h3>Install Tailwind</h3>
+<p>First you need to install Tailwind and it's dependences then run the Tailwind <code>npx</code> command to setup your project.</p>
+<pre><code>npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init tailwind.config.cjs -p
+</code></pre>
+<h3>Configuration</h3>
+<p>To properly setup Tailwind you need to make a few changes to your files. In the <code>svelte.config.js</code> file add the line below, below the <code>import adapter</code> line.</p>
+<pre><code>import { vitePreprocess } from '@sveltejs/kit/vite';
+</code></pre>
+<p>Set the preprocessor by adding <code>preprocess: vitePreprocess()</code> to the config object in <code>svelte.config.js</code> like below:</p>
+<pre><code>/** @type {import('@sveltejs/kit').Config} */
+const config = {
+  kit: {
+    adapter: adapter()
+  },
+  preprocess: vitePreprocess()
+};
+</code></pre>
+<p>After running the <code>npx</code> command, you should have a <code>tailwind.config.cjs</code> file, add <code>content: ['./src/**/*.{html,js,svelte,ts}'],</code> to the <code>module.exports</code> object to enable auto parsing for Tailwind.</p>
+<pre><code>/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ['./src/**/*.{html,js,svelte,ts}'],
+  theme: {
+    extend: {}
+  },
+  plugins: []
+};
+</code></pre>
+<h3>Importing Tailwind into Svelte</h3>
+<p>To import tailwind classes into you app, add the following Tailwind directives into your <code>app.css</code> file.</p>
+<pre><code>@tailwind base;
+@tailwind components;
+@tailwind utilities;
+</code></pre>
+<p>Then import the <code>app.css</code> file into your <code>+layout.svelte</code>.</p>
+<pre><code>&lt;script&gt;
+  import &quot;../app.css&quot;;
+&lt;/script&gt;
+
+&lt;slot /&gt;
+</code></pre>
+<h3>Running</h3>
+<p>Now Tailwind should be up and running, test it by running the following command.</p>
+<pre><code>npm run dev
+</code></pre>
+</main>
+  </body>
+</html>

@@ -1,0 +1,1 @@
+NGINX (pronounced "engine x") is a free, open-source, high-performance HTTP server and reverse proxy. It is known for its high performance and low resource consumption, making it a popular choice for web servers and microservices architectures. In this article, we will go over the steps to install NGINX on an Ubuntu machine.

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Deno JS: Oak Routing</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/"
+        ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
+      >
+    </nav>
+    <main><h1>Deno JS: Oak Routing</h1>
+<p>Oak is a middleware framework for Deno that provides a simple and modular way to handle HTTP requests and responses. Here is how to setup basic routing.</p>
+<p>In Oak, URL routing is handled by creating a router and defining routes using the Router class. Here's an example:</p>
+<pre><code>import { Application, Router } from &quot;https://deno.land/x/oak/mod.ts&quot;;
+
+const router = new Router();
+router
+    .get(&quot;/&quot;, (context) =&gt; {
+        context.response.body = &quot;Hello, world!&quot;;
+    })
+    .get(&quot;/users&quot;, (context) =&gt; {
+        context.response.body = &quot;List of users&quot;;
+    })
+    .post(&quot;/users&quot;, async (context) =&gt; {
+        const body = await context.request.body();
+        console.log(body.value);
+        context.response.body = &quot;User created&quot;;
+    });
+
+const app = new Application();
+app.use(router.routes());
+app.use(router.allowedMethods());
+
+await app.listen({ port: 8000 });
+</code></pre>
+<p>Save the file into <code>server.ts</code> and start using the command below:</p>
+<pre><code>deno --allow-net server.ts
+</code></pre>
+<p>In this example, we create a new Router instance and define three routes: <code>GET /</code>, <code>GET /users</code>, and <code>POST /users</code>. Each route handler takes a context object as an argument, which contains information about the incoming request and response. In the first route handler, we simply set the response body to a greeting. In the second route handler, we set the response body to a list of users. In the third route handler, we retrieve the request body and log it, then set the response body to indicate that a user was created.</p>
+<p>Finally, we create a new <code>Application</code> instance and use the router's <code>routes</code> method and <code>allowedMethods</code> method as middleware for handling requests. The <code>routes</code> method maps incoming requests to the appropriate route handler based on the HTTP method and URL path, while the <code>allowedMethods</code> method sends an appropriate response for requests with unsupported HTTP methods.</p>
+<p>When we run this application and make requests to the appropriate URLs, the appropriate route handlers will be invoked and the response will be sent back to the client.</p>
+</main>
+  </body>
+</html>

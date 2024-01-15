@@ -1,0 +1,1 @@
+GraphQL is a data aggregation framework designed to make accessing, updating, and creating data easier. It acts very similar to REST in the sense that it is a design spec on how to structure your API, like REST there are pre-built solutions you can implement which we will go over later in this post.

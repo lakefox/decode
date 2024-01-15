@@ -1,0 +1,1 @@
+Being able to summarize a article is super useful and surprisingly it doesn't require machine learning to accomplish. Here we will go over the concepts behind frequency analysis and implement it to build a text summerization api.

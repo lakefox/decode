@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Installing Node.js on DigitalOcean using NVM (Node Version Manager)</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/"
+        ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
+      >
+    </nav>
+    <main><h1>Installing Node.js on DigitalOcean using NVM (Node Version Manager)</h1>
+<p>Node.js is a popular, open-source JavaScript runtime environment that is used for building scalable, high-performance applications. In this tutorial, you'll learn how to install Node.js on a DigitalOcean droplet using NVM (Node Version Manager), a popular tool for managing multiple Node.js versions on a single machine.</p>
+<p>Before you begin, you'll need to have the following:</p>
+<ul>
+<li>A DigitalOcean account and a droplet with a fresh installation of Ubuntu.</li>
+<li>Access to a terminal on your droplet, either through the DigitalOcean control panel or by using an SSH client.</li>
+</ul>
+<h3>Installing Node.JS</h3>
+<p>To install NVM on your droplet, you'll need to run a series of commands in your terminal. Start by logging into your droplet using the terminal or an SSH client.</p>
+<p>Download <code>NVM</code> via curl and install it.</p>
+<pre><code>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+</code></pre>
+<p>After the installation is complete, you'll need to run the following command to load the NVM environment variables into your shell:</p>
+<pre><code>export NVM_DIR=&quot;$HOME/.nvm&quot;
+  [ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; \. &quot;$NVM_DIR/nvm.sh&quot;  # This loads nvm
+  [ -s &quot;$NVM_DIR/bash_completion&quot; ] &amp;&amp; \. &quot;$NVM_DIR/bash_completion&quot;  # This loads nvm bash_completion
+</code></pre>
+<p>Restart your terminal</p>
+<pre><code>source ~/.bash_profile
+</code></pre>
+<p>Install Node.js's latest <code>lts</code> version</p>
+<pre><code>nvm install --lts
+</code></pre>
+<p>To install a specific version of Node.js, use the following command:</p>
+<pre><code>nvm install &lt;version&gt;
+</code></pre>
+<blockquote>
+<p>Replace <code>&lt;version&gt;</code> with the version number of Node.js that you want to install.</p>
+</blockquote>
+<p>Once you have installed a specific version of Node.js, you can switch to that version by running the following command:</p>
+<pre><code>nvm use &lt;version&gt;
+</code></pre>
+<blockquote>
+<p>Again replace <code>&lt;version&gt;</code> with the version number of Node.js that you want to install.</p>
+</blockquote>
+<p>By using NVM, you can easily manage multiple versions of Node.js on a single machine, making it easier to switch between different versions as needed. With Node.js installed, you are ready to start building your next great application!</p>
+</main>
+  </body>
+</html>

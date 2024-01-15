@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Deno JS: First Website</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/"
+        ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
+      >
+    </nav>
+    <main><h1>Deno JS: First Website</h1>
+<p>Deno is a runtime for JavaScript and TypeScript that allows developers to build web applications with the use of its built-in module system. One of the most popular web frameworks for Deno is Oak, which provides a simple and intuitive API for building web applications. In this tutorial, we will learn how to set up a basic Deno website using the Oak package.</p>
+<p>First, you will need to initialize a new Deno project in a folder you have created for your project. Type the following command to initialize a new Deno project:</p>
+<pre><code>deno init
+</code></pre>
+<h6>Output</h6>
+<pre><code>✅ Project initialized
+
+Run these commands to get started
+
+  # Run the program
+  deno run main.ts
+
+  # Run the program and watch for file changes
+  deno task dev
+
+  # Run the tests
+  deno test
+
+  # Run the benchmarks
+  deno bench
+</code></pre>
+<h3>Oak</h3>
+<p>Deno does not require you to install packages and is able to <code>import</code> any modules from just a URL passed in the <code>import</code> statement. To import the most current version of Oak, the webserver library for Deno, you will use an import statement like below:</p>
+<pre><code>import { Application } from &quot;https://deno.land/x/oak/mod.ts&quot;;
+</code></pre>
+<p>The Application class coordinates managing the HTTP server, running middleware, and handling errors that occur when processing requests. Two methods are generally used: .use() and .listen(). Middleware is added via the .use() method and the .listen() method will start the server and start processing requests with the registered middleware.</p>
+<h3>Hello World</h3>
+<pre><code>import { Application } from &quot;https://deno.land/x/oak/mod.ts&quot;;
+
+const app = new Application();
+
+app.use((ctx) =&gt; {
+    ctx.response.body = &quot;Hello World!&quot;;
+});
+
+await app.listen({ port: 8000 });
+</code></pre>
+<p>If you are familiar with Node.JS's package express, the syntax of Oak will feel very familiar. In the code above the <code>Application</code> class is defined, then a router is defined that will process the request.</p>
+<blockquote>
+<p>This is the example from the documentation, in further tutorials we will dive into the <code>Router</code> class that will enable <code>GET</code> and <code>POST</code> requests with dynamic routing</p>
+</blockquote>
+<p>To start the server <code>app.listen</code> is called with the port passed in with in the options parameter.</p>
+<h3>CTX</h3>
+<p>The CTX parameter passed in the <code>app.use</code> function provides context about the current request and response to middleware functions. It provides three methods, <code>request</code>, <code>response</code>, and <code>cookies</code>.</p>
+<ul>
+<li>Request
+<ul>
+<li>Information about the request.</li>
+</ul>
+</li>
+<li>Response
+<ul>
+<li>Information about the response.</li>
+</ul>
+</li>
+<li>Cookies
+<ul>
+<li>Cookies are stored here.</li>
+</ul>
+</li>
+</ul>
+<h3>Running</h3>
+<pre><code>deno run  --allow-net main.ts
+</code></pre>
+<p>In Deno, by default, network access is disabled for security reasons. This means that if you try to make any network requests in your Deno application without enabling network access, the application will throw an error.</p>
+<p>In the case of using Oak as a server, it needs to be able to listen for incoming requests and respond to them over the network. By default, Deno will not allow this behavior without explicit permission from the user.</p>
+<p>Therefore, to use Oak as a server in Deno, you need to add the --allow-net flag when running your application. This flag tells Deno to allow network access for your application, which enables Oak to listen for incoming requests and respond to them over the network.</p>
+<p>It's important to note that while enabling network access does open up a potential security risk, the --allow-net flag only allows network access to the specific domain or IP address specified in the application. This means that even with --allow-net enabled, your application will only be able to communicate with the specified domain or IP address, and not any other external servers.</p>
+</main>
+  </body>
+</html>

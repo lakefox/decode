@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>DuckDuckGo Search JS</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/"
+        ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
+      >
+    </nav>
+    <main><h1>DuckDuckGo Search JS</h1>
+<p>Scraping search results from DuckDuckGo's Lite page using Node.js is a great way to gather data on a specific topic or group of keywords. In this blog post, we will walk through the process of scraping search results from DuckDuckGo's Lite page using the Node.js fetch and JSDOM libraries.</p>
+<p>First, install JSDOM by running the following command in your terminal:</p>
+<pre><code>npm install jsdom
+</code></pre>
+<p>We will then use the native fetch library to send a GET request to DuckDuckGo's Lite page, passing in the search query as a parameter. The response from the server will be passed to the JSDOM, which allows us to navigate and extract data from the HTML using the DOM syntax.</p>
+<pre><code>import { JSDOM } from 'jsdom';
+
+/**
+ * It fetches the HTML of the DuckDuckGo search page, parses it, and returns the results
+ * @param query - The query to search for
+ * @returns An array of objects with the following properties:
+ *     title: The title of the result
+ *     description: The description of the result
+ *     url: The url of the result
+ */
+export async function search(query) {
+    const html = await cache(`https://lite.duckduckgo.com/lite/?q=${encodeURIComponent(query)}`, &quot;text&quot;);
+    let doc = new JSDOM(html);
+    let document = doc.window.document;
+    let sponsored = [...document.querySelectorAll(&quot;tr[class='result-sponsored']&quot;)].pop();
+    let trs = [...document.querySelectorAll(&quot;tr&quot;)];
+    let rawRes = [...chunks(trs.slice(trs.indexOf(sponsored) + 1), 4)]
+
+    let results = [];
+    for (let i = 0; i &lt; rawRes.length; i++) {
+        const group = rawRes[i];
+        if (group.length == 4) {
+            results.push({
+                title: group[1].querySelector(&quot;a&quot;).textContent,
+                description: group[2].querySelector(&quot;td[class='result-snippet']&quot;).textContent,
+                url: &quot;http://&quot; + group[3].querySelector(&quot;span[class='link-text']&quot;).textContent
+            });
+        }
+    }
+    return results;
+}
+</code></pre>
+<p>This uses the chunking function below:</p>
+<pre><code>function* chunks(arr, n) {
+  for (let i = 0; i &lt; arr.length; i += n) {
+    yield arr.slice(i, i + n);
+  }
+}
+</code></pre>
+</main>
+  </body>
+</html>

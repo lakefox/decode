@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Variables in JavaScript</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/"
+        ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
+      >
+    </nav>
+    <main><h1>Variables in JavaScript</h1>
+<p>Today we will go over the most fundamental operator in programming, the variable. A variable is a keyword used to represent a piece of data in memory.</p>
+<p>@[showquiz:checkbox]{false}(role=&quot;switch&quot;) Enable knowledge checks?</p>
+<p>Using variables in JavaScript is easy as there is no need for types. Types are an identifier the programmer sets that tell the computer how to set/get the variable's data. Types can help protect your code from unintentionally doing things you don't want. If you would like to use types in JavaScript you can install TypeScript.</p>
+<p>Variables are used as a container to store data the basic syntax is shown below:</p>
+<pre><code class="language-&gt;javascript">var hello = &quot;world&quot;
+console.log(&quot;Hello &quot; + hello);
+</code></pre>
+<p>The <code>var</code> keyword tells the computer to store the string <code>&quot;world&quot;</code> in a variable named <code>hello</code>. There are four ways in total to assign a variable, all of which have different features.</p>
+<ul>
+<li><code>var</code></li>
+<li><code>let</code></li>
+<li><code>const</code></li>
+<li>none</li>
+</ul>
+<p>?{@{showquiz}}
+Before we get into how each variable type differs from each other let's do a quick knowledge check.</p>
+<pre><code>&lt;article&gt;
+
+##### What is a variable?
+@[#ans:radio]{false} A value that can change
+@[#ans:radio]{false} A expression that can be executed
+@[#ans:radio]{false} A mathematical symbol used to represent a quantity
+@[#ans:radio]{false} A container for storing data
+&lt;/article&gt;
+</code></pre>
+<blockquote>
+<p>[quiz1]{!@{ans}[0] &amp;&amp; !@{ans}[1] &amp;&amp; !@{ans}[2] &amp;&amp; @{ans}[3]};</p>
+</blockquote>
+<p>?{@{quiz1} &amp;&amp; @{showquiz}}
+<article>
+Correct! Variables can be used as a container to store data.
+</article></p>
+<p>?{@{quiz1} || !@{showquiz}}</p>
+<pre><code>### What's the difference between `var`, `let`, and `const`?
+Let's start off easy with `const`, `const` lets you define a variable that contains a set chunk of data that cannot be set to anything else. This is the only variable assigner that will not let you change the data stored in it.
+&gt; NOTE: While you cannot change the value assigned to the `const` variable, if you assign an object of an array to it, you are able to change the data inside the object.
+
+`let` and `var` both store data and that data can be changed to anything you want, including a different type of data. The difference between the two is with scope. The scope of the variable is where in a program the data the variable contains can be accessed. A global variable defined by not using `const`, `let`, or `var` can be accessed anywhere in the program. This might sound like it is a good thing however, this can cause memory issues.
+
+Looking at the code below and its output, you can see when using `var` the data stored in `j` can be accessed outside of the for loop it was declared in. In the next example, the function only outputs the value of `i` when inside the loop. This is because the scope of `i` is defined inside of the for loop.
+
+```&gt;javascript
+&quot;use strict&quot;;
+console.log(&quot;var:&quot;);
+for (var j = 0; j &lt; 2; j++) {
+  console.log(j);
+}
+
+console.log(j);
+
+console.log(&quot;let:&quot;);
+for (let i = 0; i &lt; 2; i++) {
+  console.log(i);
+}
+console.log(i);
+``` 
+</code></pre>
+<p>?{@{showquiz} &amp;&amp; @{quiz1}}
+Let's see what you learned about scope:
+<article>
+##### What is the scope?
+@[#ans2:radio]{false} The part of the program where a variable is accessible
+@[#ans2:radio]{false} The range of values that a variable can take
+@[#ans2:radio]{false} The lifespan of a variable
+@[#ans2:radio]{false} The amount of memory allocated to a variable
+</article></p>
+<blockquote>
+<p>[quiz2]{@{ans2}[0] &amp;&amp; !@{ans2}[1] &amp;&amp; !@{ans2}[2] &amp;&amp; !@{ans2}[3]};</p>
+</blockquote>
+<p>?{@{quiz2} &amp;&amp; @{quiz1} &amp;&amp; @{showquiz}}
+<article>
+Correct! The scope is the part of the program where a variable is accessible.
+</article></p>
+<p>?{@{quiz2} &amp;&amp; @{quiz1} || !@{showquiz}}
+Learning what variables do and how the scope of variables operate is fundamental to know how your code runs and being about to effectively debug your code. If you liked this interactive lesson please let us know! There will be many more to come.</p>
+</main>
+  </body>
+</html>

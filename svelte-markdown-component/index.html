@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Svelte Markdown Component</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/"
+        ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
+      >
+    </nav>
+    <main><h1>Svelte Markdown Component</h1>
+<p>Using markdown with Svelte allows you to create super simple websites that require almost no-coding. The svelte-markdown component makes this easy with one line of Svelte.</p>
+<h2>Install</h2>
+<p>Use NPM to install <code>svelte-markdown</code> to your project.</p>
+<pre><code>npm i svelte-markdown
+</code></pre>
+<h2>Importing</h2>
+<p>The <code>svelte-markdown</code> library is a component that can be used just like an HTML tag. First, you need to import it from the <code>node_modules</code> where you installed it.</p>
+<pre><code>&lt;script&gt;
+  import SvelteMarkdown from 'svelte-markdown'
+&lt;/script&gt;
+</code></pre>
+<h2>Usage</h2>
+<p>Once it's imported create you can either create a variable with your markdown document in it called source and pass it to the component like below:</p>
+<pre><code>&lt;SvelteMarkdown {source} /&gt;
+</code></pre>
+<p>or you can name the variable anything you like and pass it like this</p>
+<pre><code>&lt;SvelteMarkdown source={markdown} /&gt;
+</code></pre>
+<p><code>svelte-markdown</code> is a great tool for making a blog that is easy to update and write posts. Markdown is a great alternative to HTML if you want the feel of a WYSIWYG editor like <a href="/install-and-configure-tip-tap">TipTap</a> without the extra steps of setting it up. You can read more about <code>svelte-markdown</code> on its GitHub <a href="https://github.com/pablo-abc/svelte-markdown" title="Svelte Markdown GitHub">here</a></p>
+</main>
+  </body>
+</html>

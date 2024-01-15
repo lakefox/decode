@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>LetsEncrypt and Securing Websites</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/"
+        ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
+      >
+    </nav>
+    <main><h1>LetsEncrypt and Securing Websites</h1>
+<p>Let's Encrypt is a free alternative to paid SSL Certificate Authorities. Learn what they do and how to get started.</p>
+<h3>What's a Certificate Authority?</h3>
+<p>A certificate Authority also commonly called a &quot;CA&quot;, is an organization that acts as a third party between your website and the user's browser to manage the website's encryption. The role of managing the website's encryption is done via issuing SSL/TLS certificates. The certificates need a third party to sign them, this should be a trusted source, if you have seen other sites offer signed certificates this is what they are selling. Let's Encrypt does this same thing for free but its scope is more limited.</p>
+<h3>Let's Encrypt vs Paid SSL</h3>
+<p>Paid SSL and Let's Encrypt certificates vary a bit, mainly in the authentication. Other paid SSL certificates can verify the owner of the website is actually who they are claiming got be by using manual verification processes. Let's Encrypt's process is completely automated and only provides domain ownership verification. Domain ownership verification just proves that the server that sent the information owns the domain you are trying to connect to.</p>
+<h3>SSL/TLS Certificates and SEO</h3>
+<p>SSL/TLS certificates do increase SEO performance, but only slightly. Google does consider HTTPS encryption as a signal when ranking pages. This will not do a ton for you however it is worth it as setting up Let's Encrypt is a very easy way to boost your site.</p>
+<h3>Setting up Let's Encrypt</h3>
+<p>This tutorial will cover how to secure your site using the CLI tool on Ubuntu. Let's Encrypt has a very simple tool called <code>certbot</code> which is a python script that walks you through the entire process and automatically renews the certificate for you.</p>
+<h4>Step 1</h4>
+<p>Install <code>certbot</code></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>sudo apt install certbot python3-certbot-nginx
+</span></span></code></pre><h4>Step 2</h4>
+<p>Run the following command to register your cert, make sure to replace <code>domain.sh</code> with your domain. If you have any subdomains include them in this command by adding another <code>-d www.domain.sh</code> argument.</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>sudo certbot --nginx -d domain.sh
+</span></span></code></pre></main>
+  </body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Node JS HTTP Webserver</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/"
+        ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
+      >
+    </nav>
+    <main><h1>Node JS HTTP Webserver</h1>
+<p>Node JS comes out of the box with a built in HTTP module that can handle Hypertext Transfer Protocol requests. You can use this to build a web server without installing anything.</p>
+<p>The HTTP module can be used to create an HTTP server that can process requests can write back to the client.</p>
+<h5>Importing HTTP</h5>
+<pre><code>const http = require(&quot;http&quot;);
+</code></pre>
+<h5>Processing Requests</h5>
+<p>Here is a basic HTTP server using the HTTP module in Node JS. To create the server use the <code>http.createServer</code> function in the HTTP library. You need to pass in a function to handle the request and the response. The request will provide you the information on what has been sent to you and the response will be what goes to the user. Responses need to have content written to them, you can use <code>res.write</code> to add any type of data. Then to send it you close the response with <code>res.end</code>. To set the port the server listens to and to start the sever, add <code>.listen(port)</code> to the <code>http.createServer</code> function.</p>
+<pre><code>const http = require(&quot;http&quot;);
+
+//create a server object:
+http.createServer((req, res) =&gt; {
+  res.write('Hello World!'); //write a response to the client
+  res.end(); //end the response
+}).listen(8080); //the server object listens on port 8080
+</code></pre>
+<h5>Adding Headers</h5>
+<p>It is important to the client what type of data is being sent, you can do this using headers. To learn more about what types of headers there are you can read <a href="https://decode.sh/http-headers-basics">this article</a>. Just as you use <code>res.write</code> to write the body information of the request, you use <code>res.writeHead</code> to write headers and statuses to the head of the request.</p>
+<pre><code>// 200 is the HTTP status code for `OK`
+// The second argument is the headers you want to set
+res.writeHead(200, {'Content-Type': 'text/html'});
+</code></pre>
+<h5>Routing Requests</h5>
+<p>For any web server to send information you need to know where the data needs to be sent. All of that data is in the request variable, you can read the <a href="https://nodejs.org/api/http.html">docs</a> to learn all methods but we will go over the main ones that can help you route your requests.</p>
+<h6>Headers</h6>
+<ul>
+<li>To see the headers passed from the browser use <code>req.getHeaders()</code>.</li>
+</ul>
+<pre><code>const headers = req.getHeaders();
+// headers === { foo: 'bar' }
+</code></pre>
+<h6>URL</h6>
+<ul>
+<li>The URL contains the full URL sent to your web server to access use <code>req.url</code></li>
+</ul>
+<pre><code>const url = req.url;
+// path === &quot;/node-js-http-webserver&quot;
+</code></pre>
+<h6>Method</h6>
+<ul>
+<li>Knowing the method of the request is important so you aren't treating a <code>GET</code> request as a <code>POST</code> request or vice versa. To see the method use <code>req.method</code>.</li>
+</ul>
+<pre><code>const method = req.method;
+// method === &quot;GET&quot;
+</code></pre>
+<h5>Parsing the URL</h5>
+<p>To better handle the request you can use the <code>url</code> module built into Node JS here's an example of using it to parse a URL.</p>
+<pre><code>var url = require('url');
+var adr = 'https://decode.sh/node-js-http-webserver?admin=false';
+var q = url.parse(adr, true);
+
+console.log(q.host); //returns 'decode.sh'
+console.log(q.pathname); //returns '/node-js-http-webserver'
+console.log(q.search); //returns '?admin=false'
+
+var qdata = q.query; //returns an object: { admin: false }
+console.log(qdata.admin); //returns false
+</code></pre>
+</main>
+  </body>
+</html>

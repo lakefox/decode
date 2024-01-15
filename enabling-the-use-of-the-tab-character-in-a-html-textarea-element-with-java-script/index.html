@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Enabling the Use of the Tab Character in a HTML textarea Element with JavaScript</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/"
+        ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
+      >
+    </nav>
+    <main><h1>Enabling the Use of the Tab Character in a HTML textarea Element with JavaScript</h1>
+<p>How to enable the use of the tab character in a HTML textarea element using JavaScript. It describes the process of adding an event listener to the textarea element that listens for the keydown event and checking the keyCode property of the event object to determine if the tab key has been pressed. If the tab key has been pressed, the default behavior of the tab key is prevented and a tab character is inserted into the textarea element using the insertText function. An example of the code required to implement this functionality is also provided.</p>
+<p><img src="./tab.webp" alt="A picture of the keyboard key tab" /></p>
+<p>The tab character, represented by the ASCII code 9, is a useful way to allow users to quickly navigate through a form or document. Unfortunately, the HTML textarea element does not support the use of the tab character by default. However, it is possible to enable the use of the tab character in a textarea element by using JavaScript.</p>
+<p>To enable the use of the tab character in a textarea element, you will need to add an event listener to the textarea element that listens for the keydown event. This event is triggered whenever a key is pressed on the keyboard.</p>
+<p>Inside the event listener, you can check if the tab key has been pressed by checking the keyCode property of the event object. If the tab key has been pressed, you can prevent the default behavior of the tab key (which is to move focus to the next element on the page) by calling the preventDefault method on the event object.</p>
+<p>You can then insert a tab character into the textarea element by using the insertText function. This function takes the text to be inserted as an argument and inserts it at the current cursor position in the textarea element.</p>
+<p>Here is an example of how you can enable the use of the tab character in a textarea element using JavaScript:</p>
+<h2>Code</h2>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span>document.<span style="color:#a6e22e">querySelector</span>(<span style="color:#e6db74">&#34;textarea&#34;</span>).<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#34;keydown&#34;</span>, (<span style="color:#a6e22e">e</span>) =&gt; {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">key</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;Tab&#34;</span>) {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span>    <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">preventDefault</span>();
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">textArea</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">currentTarget</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span>    <span style="color:#a6e22e">textArea</span>.<span style="color:#a6e22e">setRangeText</span>(
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span><span>      <span style="color:#e6db74">&#34;\t&#34;</span>,
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span>      <span style="color:#a6e22e">textArea</span>.<span style="color:#a6e22e">selectionStart</span>,
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span><span>      <span style="color:#a6e22e">textArea</span>.<span style="color:#a6e22e">selectionEnd</span>,
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span><span>      <span style="color:#e6db74">&#34;end&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span>    );
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11</span><span>  }
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12</span><span>});
+</span></span></code></pre><p>In this example, the textarea element is selected using its id attribute and the addEventListener method is used to attach the event listener to the textarea element. The event listener checks for the tab key by checking the keyCode property of the event object, and if the tab key has been pressed, it calls the preventDefault method to prevent the default behavior of the tab key and calls the insertText function to insert a tab character into the textarea element.</p>
+<p>This is just one way to enable the use of the tab character in a textarea element using JavaScript. There are many other ways to achieve the same result, depending on your specific needs and requirements.</p>
+</main>
+  </body>
+</html>

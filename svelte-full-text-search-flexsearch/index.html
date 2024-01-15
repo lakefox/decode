@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Svelte Full Text Search - flexsearch</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/"
+        ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
+      >
+    </nav>
+    <main><h1>Svelte Full Text Search - flexsearch</h1>
+<p>&quot;flexsearch&quot; is a JavaScript library for fast, flexible, and robust search and indexing. It provides a high-performance search engine that is optimized for search and indexing, and can be used in both client-side and server-side applications. It supports a range of features including full-text search, fuzzy search, query highlighting, and auto-suggestions. Here's how to implement it into a Svelte project.</p>
+<h3>Install</h3>
+<pre><code>npm install flexsearch
+</code></pre>
+<h3>Importing into your project</h3>
+<p><code>flexsearch</code> has three types of indexes:</p>
+<ul>
+<li>Index is a flat high performance index that stores id-content-pairs.</li>
+<li>Worker / WorkerIndex is a flat index that stores id-content pairs but runs in the background as a dedicated worker thread.</li>
+<li>Document is a multi-field index that can store complex JSON documents (could also exist of worker indexes).</li>
+</ul>
+<p>Most of you probably need just one of them according to your scenario. To import via the npm package you will need to import just the single index you want below is an example of <code>Index</code> and <code>Document</code> being imported into a project:</p>
+<pre><code>import Document from 'flexsearch/src/document';
+import Index from 'flexsearch/src/index';
+</code></pre>
+<blockquote>
+<p>NOTE: if you are importing into Svelte you will need to edit the <code>package.json</code> of the module and add <code>&quot;type&quot;: &quot;module&quot;</code> or Svelte will not allow it to be imported</p>
+</blockquote>
+<h3>Using it in Svelte</h3>
+<h4>Adding the documents</h4>
+<p><code>new Document</code> will create a <code>flexsearch</code> document index that allows you to add your documents to the index. It takes a document descriptor which contains a document object with the index field being the key of the object you want indexed.</p>
+<pre><code>let findDocument = new Document({
+	document: {
+		index: ['title', 'description', 'content']
+	}
+});
+for (let i = 0; i &lt; data.docs.length; i++) {
+	findDocument.add(docs[i]);
+}
+</code></pre>
+<h4>Search functions</h4>
+<p>To search the document index use the index you created, in this case, <code>findDocument</code>. Use the <code>.search</code> function and pass your search query to the function. This will return an object with the keys being the same as the index field of the <code>document</code> you passed upon initiation. The keys will contain arrays of the ids of the documents that match the search query. Here I am flattening the object into an array of IDs and then filtering them using svelte in the <code>{#each }</code> loop only if there is a search query.</p>
+<pre><code>let search = &quot;&quot;;
+let results = [];
+function findDocuments() {
+	results = findDocument
+		.search(search)
+		.map((e) =&gt; e.result)
+		.flat();
+}
+</code></pre>
+<h4>Svelte elements</h4>
+<pre><code>&lt;input
+	type=&quot;search&quot;
+	id=&quot;search&quot;
+	placeholder=&quot;Search&quot;
+	bind:value={search}
+	on:keydown={findDocuments}
+/&gt;
+
+// Filter the documents if the search term is not blank
+{#each docs as doc}
+	{#if search == '' || results.indexOf(doc.id) != -1}
+		// Search Results
+	{/if}
+{/each}
+</code></pre>
+</main>
+  </body>
+</html>

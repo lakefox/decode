@@ -1,0 +1,1 @@
+A ternary operator is a type of conditional operator that allows for inline if statements. The ternary operator is suer useful once you know how to use it and can reduce the amount of logic in an application and are often used when you need to assign a value to a variable based on a condition.

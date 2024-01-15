@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Logging into Git from a Remote Server</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/"
+        ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
+      >
+    </nav>
+    <main><h1>Logging into Git from a Remote Server</h1>
+<p>Git remote server setup can be tricky with the updated rules Github has, here we will dive into the basics of logging in while keeping your keys secure.</p>
+<p>There are two ways to &quot;login&quot; to Git the first way to to fill out the two commands below:</p>
+<pre><code>git config --global user.name &quot;your_username&quot;
+</code></pre>
+<p>and</p>
+<pre><code>git config --global user.email &quot;your_email_address@example.com&quot;
+</code></pre>
+<p>This method however is outdated if you are trying to log in to a GitHub repository. To login to a GitHub repo will have to install the <code>gh</code> tools you can do that by pasting the following command into a terminal connected to the remote server.</p>
+<pre><code>type -p curl &gt;/dev/null || sudo apt install curl -y
+curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
+&amp;&amp; sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \
+&amp;&amp; echo &quot;deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main&quot; | sudo tee /etc/apt/sources.list.d/github-cli.list &gt; /dev/null \
+&amp;&amp; sudo apt update \
+&amp;&amp; sudo apt install gh -y
+</code></pre>
+<p>This comes from the installation guide <a href="https://github.com/cli/cli/blob/trunk/docs/install_linux.md" title="Installation Guide">here</a> and works for Linux, if your remote server is not Linux you can follow the guide <a href="https://cli.github.com/manual/installation" title="Alterative Installation Guide">here</a>.</p>
+<p>After the <code>gh</code> tools finish installing you will need to run this:</p>
+<pre><code>gh auth login
+</code></pre>
+<p>This will bring up a login wizard, if you are on a remote server it will try to open the link it gives you on the device. you will need to copy and paste this link onto your local machine and type the code that is also provided. Once you log in you are set up to use <code>git</code> as normal.</p>
+</main>
+  </body>
+</html>

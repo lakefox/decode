@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Installing Deno JS</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/"
+        ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
+      >
+    </nav>
+    <main><h1>Installing Deno JS</h1>
+<p>Deno is a JavaScript and TypeScript runtime environment that was created as an alternative to Node.js. It is designed to be simple, secure, and fast, with a focus on making it easier for developers to build scalable and efficient applications.</p>
+<p>Deno was created by Ryan Dahl, the same person who created Node.js, and it addresses some of the issues he saw with Node.js. One of the main differences between the two is that Deno does not have a centralized package manager like npm, which can lead to security and compatibility issues. Instead, Deno includes many built-in modules, and developers can use external modules by importing them directly from their source code on the web.</p>
+<p>Deno also includes security features that allow it to run scripts in a sandboxed environment, which helps to prevent malicious scripts from accessing sensitive parts of the system. Additionally, Deno supports modern features such as Web Assembly and asynchronous programming out of the box, making it easier to create fast and efficient applications.</p>
+<p>Overall, Deno provides a modern and efficient way to build JavaScript and TypeScript applications, with a focus on security and simplicity.</p>
+<h3>Installation</h3>
+<h5>Using Shell (macOS and Linux):</h5>
+<pre><code>curl -fsSL https://deno.land/x/install/install.sh | sh
+</code></pre>
+<h5>Using PowerShell (Windows):</h5>
+<pre><code>irm https://deno.land/install.ps1 | iex
+</code></pre>
+<h5>Using Homebrew (macOS):</h5>
+<pre><code>brew install deno
+</code></pre>
+<h5>Using Nix (macOS and Linux):</h5>
+<ul>
+<li><a href="/nix-package-manager">Install Nix</a></li>
+</ul>
+<pre><code>nix-shell -p deno
+</code></pre>
+<p>After installing you will get a message simular to this one, prompting you to add manually add Deno to your terminal. Paste the command they provide you then continue.</p>
+<pre><code>######################################################################## 100.0%
+Archive:  /Users/name/.deno/bin/deno.zip
+  inflating: /Users/name/.deno/bin/deno
+Deno was installed successfully to /Users/name/.deno/bin/deno
+Manually add the directory to your $HOME/.zshrc (or similar)
+  export DENO_INSTALL=&quot;/Users/name/.deno&quot;
+  export PATH=&quot;$DENO_INSTALL/bin:$PATH&quot;
+Run '/Users/name/.deno/bin/deno --help' to get started
+
+Stuck? Join our Discord https://discord.gg/deno
+</code></pre>
+<p>To test that Deno was installed correctly, run the following command:</p>
+<pre><code>deno --version
+</code></pre>
+<h3>Updating</h3>
+<p>Deno comes with a built-in version manager, to update to the latest version use the following command:</p>
+<pre><code>deno upgrade
+</code></pre>
+</main>
+  </body>
+</html>

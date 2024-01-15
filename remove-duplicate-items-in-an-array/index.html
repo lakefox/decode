@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Remove Duplicate Items in an Array</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/"
+        ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
+      >
+    </nav>
+    <main><h1>Remove Duplicate Items in an Array</h1>
+<p>Eliminating duplicate items from an array can be challenging, but this simple one-liner makes it easy to do so in any situation.</p>
+<p>The <code>Set</code> object in JavaScript is a collection of unique values. It can be used to store and manipulate a collection of primitive values (such as strings or numbers) or object references. We can use this to remove all repeat values from an array by initializing the <code>Set</code> object with an array as an argument. This will create a <code>Set</code> object, the next step to convert it back to an array is to use the spread operator to spread the object into an array</p>
+<h4>Example</h4>
+<pre><code>let array1 = [1,1,2,2,3,3,4,4];
+let array2 = [...new Set(array1)];
+</code></pre>
+</main>
+  </body>
+</html>

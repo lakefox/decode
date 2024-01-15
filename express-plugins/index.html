@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Express Plugins</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/"
+        ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
+      >
+    </nav>
+    <main><h1>Express Plugins</h1>
+<p>Express plugins can be used to process POST body data, serve static files, or serve content with CORS enabled. Learn the basics of app.use.</p>
+<p>First, we will start off with parsing a POST requests body. If you are familiar with Express v3.x you with know about <code>body-parser</code> in Express v4.x has been replaced with <code>urlencoded</code>, here's how to use it:</p>
+<pre><code>app.use(express.urlencoded({ extended: true }));
+</code></pre>
+<p>This will parse the POST request and add the data to your request object's <code>.body</code> property.</p>
+<p>If your data is in a JSON format you will need to add another built-in function to parse it like below.</p>
+<pre><code>app.use(express.json());
+</code></pre>
+<p>If you want to serve static files like HTML documents, CSS, JS, or Media files you will need to use the <code>.static</code> adapter with the directory you want to pull from as the first argument.</p>
+<pre><code>app.use(express.static('public'));
+</code></pre>
+<p>Those are the most important built-in functions to know how to use, however, there are a few that don't come along with express but are helpful to know how to use.</p>
+<h5>CORS</h5>
+<p>Cross-Origin Resource Sharing or CORS is the way you can share resources from different websites. This data is set in the Head of the HTTP request to automatically do this Express has the <code>cors</code> module.</p>
+<h6>Installation</h6>
+<pre><code>npm i cors
+</code></pre>
+<h6>Usage</h6>
+<pre><code>const cors = require(&quot;cors&quot;);
+app.use(cors());
+</code></pre>
+<h5>GZIP</h5>
+<p>If you want to compress your data before sending it to the client Express has the <code>compression</code> module that auto-compresses all out bound data.</p>
+<h6>Installation</h6>
+<pre><code>npm i compression
+</code></pre>
+<h6>Usage</h6>
+<pre><code>app.use(compression());
+</code></pre>
+</main>
+  </body>
+</html>

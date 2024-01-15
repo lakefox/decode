@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Using Canvas in Node JS</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/"
+        ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
+      >
+    </nav>
+    <main><h1>Using Canvas in Node JS</h1>
+<p>Have you ever wanted to generate dynamic images on the server side? With Node Canvas, it's easy! Node Canvas is a module that allows you to use the canvas element on the backend, making it simple to create images based on user input.</p>
+<p><img src="https://decode.sh/og/post/Using%20Canvas%20in%20Node%20JS" alt="Hero Image" /></p>
+<p>Node Canvas is a module that allows you to use the canvas element on the server side for generating dynamic images. You can see an example of this by going to the URL below and replacing <code>test-image</code> with any text to get a random image.</p>
+<pre><code>https://decode.sh/hero/Test%20Image
+</code></pre>
+<h4>Installation</h4>
+<pre><code>npm install canvas
+</code></pre>
+<p>Note: canvas uses Cairo, a 2D graphics library with support for multiple output devices, which you may need to install in order to get canvas working properly. Use the table below to install.</p>
+<p>OS | Command
+----- | -----
+OS X | Using <a href="https://brew.sh/">Homebrew</a>:<br/><code>brew install pkg-config cairo pango libpng jpeg giflib librsvg pixman</code>
+Ubuntu | <code>sudo apt-get install build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev</code>
+Fedora | <code>sudo yum install gcc-c++ cairo-devel pango-devel libjpeg-turbo-devel giflib-devel</code>
+Solaris | <code>pkgin install cairo pango pkg-config xproto renderproto kbproto xextproto</code>
+OpenBSD | <code>doas pkg_add cairo pango png jpeg giflib</code>
+Windows | See the <a href="https://github.com/Automattic/node-canvas/wiki/Installation:-Windows">wiki</a>
+Others | See the <a href="https://github.com/Automattic/node-canvas/wiki">wiki</a></p>
+<p><strong>Mac OS X v10.11+:</strong> If you have recently updated to Mac OS X v10.11+ and are experiencing trouble when compiling, run the following command: <code>xcode-select --install</code>. Read more about the problem <a href="http://stackoverflow.com/a/32929012/148072">on Stack Overflow</a>.
+If you have xcode 10.0 or higher installed, in order to build from source you need NPM 6.4.1 or higher.</p>
+<h4>Usage</h4>
+<p>To use <code>canvas</code>, you will first need to import <code>createCanvas</code> like this:</p>
+<pre><code>import { createCanvas } from &quot;canvas&quot;;
+</code></pre>
+<p>Creating the canvas is as simple as with the native module</p>
+<pre><code>const canvas = createCanvas(width, height);
+const ctx = canvas.getContext('2d');
+</code></pre>
+<h4>Example</h4>
+<p>Creating the canvas is as easy as with the native module. Here is an example from the official documentation that draws the word 'Awesome!' along with an image of a cat wearing a lime helmet:</p>
+<pre><code>const { createCanvas, loadImage } = require('canvas')
+const canvas = createCanvas(200, 200)
+const ctx = canvas.getContext('2d')
+
+// Write &quot;Awesome!&quot;
+ctx.font = '30px Impact'
+ctx.rotate(0.1)
+ctx.fillText('Awesome!', 50, 100)
+
+// Draw line under text
+var text = ctx.measureText('Awesome!')
+ctx.strokeStyle = 'rgba(0,0,0,0.5)'
+ctx.beginPath()
+ctx.lineTo(50, 102)
+ctx.lineTo(50 + text.width, 102)
+ctx.stroke()
+
+// Draw cat with lime helmet
+loadImage('examples/images/lime-cat.jpg').then((image) =&gt; {
+  ctx.drawImage(image, 50, 0, 70, 70)
+
+  console.log('&lt;img src=&quot;' + canvas.toDataURL() + '&quot; /&gt;')
+})
+</code></pre>
+<h4>Exporting</h4>
+<p>To send the image to the client, you can use the non-standard API's in the <a href="https://github.com/Automattic/node-canvas">documentation</a> to convert the image to a buffer and return it in the Response object like this:</p>
+<h5>Svelte example</h5>
+<p>Using the same code as above, to send the image to the client all you have to do is convert the image to a buffer and return it in the <code>Response</code> object.</p>
+<h6>Converting the canvas to a buffer</h6>
+<pre><code>canvas.toBuffer(&quot;image/jpeg&quot;)
+</code></pre>
+<h6>Full code example</h6>
+<pre><code>import { error } from '@sveltejs/kit';
+import { createCanvas } from &quot;canvas&quot;;
+
+export function GET({ params, url }) {
+    return new Promise((resolve, reject) =&gt; {
+       	ctx.font = '30px Impact'
+		ctx.rotate(0.1)
+		ctx.fillText('Awesome!', 50, 100)
+
+		// Draw line under text
+		var text = ctx.measureText('Awesome!')
+		ctx.strokeStyle = 'rgba(0,0,0,0.5)'
+		ctx.beginPath()
+		ctx.lineTo(50, 102)
+		ctx.lineTo(50 + text.width, 102)
+		ctx.stroke()
+
+		// Draw cat with lime helmet
+		loadImage('examples/images/lime-cat.jpg').then((image) =&gt; {
+ 		 ctx.drawImage(image, 50, 0, 70, 70)
+
+        resolve(new Response(canvas.toBuffer(&quot;image/jpeg&quot;)));
+    }).catch(() =&gt; {
+        throw error(404, 'Not found');
+    })
+}
+</code></pre>
+</main>
+  </body>
+</html>

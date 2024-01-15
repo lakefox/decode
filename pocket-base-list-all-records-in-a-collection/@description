@@ -1,0 +1,1 @@
+When using the getList() method to fetch queries from your collection, you can run into issues where as your database grows, you are no longer collecting all the records. To fix this you can use the getFullList method.

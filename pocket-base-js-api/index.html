@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>PocketBase JS API</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/"
+        ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
+      >
+    </nav>
+    <main><h1>PocketBase JS API</h1>
+<p>Unlock the full potential of PocketBase's JS SDK with this comprehensive guide covering everything you need to know to avoid confusion.</p>
+<p><img src="./untitled_cVi0LEjGOG.webp" alt="pocketbase" /></p>
+<h2>Prerequisite</h2>
+<ul>
+<li><a href="pocket-base-installation-on-digital-ocean">PocketBase Installation on Digital Ocean</a></li>
+</ul>
+<h2>Install</h2>
+<h3>Browser (manuel)</h3>
+<p>You can use any NPM CDN to load the SDK or you can download it and host it yourself.</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://unpkg.com/pocketbase/dist/pocketbase.umd.js&#34;</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
+</span></span></code></pre><h4>Import as a Module</h4>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;module&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>  <span style="color:#66d9ef">import</span> <span style="color:#a6e22e">PocketBase</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;https://unpkg.com/pocketbase/dist/pocketbase.umd.js&#39;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>  ...
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
+</span></span></code></pre><h5>NPM</h5>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>npm i pocketbase
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#75715e">// Using ES modules (default)
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">PocketBase</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;pocketbase&#34;</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span><span style="color:#75715e">// OR if you are using CommonJS modules
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">PocketBase</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;pocketbase/cjs&#34;</span>);
+</span></span></code></pre><h3>Usage</h3>
+<p>Connecting to your PocketBase instance is very straightforward, after importing the module create a <code>new</code> PocketBase instance and pass your DataBase URL as the first argument.</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">PocketBase</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;pocketbase&#34;</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">pb</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">PocketBase</span>(<span style="color:#e6db74">&#34;http://127.0.0.1:8090&#34;</span>);
+</span></span></code></pre><h4>Collections</h4>
+<p>Every PocketBase request will start by first defining which collection you want to pull or put information in.</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">collection</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">collection</span>(<span style="color:#e6db74">&#34;example&#34;</span>);
+</span></span></code></pre><p>In this example, we are getting the collection <code>example</code>. The collection object has methods for searching and authentication.</p>
+<h5>Getting Information</h5>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">collection</span>(<span style="color:#e6db74">&#34;example&#34;</span>).<span style="color:#a6e22e">getList</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">20</span>);
+</span></span></code></pre><p>This will get the first 20 results from the <code>example</code> collection. If you want to filter your results the <code>getList</code> method allows for a configuration object to be passed.</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">collection</span>(<span style="color:#e6db74">&#34;example&#34;</span>).<span style="color:#a6e22e">getList</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">20</span>, {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>  <span style="color:#a6e22e">filter</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;status = true &amp;&amp; created &gt; &#34;2022-08-01 10:00:00&#34;&#39;</span>,
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>});
+</span></span></code></pre><p>PocketBase uses standard SQL syntax for the filtering.</p>
+<h5>Authentication</h5>
+<p>PocketBase has built-in methods for account creation and authentication. Once you authenticate a user at the <code>pb</code> object level the user will remain authenticated until you deauth them. This is great if you have permissions set for a user, they will not be able to access collections you don't want them in.</p>
+<p>Here is an example of logging in a user with their email and password:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">userData</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">pb</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>  .<span style="color:#a6e22e">collection</span>(<span style="color:#e6db74">&#34;users&#34;</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>  .<span style="color:#a6e22e">authWithPassword</span>(<span style="color:#e6db74">&#34;test@example.com&#34;</span>, <span style="color:#e6db74">&#34;123456&#34;</span>);
+</span></span></code></pre><p>After authentication, the promise will return the user's data so there is no need to make an additional request. If you want to deauth a user call the function below anywhere and it will clear out the authStore:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">authStore</span>.<span style="color:#a6e22e">clear</span>();
+</span></span></code></pre><h4>File Uploading</h4>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">PocketBase</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;pocketbase&#39;</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">pb</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">PocketBase</span>(<span style="color:#e6db74">&#39;http://127.0.0.1:8090&#39;</span>);
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span>...
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">formData</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">FormData</span>();
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fileInput</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;fileInput&#39;</span>);
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11</span><span><span style="color:#75715e">// listen to file input changes and add the selected files to the form data
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12</span><span><span style="color:#75715e"></span><span style="color:#a6e22e">fileInput</span>.<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;change&#39;</span>, <span style="color:#66d9ef">function</span> () {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13</span><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">file</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">fileInput</span>.<span style="color:#a6e22e">files</span>) {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14</span><span>        <span style="color:#a6e22e">formData</span>.<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#39;documents&#39;</span>, <span style="color:#a6e22e">file</span>);
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15</span><span>    }
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16</span><span>});
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18</span><span><span style="color:#75715e">// set some other regular text field value
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19</span><span><span style="color:#75715e"></span><span style="color:#a6e22e">formData</span>.<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#39;title&#39;</span>, <span style="color:#e6db74">&#39;Hello world!&#39;</span>);
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21</span><span>...
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23</span><span><span style="color:#75715e">// upload and create new record
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24</span><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">createdRecord</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">collection</span>(<span style="color:#e6db74">&#39;example&#39;</span>).<span style="color:#a6e22e">create</span>(<span style="color:#a6e22e">formData</span>);
+</span></span></code></pre><p>Here is the code from the documentation on how to upload files. I did not realize this at first but the <code>fromData</code> becomes the source for all the data you are uploading so if you were uploading an image and you wanted to give it a title you follow this example and use <code>.append</code> with the name of the field in your database and then the value you want to store. Also, another note is the field where you are putting the documents DOES NOT need to be called <code>documents</code>. This confused me at first.</p>
+<p>Now that you have uploaded the files you will probably want to access them, you can use the following URL format to get them.</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>http://127.0.0.1:8090/api/files/COLLECTION_ID_OR_NAME/RECORD_ID/FILENAME
+</span></span></code></pre><ul>
+<li>COLLECTION_ID_OR_NAME
+<ul>
+<li>You can get the collection ID from the <code>.collectionId</code> field of the image</li>
+</ul>
+</li>
+<li>RECORD_ID
+<ul>
+<li>This will be <code>.id</code> of the record</li>
+</ul>
+</li>
+<li>FILENAME
+<ul>
+<li>This is stored under the object key that has the same name as the file collum in the collection</li>
+</ul>
+</li>
+</ul>
+<p>If you have any questions please put them below and I will answer them, or you can email <code>contact@low.sh</code> and I will update this tutorial with any missing information.</p>
+</main>
+  </body>
+</html>

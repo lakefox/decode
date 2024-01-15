@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>How to use Git</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/"
+        ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
+      >
+    </nav>
+    <main><h1>How to use Git</h1>
+<p>Git is a popular version control system that allows developers to keep track of changes in their codebase and collaborate with others. Here is a step-by-step tutorial on how to use Git.</p>
+<h3>Install Git</h3>
+<p>The first step in using Git is to install it on your computer. Git is available for Windows, Mac, and Linux operating systems. You can download the installer from the official Git website <a href="https://git-scm.com/downloads" title="Git SCM">here</a>.</p>
+<h3>Set up Git</h3>
+<p>After installing Git, you need to set up your name and email address in Git's configuration file. This information is used to identify who made each change to the codebase.</p>
+<p>To set up your name and email address, open a command prompt or terminal window and enter the following commands:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>git config --global user.name <span style="color:#e6db74">&#34;Your Name&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>git config --global user.email <span style="color:#e6db74">&#34;youremail@example.com&#34;</span>
+</span></span></code></pre><p>Replace &quot;Your Name&quot; and &quot;youremail@example.com&quot; with your actual name and email address.</p>
+<h3>Create a Git repository</h3>
+<p>A Git repository is a directory that contains all the files and folders for your project. To create a Git repository, navigate to the directory where you want to store your project and enter the following command:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>git init
+</span></span></code></pre><p>This will initialize a new Git repository in the current directory.</p>
+<h3>Add files to the repository</h3>
+<p>Once you have a Git repository set up, you can start adding files to it. To add a file to the repository, use the following command:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>git add filename
+</span></span></code></pre><p>Replace &quot;filename&quot; with the name of the file you want to add. You can also use the following command to add all the files in the current directory and its subdirectories:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>git add .
+</span></span></code></pre><h3>Commit changes</h3>
+<p>After adding files to the repository, you need to commit the changes. A commit is a snapshot of the code at a particular point in time, along with a message that describes the changes you made.</p>
+<p>To commit changes, use the following command:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>git commit -m <span style="color:#e6db74">&#34;Commit message&#34;</span>
+</span></span></code></pre><p>Replace &quot;Commit message&quot; with a brief description of the changes you made.</p>
+<p>Step 6: Check the status of the repository
+To check the status of the repository, use the following command:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>git status
+</span></span></code></pre><p>This will show you which files have been modified, which files have been staged for the next commit, and which files are not being tracked by Git.</p>
+<h3>Push changes to a remote repository</h3>
+<p>If you are collaborating with others on a project, you may need to push your changes to a remote repository, such as GitHub or Bitbucket.</p>
+<p>To push changes to a remote repository, use the following command:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>git push remote branch
+</span></span></code></pre><p>Replace &quot;remote&quot; with the name of the remote repository, and &quot;branch&quot; with the name of the branch you want to push changes to.</p>
+<h3>Pull changes from a remote repository</h3>
+<p>If someone else has made changes to the codebase, you may need to pull their changes into your local repository.</p>
+<p>To pull changes from a remote repository, use the following command:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>git pull remote branch
+</span></span></code></pre><p>Replace &quot;remote&quot; with the name of the remote repository, and &quot;branch&quot; with the name of the branch you want to pull changes from.</p>
+<h3>Branching and Merging</h3>
+<p>If you want to experiment with a new feature, you can create a new branch in your Git repository. A branch is a copy of the codebase that you can modify without affecting the original code. Once you are done with the changes, you can merge the branch back into the main codebase.</p>
+<p>To create a new branch, use the following command:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>git branch new_branch
+</span></span></code></pre><p>Replace &quot;new_branch&quot; with the name of the new branch.</p>
+<p>To switch to the new branch, use the following command:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>git checkout new_branch
+</span></span></code></pre><p>Once you have made changes in the new branch and want to merge it back to the main branch, switch to the main branch and use the following command:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>git merge new_branch
+</span></span></code></pre><h3>Review the commit history</h3>
+<p>You can review the commit history of a Git repository using the following command:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>git log
+</span></span></code></pre><p>This will show you a list of all the commits that have been made to the repository, along with their commit messages and other information.</p>
+<h3>Undo changes</h3>
+<p>If you make a mistake or need to undo changes, you can use the following commands:</p>
+<p>To discard changes that have not been staged for the next commit, use:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>git checkout -- filename
+</span></span></code></pre><p>To undo changes that have been staged for the next commit, use:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>git reset filename
+</span></span></code></pre><p>To undo a commit, use:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>git reset HEAD^
+</span></span></code></pre><p>Git is a powerful tool that can help you keep track of changes in your codebase and collaborate with others. This tutorial has covered the basics of using Git, including creating a repository, adding files, committing changes, pushing and pulling changes, branching and merging, reviewing the commit history, and undoing changes. With practice, you can become proficient in using Git and take advantage of its many features.</p>
+</main>
+  </body>
+</html>

@@ -1,0 +1,1 @@
+TF-IDF stands for Term Frequency - Inverse Document Frequency, the formula we will be going over in this document is used to measure the importance of a word in a sentence. This is heavily used in machine learning and data mining to identify stopwords and select sentence that can be used to form a summary.

@@ -1,0 +1,1 @@
+It can cause malicious code to be executed with the same permissions as the webpage or extension, as well as it is slower than other alternatives due to the additional steps required for invoking the JavaScript interpreter. Minifiers also struggle with code transitively dependent on eval(), and how this can cause issues for variables.

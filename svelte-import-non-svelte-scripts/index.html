@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Svelte Import Non-Svelte Scripts</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/"
+        ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
+      >
+    </nav>
+    <main><h1>Svelte Import Non-Svelte Scripts</h1>
+<p>Importing non-Svelte libraries into a Svelte project can be confusing. Here's a guide on how to import both NPM and non-NPM JavaScript modules into your Svelte project.</p>
+<p>Svelte uses ES6 modules for importing all modules, if the package you are trying to use does not have an ES6 version of it you will not be able to use the library. Luckily most packages have a workaround that is custom to the specific package Here's how to import the modules into svelte:</p>
+<h3>Pure ES6 Module</h3>
+<p>Here's the basic importing of an ES6 NPM package.</p>
+<pre><code>import { function } from &quot;package&quot;
+</code></pre>
+<h3>Non ES6 with a Seperate ES6 File</h3>
+<p>If the package you are using has an ES6 file in it, use <code>/package</code> in place of <code>/node_modules/package</code> to select which file you want to import.</p>
+<pre><code>import { function } from &quot;package/dist/es6&quot;
+</code></pre>
+<h3>Using the Head</h3>
+<p>If you are unable to import the module another way to use it is to load the script using the <code>head</code> element like below:</p>
+<pre><code>&lt;svelte:head&gt;
+	&lt;script src=&quot;path_to_file&quot;&gt;&lt;/script&gt;
+&lt;/svelte:head&gt;
+</code></pre>
+<p>This will allow you to interact with the package just as if you loaded it from the <code>app.html</code> file. If you choose this method you will be unable to server-side render anything that requires the package. To separate the code and prevent it from running before loaded you can use the <code>onMount</code> function like below:</p>
+<pre><code>import { onMount } from 'svelte';
+	
+onMount(() =&gt; {
+	console.log(&quot;Document Loaded&quot;)
+});
+</code></pre>
+</main>
+  </body>
+</html>

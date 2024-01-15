@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Promise Message Queuing</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/"
+        ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
+      >
+    </nav>
+    <main><h1>Promise Message Queuing</h1>
+<p>When building an application, if you are like me, you make multiple requests to your database per request. I recently ran into an issue with syncing the fetching of data from my database and returning a response as soon as possible. Here's how I fixed it.</p>
+<h3>The Problem</h3>
+<p>Three database queries are running on the server side of this website's homepage. One to get the site's styling, one to get the posts, and the last to get the series listed on the sidebar. Previously, I was chaining the queries to run one after another, in hindsight this is a bad idea because you have to wait the sum of the three requests time before the site responds. This causes the initial response from the server to be slow, but it was nothing too crazy. Here is the code version of how it was laid out.</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#a6e22e">DB</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;styles&#34;</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span>	.<span style="color:#a6e22e">then</span>(() =&gt; {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span>		<span style="color:#a6e22e">DB</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;posts&#34;</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span>			.<span style="color:#a6e22e">then</span>(() =&gt; {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span>				<span style="color:#a6e22e">DB</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;series&#34;</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span><span>					.<span style="color:#a6e22e">then</span>(() =&gt; {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span>						<span style="color:#75715e">/* send the data to the client */</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span><span>					})
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span><span>			})	
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span>	})
+</span></span></code></pre><blockquote>
+<p>Note: this is not the actual code for this site, I use PocketBase as the database and SvelteKit as the framework. Writing out the actual code provides nothing.</p>
+</blockquote>
+<h3>What I did</h3>
+<p>I knew the best approach to loading the database queries is to start them all at the same time and then when the last one finishes, send the response to the client. So I built a little helper class that you can &quot;register&quot; a promise and a finishing event to. Here's what I came up with:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">pQue</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span>	<span style="color:#a6e22e">constructor</span>() {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span>		<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">tasks</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span>		<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">complete</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span>		<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">store</span> <span style="color:#f92672">=</span> {};
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span><span>		<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">resolve</span> <span style="color:#f92672">=</span> () =&gt; {};
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span>		<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">register</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">promise</span>) =&gt; {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span><span>			<span style="color:#a6e22e">tasks</span><span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span><span>			<span style="color:#a6e22e">promise</span>.<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">data</span>) =&gt; {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span>				<span style="color:#a6e22e">complete</span><span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11</span><span>				<span style="color:#a6e22e">store</span> <span style="color:#f92672">=</span> Object.<span style="color:#a6e22e">assign</span>(<span style="color:#a6e22e">store</span>, <span style="color:#a6e22e">data</span>);
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12</span><span>				<span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">complete</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">tasks</span>) {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13</span><span>					<span style="color:#a6e22e">resolve</span>(<span style="color:#a6e22e">store</span>);
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14</span><span>				}
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15</span><span>			});
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16</span><span>		};
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17</span><span>		<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">then</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">cb</span>) =&gt; {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18</span><span>			<span style="color:#a6e22e">resolve</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">cb</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19</span><span>		};
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20</span><span>	}
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21</span><span>}
+</span></span></code></pre><p>Here's the function in use with the previous example:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">queue</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">pQue</span>();
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span><span style="color:#75715e">// Handle the data once all promises are complete
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span><span style="color:#75715e"></span><span style="color:#a6e22e">queue</span>.<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">data</span>) =&gt; {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span>	<span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">data</span>);
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span><span>});
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span><span><span style="color:#a6e22e">queue</span>.<span style="color:#a6e22e">register</span>(<span style="color:#a6e22e">DB</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;styles&#34;</span>));
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span><span><span style="color:#a6e22e">queue</span>.<span style="color:#a6e22e">register</span>(<span style="color:#a6e22e">DB</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;posts&#34;</span>));
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span><span style="color:#a6e22e">queue</span>.<span style="color:#a6e22e">register</span>(<span style="color:#a6e22e">DB</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;series&#34;</span>));
+</span></span></code></pre><p>When the class is initiated, the constructor creates a &quot;task manager&quot; of sorts, that keeps track of how many promises have been registered and how many are completed. The <code>register</code> function takes a promise as an argument and updates the task variable to keep track of the promises still hanging. When the promise completes, the <code>.then</code> function of the <code>pQue</code> class is used to update the completed promises tracker and then maps the values of the promise to the store variable. Once all promises are complete, the <code>.then</code> function of the <code>pQue</code> function is then called with the <code>store</code> variable passed.</p>
+</main>
+  </body>
+</html>

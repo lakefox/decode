@@ -1,0 +1,1 @@
+HTTP headers are a crucial part of the HTTP protocol, which is used to transmit data over the internet. These headers are used to provide additional information about the request or response, such as the type of content being sent, the length of the content, and the encoding used.

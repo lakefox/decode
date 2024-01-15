@@ -1,0 +1,1 @@
+Trying to get highlighted code to be editable on your website can be tricky to implement. The idea behind successfully doing it is to display a code tag and highlight the code in there, then overlay a textarea with the font color and background set to transparent.

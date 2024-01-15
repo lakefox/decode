@@ -1,0 +1,1 @@
+Until recently I never completely understood what server-sent events were. Of course, I had a general idea of how they work, they acted as a websocket that works in one direction, allowing you to send data at different times throughout a request. What I didn't realize is how simple they were to implement and how powerfull they could be.

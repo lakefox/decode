@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Bundling NPM packages for the browser</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/"
+        ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
+      >
+    </nav>
+    <main><h1>Bundling NPM packages for the browser</h1>
+<p>How to bundle your NPM package for production</p>
+<p>When building <a href="https://decode.sh/kod-js">Kod.js</a> I wanted it to work on both Node and in the browser. I had to be careful not to use modules that aren't compatible with both environments. However, once the code was written it still relied on external packages that had to be loaded separately, this clearly isn't a good way to create a package. After doing a bit of research I came across module bundlers like browserify that could make my code into one big file. Here's how to do the same:</p>
+<h3>Installing Browserify</h3>
+<p>Browserify is an open-source javascript bundler that runs as an OS-level command so you will want to install it globally.</p>
+<pre><code>npm install -g browserify
+</code></pre>
+<h3>Using ES6 import</h3>
+<p>Out of the box, browserify doesn't support ES6 modules, you will need to install <code>esmify</code> to be able to bundle using browserify.</p>
+<pre><code>npm install -g esmify
+</code></pre>
+<h3>Minifying your bundle</h3>
+<p>When bundling code you will notice there is a lot of code all in one file, to reduce the file size you can use a code minifying tool like <code>terser</code> that can compress your bundle by replacing all the variables with the smallest name possible.</p>
+<pre><code>npm install -g terser
+</code></pre>
+<h3>Using it all together</h3>
+<p>Below is the command I have set in my <code>package.json</code> to build my web bundle for <code>Kod.js</code>.</p>
+<pre><code>npx browserify -p esmify index.mjs | terser --compress --mangle &gt; ./dist/kod.min.js
+</code></pre>
+</main>
+  </body>
+</html>

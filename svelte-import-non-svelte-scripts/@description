@@ -1,0 +1,1 @@
+Importing non-Svelte libraries into a Svelte project can be confusing. Here's a guide on how to import both NPM and non-NPM JavaScript modules into your Svelte project.

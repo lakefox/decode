@@ -1,0 +1,1 @@
+Lazy loading is a technique that defers the loading of images until they are needed, rather than loading them all at once when the page first loads. This can help improve the performance and user experience of a webpage, particularly on sites with a large number of images.

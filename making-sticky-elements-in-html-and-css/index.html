@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Making sticky elements in HTML and CSS.</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/"
+        ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
+      >
+    </nav>
+    <main><h1>Making sticky elements in HTML and CSS.</h1>
+<p>Sticky elements are a useful feature in modern web design, as they allow certain elements on a webpage to remain visible even when the user scrolls. This can be useful for elements such as the navigation bar or a call-to-action button, as it ensures that they are always accessible to the user.</p>
+<p>In order to make an element sticky, we can use the position property in CSS. Specifically, we can set the position to sticky to make the element &quot;stick&quot; to the viewport when the user scrolls past a certain point.</p>
+<pre><code>.sticky {
+  position: sticky;
+}
+</code></pre>
+<p>In addition to setting the position property, we can also use the top, left, right, and bottom properties to specify the distances from the corresponding edges of the viewport at which the element should become sticky. For example, to make an element sticky 20 pixels from the top of the viewport, we can use the following CSS:</p>
+<pre><code>.sticky-top {
+  position: sticky;
+  top: 20px;
+}
+</code></pre>
+<p>To make an element sticky 20 pixels from the left of the viewport, we can use the following CSS:</p>
+<pre><code>.sticky-left {
+  position: sticky;
+  left: 20px;
+}
+</code></pre>
+<p>Similarly, to make an element sticky 20 pixels from the right of the viewport, we can use the following CSS:</p>
+<pre><code>.sticky-right {
+  position: sticky;
+  right: 20px;
+}
+</code></pre>
+<p>And to make an element sticky 20 pixels from the bottom of the viewport, we can use the following CSS:</p>
+<pre><code>.sticky-bottom {
+  position: sticky;
+  bottom: 20px;
+}
+</code></pre>
+<p>Keep in mind that the <code>position: sticky;</code> property is not supported in all browsers, so you may need to use a fallback solution for older browsers. One way to do this is to use a combination of JavaScript and the scroll event to manually update the position of the element as the user scrolls. Another for older Safari browsers is to use <code>-webkit-sticky</code>.</p>
+<p>With these techniques, you can easily make elements sticky on your web pages to enhance the usability and navigation of your site.</p>
+</main>
+  </body>
+</html>
