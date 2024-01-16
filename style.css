@@ -1,5 +1,5 @@
 @font-face {
-  font-family: Comic Mono;
+  font-family: monospace, Comic Mono;
   font-weight: normal;
   src: url(./ComicMono.ttf);
 }
