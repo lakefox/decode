@@ -1,11 +1,5 @@
-@font-face {
-  font-family: Comic Mono;
-  font-weight: normal;
-  src: url(./ComicMono.ttf);
-}
-
 html {
-  font-family: "Comic Mono", monospace, sans-serif;
+  font-family: Comic Mono;
 }
 
 nav > a > img {
@@ -28,10 +22,13 @@ nav > a {
   font-size: 18px;
 }
 main {
+  margin-bottom: 100px;
+}
+
+.list {
   width: 90%;
   max-width: 900px;
   margin: auto;
-  margin-bottom: 100px;
 }
 pre {
   padding: 10px;
@@ -40,5 +37,83 @@ pre {
 }
 
 img {
+  width: auto;
+  max-height: 400px;
+}
+
+table[spreadsheet] {
+  overflow: scroll;
+  display: block;
+  border-spacing: 0;
+  background: #ccc;
+  max-height: 200px;
+  max-width: 800px;
+}
+
+table[spreadsheet] input {
+  border: none;
+  width: 130px;
+  height: unset;
+  background: #fff;
+  color: #000;
+  margin: 0;
+  padding: 1px 2px;
+  border-radius: 0;
+  font-size: 14px;
+}
+
+table[spreadsheet] td {
+  font-family: monospace;
+  text-align: center;
+  font-weight: 700;
+  font-size: 12px;
+  color: #000;
+  margin: 0;
+  padding: 1px;
+  border: none;
+  min-width: 20px;
+}
+
+table[spreadsheet] td:first-child {
+  font-size: 12px;
+  position: sticky;
+  left: 0;
+  background: #ccc;
+  border-right: 2px solid #ccc;
+}
+
+table[spreadsheet] thead:first-child td:first-child {
+  background: transparent;
+}
+
+[editor] {
+  background: #110f15;
+  padding: 10px;
+  border-radius: 4px;
+  max-width: 800px;
+}
+[editor] > iframe {
+  background: #fff;
   width: 100%;
+  height: 300px;
+}
+[editor] > div {
+  display: flex;
+  justify-content: space-between;
+  height: 300px;
+  padding-top: 10px;
+}
+[editor] > div > label {
+  margin-bottom: 20px;
+  color: #fff;
+  background: #cdcdcd;
+  font-family: Arial, Helvetica, sans-serif;
+}
+[editor] > div > label > textarea {
+  background: #1c2a36;
+  color: #cdcdcd;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
 }

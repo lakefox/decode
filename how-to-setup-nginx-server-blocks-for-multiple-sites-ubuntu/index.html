@@ -70,27 +70,21 @@
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17</span><span>    	}
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18</span><span>}
 </span></span></code></pre><p>Once added save the file and then we need to link the configuration file to the <code>sites-enabled</code> directory</p>
-<pre><code>sudo ln -s /etc/nginx/sites-available/@{domain}/etc/nginx/sites-enabled/
-</code></pre>
-<p>This will keep both configuration files in sync between <code>sites-available</code> and <code>sites-enabled</code></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>sudo ln -s /etc/nginx/sites-available/@<span style="color:#f92672">{</span>domain<span style="color:#f92672">}</span>/etc/nginx/sites-enabled/
+</span></span></code></pre><p>This will keep both configuration files in sync between <code>sites-available</code> and <code>sites-enabled</code></p>
 <p>Next to prevent a possible hash bucket memory problem, open <code>/etc/nginx/nginx.conf</code>.</p>
-<pre><code>sudo nano /etc/nginx/nginx.conf
-</code></pre>
-<p>un-comment the line below in the <code>http</code> block</p>
-<pre><code>server_names_hash_bucket_size 64;
-</code></pre>
-<h2>Step 4</h2>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>sudo nano /etc/nginx/nginx.conf
+</span></span></code></pre><p>un-comment the line below in the <code>http</code> block</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>server_names_hash_bucket_size 64;
+</span></span></code></pre><h2>Step 4</h2>
 <p>Now everything should be set up, you can run the command to make sure all the formatting is done properly.</p>
-<pre><code>sudo nginx -t
-</code></pre>
-<p>If no warning show up you are good to restart the server.</p>
-<pre><code>sudo systemctl restart nginx
-</code></pre>
-<h3>Setting up multiple sites</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>sudo nginx -t
+</span></span></code></pre><p>If no warning show up you are good to restart the server.</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>sudo systemctl restart nginx
+</span></span></code></pre><h3>Setting up multiple sites</h3>
 <p>To configure more than one domain on the same server just repeat steps 2-4.</p>
 <h4>Next learn how to set up Node.JS for production.</h4>
 <p><a href="/setting-up-node-js-for-production">Setting up Node.JS for Production</a></p>
-</div>
 </main>
   </body>
 </html>

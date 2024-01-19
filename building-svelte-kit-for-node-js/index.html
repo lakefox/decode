@@ -17,19 +17,17 @@
 <p>SvelteKit is a powerful tool that is great for making all types of websites, with out of the box support for services like Vercel. In this tutorial you will learn how to setup up SvelteKit for Node JS to run on a platform like Digital Ocean.</p>
 <h2>Installing the Correct Adapter</h2>
 <p>Out of the box, Svelte comes with the auto adapter, to build your app for Node Js you will have to install <code>adapter-node</code>.</p>
-<pre><code>npm i @sveltejs/adapter-node
-</code></pre>
-<h2>Configuring Svelte</h2>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>npm i @sveltejs/adapter-node
+</span></span></code></pre><h2>Configuring Svelte</h2>
 <p>The <code>svelte.config.js</code> contains all of your adapter settings to build for Node you can set up your file like this.</p>
-<h5>Output Directory</h5>
-<p>@[var]{dist}</p>
-<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">adapter</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;@sveltejs/adapter-node&#39;</span>;
+<h3>Output Directory</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">adapter</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;@sveltejs/adapter-node&#34;</span>;
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span>
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span><span style="color:#75715e">/** @type {import(&#39;@sveltejs/kit&#39;).Config} */</span>
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">config</span> <span style="color:#f92672">=</span> {
-</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span>	<span style="color:#a6e22e">kit</span><span style="color:#f92672">:</span> {
-</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span><span>		<span style="color:#a6e22e">adapter</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">adapter</span>({ <span style="color:#a6e22e">out</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;./@{var}&#39;</span> })
-</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span>	},
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span>  <span style="color:#a6e22e">kit</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span><span>    <span style="color:#a6e22e">adapter</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">adapter</span>({ <span style="color:#a6e22e">out</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;./dist&#34;</span> }),
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span>  },
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span><span>};
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span><span>
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">config</span>;
@@ -37,10 +35,10 @@
 <p>To build your app for Node JS you can use the <code>npm</code> commands that Svetle already provides for you.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>npm run build
 </span></span></code></pre><h2>Running</h2>
-<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>node ./@<span style="color:#f92672">{</span>var<span style="color:#f92672">}</span>//index
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>node ./dist/index
 </span></span></code></pre><h2>Changing the host and port</h2>
 <p>If you want to change either the host or the port the built app pass the variables <code>HOST</code> and <code>PORT</code> to the index file like this.</p>
-<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>PORT<span style="color:#f92672">=</span><span style="color:#ae81ff">4000</span> HOST<span style="color:#f92672">=</span>127.0.0.1 node ./@<span style="color:#f92672">{</span>var<span style="color:#f92672">}</span>//index
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>PORT<span style="color:#f92672">=</span><span style="color:#ae81ff">4000</span> HOST<span style="color:#f92672">=</span>127.0.0.1 node ./dist/index
 </span></span></code></pre><p>An easy way to do this in one command is to create a <code>./server.sh</code> file in your root directory with the line above and run the following command.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>chmod u+x ./server.sh
 </span></span></code></pre><p>to run the new script you created type the following command:</p>

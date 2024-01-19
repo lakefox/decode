@@ -23,15 +23,44 @@
 <pre><code>npm install canvas
 </code></pre>
 <p>Note: canvas uses Cairo, a 2D graphics library with support for multiple output devices, which you may need to install in order to get canvas working properly. Use the table below to install.</p>
-<p>OS | Command
------ | -----
-OS X | Using <a href="https://brew.sh/">Homebrew</a>:<br/><code>brew install pkg-config cairo pango libpng jpeg giflib librsvg pixman</code>
-Ubuntu | <code>sudo apt-get install build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev</code>
-Fedora | <code>sudo yum install gcc-c++ cairo-devel pango-devel libjpeg-turbo-devel giflib-devel</code>
-Solaris | <code>pkgin install cairo pango pkg-config xproto renderproto kbproto xextproto</code>
-OpenBSD | <code>doas pkg_add cairo pango png jpeg giflib</code>
-Windows | See the <a href="https://github.com/Automattic/node-canvas/wiki/Installation:-Windows">wiki</a>
-Others | See the <a href="https://github.com/Automattic/node-canvas/wiki">wiki</a></p>
+<table>
+<thead>
+<tr>
+<th>OS</th>
+<th>Command</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OS X</td>
+<td>Using <a href="https://brew.sh/">Homebrew</a>:<br/><code>brew install pkg-config cairo pango libpng jpeg giflib librsvg pixman</code></td>
+</tr>
+<tr>
+<td>Ubuntu</td>
+<td><code>sudo apt-get install build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev</code></td>
+</tr>
+<tr>
+<td>Fedora</td>
+<td><code>sudo yum install gcc-c++ cairo-devel pango-devel libjpeg-turbo-devel giflib-devel</code></td>
+</tr>
+<tr>
+<td>Solaris</td>
+<td><code>pkgin install cairo pango pkg-config xproto renderproto kbproto xextproto</code></td>
+</tr>
+<tr>
+<td>OpenBSD</td>
+<td><code>doas pkg_add cairo pango png jpeg giflib</code></td>
+</tr>
+<tr>
+<td>Windows</td>
+<td>See the <a href="https://github.com/Automattic/node-canvas/wiki/Installation:-Windows">wiki</a></td>
+</tr>
+<tr>
+<td>Others</td>
+<td>See the <a href="https://github.com/Automattic/node-canvas/wiki">wiki</a></td>
+</tr>
+</tbody>
+</table>
 <p><strong>Mac OS X v10.11+:</strong> If you have recently updated to Mac OS X v10.11+ and are experiencing trouble when compiling, run the following command: <code>xcode-select --install</code>. Read more about the problem <a href="http://stackoverflow.com/a/32929012/148072">on Stack Overflow</a>.
 If you have xcode 10.0 or higher installed, in order to build from source you need NPM 6.4.1 or higher.</p>
 <h4>Usage</h4>

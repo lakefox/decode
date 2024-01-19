@@ -30,38 +30,36 @@
 <p>The main reason however was that HTML was never meant to act as a styling language, it is a markup language.</p>
 <p>Modern alternatives: There are more modern and flexible ways to achieve similar effects, such as using CSS and JavaScript. These methods provide more control and customization options and are better supported across different web browsers.</p>
 <p>Here is an example of how you can achieve the same effect as the HTML <code>&lt;marquee&gt;</code> tag using CSS:</p>
-<h5>HTML</h5>
-<pre><code>&lt;div class=&quot;marquee&quot; data-text=&quot;This is some scrolling text!&quot;/&gt;
-</code></pre>
-<h5>CSS</h5>
-<pre><code>.marquee {
-  width: 300px;
-  height: 50px;
-  overflow: hidden;
-  position: relative;
-}
-
-.marquee:before {
-  content: attr(data-text);
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 100%;
-  width: 100%;
-  height: 100%;
-  animation: marquee 5s linear infinite;
-}
-
-@keyframes marquee {
-  from {
-    left: 100%;
-  }
-  to {
-    left: -100%;
-  }
-}
-</code></pre>
-<p>In this example, the text is  added to the content of the :before pseudo-element using <code>attr</code> to get the contents of the <code>data-text</code> attribute. The animation then moves the text from right to left until it disappears completely off the left edge of the container.</p>
+<h2>HTML</h2>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;marquee&#34;</span> <span style="color:#a6e22e">data-text</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;This is some scrolling text!&#34;</span> /&gt;
+</span></span></code></pre><h2>CSS</h2>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span>.<span style="color:#a6e22e">marquee</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span>  <span style="color:#66d9ef">width</span>: <span style="color:#ae81ff">300</span><span style="color:#66d9ef">px</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span>  <span style="color:#66d9ef">height</span>: <span style="color:#ae81ff">50</span><span style="color:#66d9ef">px</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span>  <span style="color:#66d9ef">overflow</span>: <span style="color:#66d9ef">hidden</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span>  <span style="color:#66d9ef">position</span>: <span style="color:#66d9ef">relative</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span><span>}
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span><span>.<span style="color:#a6e22e">marquee</span>:<span style="color:#a6e22e">before</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span><span>  <span style="color:#66d9ef">content</span>: attr(data<span style="color:#f92672">-</span><span style="color:#66d9ef">text</span>);
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span>  <span style="color:#66d9ef">display</span>: <span style="color:#66d9ef">block</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11</span><span>  <span style="color:#66d9ef">position</span>: <span style="color:#66d9ef">absolute</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12</span><span>  <span style="color:#66d9ef">top</span>: <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13</span><span>  <span style="color:#66d9ef">left</span>: <span style="color:#ae81ff">100</span><span style="color:#66d9ef">%</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14</span><span>  <span style="color:#66d9ef">width</span>: <span style="color:#ae81ff">100</span><span style="color:#66d9ef">%</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15</span><span>  <span style="color:#66d9ef">height</span>: <span style="color:#ae81ff">100</span><span style="color:#66d9ef">%</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16</span><span>  <span style="color:#66d9ef">animation</span>: marquee <span style="color:#ae81ff">5</span><span style="color:#66d9ef">s</span> <span style="color:#66d9ef">linear</span> <span style="color:#66d9ef">infinite</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17</span><span>}
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19</span><span>@<span style="color:#66d9ef">keyframes</span> <span style="color:#f92672">marquee</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20</span><span>  <span style="color:#f92672">from</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21</span><span>    <span style="color:#66d9ef">left</span>: <span style="color:#ae81ff">100</span><span style="color:#66d9ef">%</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22</span><span>  }
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23</span><span>  <span style="color:#f92672">to</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24</span><span>    <span style="color:#66d9ef">left</span>: <span style="color:#ae81ff">-100</span><span style="color:#66d9ef">%</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25</span><span>  }
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26</span><span>}
+</span></span></code></pre><p>In this example, the text is added to the content of the :before pseudo-element using <code>attr</code> to get the contents of the <code>data-text</code> attribute. The animation then moves the text from right to left until it disappears completely off the left edge of the container.</p>
 </main>
   </body>
 </html>

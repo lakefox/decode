@@ -15,25 +15,23 @@
     </nav>
     <main><h1>Fetch API</h1>
 <p>The Fetch API is a interface for making http requests using javascript in the browser and with node version +18. If you are familiar with the XMLHttpRequest or ajax() from jQuery this will feel familiar.</p>
-<h4>Concepts</h4>
+<h2>Concepts</h2>
 <p>The fetch api is built on <a href="https://decode.sh/promises-vs-callbacks" title="Promises VS Callbacks">promises</a> and returns a <code>Response</code> object that will need further processing depending on the data parsing you want. The <code>fetch()</code> function takes two arguments, the request URL and the parameters. Then returns a <code>Response</code> object that will further process your data.</p>
-<h4>Usage</h4>
+<h2>Usage</h2>
 <p>Here is a simple example of a fetch request to an RSS feed. The RSS feed is in plain text so we process it using the <code>response.text()</code> method. There is also <code>.json()</code>, <code>.blob()</code>, <code>.formData()</code> and <code>.arrayBuffer()</code>.</p>
-<pre><code>fetch('https://decode.sh/rss&quot;)
-  .then((response) =&gt; response.text())
-  .then((data) =&gt; console.log(data));
-</code></pre>
-<h4>Fetching an image</h4>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#a6e22e">fetch</span>(<span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#a6e22e">https</span><span style="color:#f92672">:</span><span style="color:#75715e">//decode.sh/rss&#34;)
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#75715e"></span>  .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">response</span>) =&gt; <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">text</span>())
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>  .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">data</span>) =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">data</span>));
+</span></span></code></pre><h2>Fetching an image</h2>
 <p>When fetching binary data, like an image, you will want to convert it to a blob. Then you can create an object URL and use it like a file.</p>
-<pre><code>const image = document.querySelector(&quot;#image&quot;);
-fetch(&quot;https://decode.sh/favicon.png&quot;)
-  .then((response) =&gt; response.blob())
-  .then((blob) =&gt; {
-    const objectURL = URL.createObjectURL(blob);
-    image.src = objectURL;
-  });
-</code></pre>
-<h4>Adding Parameters</h4>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">image</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">querySelector</span>(<span style="color:#e6db74">&#34;#image&#34;</span>);
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#34;https://decode.sh/favicon.png&#34;</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>  .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">response</span>) =&gt; <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">blob</span>())
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>  .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">blob</span>) =&gt; {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">objectURL</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">URL</span>.<span style="color:#a6e22e">createObjectURL</span>(<span style="color:#a6e22e">blob</span>);
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span>    <span style="color:#a6e22e">image</span>.<span style="color:#a6e22e">src</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">objectURL</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7</span><span>  });
+</span></span></code></pre><h3>Adding Parameters</h3>
 <p>Along with the URL, fetch takes an options parameter, this allows you to set headers and make POST requests. Here's a breakdown of what can be added to the options.</p>
 <ul>
 <li>method
@@ -64,36 +62,36 @@ fetch(&quot;https://decode.sh/favicon.png&quot;)
 </ul>
 <p>For a more exhaustive list of fetch parameters see:
 <a href="https://developer.mozilla.org/en-US/docs/Web/API/fetch#parameters" title="Fetch API Documentation">MDN</a></p>
-<h4>Fetch POST Request</h4>
+<h2>Fetch POST Request</h2>
 <p>Here is a basic POST request example, it is broken out into a function that can be reused and returns the <code>Response</code> object that the <code>fetch</code> function returns.</p>
 <p>Check out: <a href="https://decode.sh/http-headers-basics" title="Basics of headers">HTTP Headers Basics</a></p>
-<pre><code>async function postData(url = '', data = {}) {
-        // Default options are marked with *
-        const response = await fetch(url, {
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
-            mode: 'cors', // no-cors, *cors, same-origin
-            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: 'same-origin', // include, *same-origin, omit
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': token
-                // 'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            redirect: 'follow', // manual, *follow, error
-            referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-            body: JSON.stringify(data) // body data type must match &quot;Content-Type&quot; header
-        });
-        return response;
-    }
-
-// NOTE: this URL is not a real URL
-postDate(&quot;https://decode.sh/post/example&quot;, {
-	test: &quot;Hello&quot;
-}).then(res =&gt; res.json())
-.then((data) =&gt; {
-	console.log(data);
-})
-</code></pre>
-</main>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">postData</span>(<span style="color:#a6e22e">url</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> {}) {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span>  <span style="color:#75715e">// Default options are marked with *
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#a6e22e">url</span>, {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span>    <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;POST&#34;</span>, <span style="color:#75715e">// *GET, POST, PUT, DELETE, etc.
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">mode</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;cors&#34;</span>, <span style="color:#75715e">// no-cors, *cors, same-origin
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">cache</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;no-cache&#34;</span>, <span style="color:#75715e">// *default, no-cache, reload, force-cache, only-if-cached
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">credentials</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;same-origin&#34;</span>, <span style="color:#75715e">// include, *same-origin, omit
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">headers</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span><span>      <span style="color:#e6db74">&#34;Content-Type&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;application/json&#34;</span>,
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span>      <span style="color:#a6e22e">Authorization</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">token</span>,
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11</span><span>      <span style="color:#75715e">// &#39;Content-Type&#39;: &#39;application/x-www-form-urlencoded&#39;,
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12</span><span><span style="color:#75715e"></span>    },
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13</span><span>    <span style="color:#a6e22e">redirect</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;follow&#34;</span>, <span style="color:#75715e">// manual, *follow, error
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14</span><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">referrerPolicy</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;no-referrer&#34;</span>, <span style="color:#75715e">// no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15</span><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">data</span>), <span style="color:#75715e">// body data type must match &#34;Content-Type&#34; header
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16</span><span><span style="color:#75715e"></span>  });
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17</span><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">response</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18</span><span>}
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20</span><span><span style="color:#75715e">// NOTE: this URL is not a real URL
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21</span><span><span style="color:#75715e"></span><span style="color:#a6e22e">postDate</span>(<span style="color:#e6db74">&#34;https://decode.sh/post/example&#34;</span>, {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22</span><span>  <span style="color:#a6e22e">test</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Hello&#34;</span>,
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23</span><span>})
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24</span><span>  .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">res</span>) =&gt; <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">json</span>())
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25</span><span>  .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">data</span>) =&gt; {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26</span><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">data</span>);
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27</span><span>  });
+</span></span></code></pre></main>
   </body>
 </html>

@@ -16,13 +16,13 @@
     <main><h1>Benchmarking Node JS vs Bun</h1>
 <p>Recently Bun added a compiling feature in version 0.6.1. Curious about its functionality, I conducted a comparison between compiled and uncompiled versions as a baseline. I also tested it against Node JS compiled with pkg. Here are the results!</p>
 <h3>Results</h3>
-<p>#{spreadsheet}
-Stat | Node | Bun | Compiled Node | Compiled Bun
-Requests/sec | 80333.19 | 201346.62 | 77023.24 | 200285.12
-Transfer/sec | 10.65MB | 25.15MB | 10.21MB | 25.02MB
-Total Requests | 2418249 | 6061438 | 2313736 | 6029319
-||
-Difference % | | =TRUNC(C4/B4<em>100) || =TRUNC(E4/D4</em>100)</p>
+<table spreadsheet cells="100" rows="20" data='[["Stat" , "Node" , "Bun" , "Compiled Node" , "Compiled Bun"],
+["Requests/sec", "80333.19", "201346.62", "77023.24", "200285.12"],
+["Transfer/sec", "10.65MB", "25.15MB" , "10.21MB" , "25.02MB"],
+["Total Requests", "2418249", "6061438", "2313736", "6029319"],
+["Difference %", "", "=TRUNC(C4/B4*100)", "=TRUNC(E4/D4*100)"]
+]'></table>
+<script src="/plugins/spreadsheet.js"></script>
 <p>The results above show that uncompiled Bun code is the fastest of the four tested methods and it is <code>250%</code> faster than the second fastest, uncompiled Node.</p>
 <h3>Methodology</h3>
 <p>In this test, I ran four benchmarks on Node JS and Bun default HTTP modules using the <code>wrk</code> command below.</p>

@@ -1,23 +1,25 @@
 # Deno JS: Oak Routing
+
 Oak is a middleware framework for Deno that provides a simple and modular way to handle HTTP requests and responses. Here is how to setup basic routing.
 
 In Oak, URL routing is handled by creating a router and defining routes using the Router class. Here's an example:
-```
+
+```javascript
 import { Application, Router } from "https://deno.land/x/oak/mod.ts";
 
 const router = new Router();
 router
-    .get("/", (context) => {
-        context.response.body = "Hello, world!";
-    })
-    .get("/users", (context) => {
-        context.response.body = "List of users";
-    })
-    .post("/users", async (context) => {
-        const body = await context.request.body();
-        console.log(body.value);
-        context.response.body = "User created";
-    });
+  .get("/", (context) => {
+    context.response.body = "Hello, world!";
+  })
+  .get("/users", (context) => {
+    context.response.body = "List of users";
+  })
+  .post("/users", async (context) => {
+    const body = await context.request.body();
+    console.log(body.value);
+    context.response.body = "User created";
+  });
 
 const app = new Application();
 app.use(router.routes());
@@ -27,7 +29,8 @@ await app.listen({ port: 8000 });
 ```
 
 Save the file into `server.ts` and start using the command below:
-```
+
+```sh
 deno --allow-net server.ts
 ```
 

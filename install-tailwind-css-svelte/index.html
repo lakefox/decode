@@ -15,51 +15,44 @@
     </nav>
     <main><h1>Install Tailwind CSS Svelte</h1>
 <p>Tailwind CSS is a CSS framework designed to be used with modular predefined classes instead of custom classes for each element. We will go over how to install Tailwind CSS and set it up to build with Svelte.</p>
-<h3>Install Tailwind</h3>
+<h2>Install Tailwind</h2>
 <p>First you need to install Tailwind and it's dependences then run the Tailwind <code>npx</code> command to setup your project.</p>
-<pre><code>npm install -D tailwindcss postcss autoprefixer
-npx tailwindcss init tailwind.config.cjs -p
-</code></pre>
-<h3>Configuration</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>npm install -D tailwindcss postcss autoprefixer
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>npx tailwindcss init tailwind.config.cjs -p
+</span></span></code></pre><h2>Configuration</h2>
 <p>To properly setup Tailwind you need to make a few changes to your files. In the <code>svelte.config.js</code> file add the line below, below the <code>import adapter</code> line.</p>
-<pre><code>import { vitePreprocess } from '@sveltejs/kit/vite';
-</code></pre>
-<p>Set the preprocessor by adding <code>preprocess: vitePreprocess()</code> to the config object in <code>svelte.config.js</code> like below:</p>
-<pre><code>/** @type {import('@sveltejs/kit').Config} */
-const config = {
-  kit: {
-    adapter: adapter()
-  },
-  preprocess: vitePreprocess()
-};
-</code></pre>
-<p>After running the <code>npx</code> command, you should have a <code>tailwind.config.cjs</code> file, add <code>content: ['./src/**/*.{html,js,svelte,ts}'],</code> to the <code>module.exports</code> object to enable auto parsing for Tailwind.</p>
-<pre><code>/** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: ['./src/**/*.{html,js,svelte,ts}'],
-  theme: {
-    extend: {}
-  },
-  plugins: []
-};
-</code></pre>
-<h3>Importing Tailwind into Svelte</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">vitePreprocess</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;@sveltejs/kit/vite&#34;</span>;
+</span></span></code></pre><p>Set the preprocessor by adding <code>preprocess: vitePreprocess()</code> to the config object in <code>svelte.config.js</code> like below:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#75715e">/** @type {import(&#39;@sveltejs/kit&#39;).Config} */</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">config</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>  <span style="color:#a6e22e">kit</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>    <span style="color:#a6e22e">adapter</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">adapter</span>(),
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span>  },
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span>  <span style="color:#a6e22e">preprocess</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">vitePreprocess</span>(),
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7</span><span>};
+</span></span></code></pre><p>After running the <code>npx</code> command, you should have a <code>tailwind.config.cjs</code> file, add <code>content: ['./src/**/*.{html,js,svelte,ts}'],</code> to the <code>module.exports</code> object to enable auto parsing for Tailwind.</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#75715e">/** @type {import(&#39;tailwindcss&#39;).Config} */</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>  <span style="color:#a6e22e">content</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#34;./src/**/*.{html,js,svelte,ts}&#34;</span>],
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>  <span style="color:#a6e22e">theme</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span>    <span style="color:#a6e22e">extend</span><span style="color:#f92672">:</span> {},
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span>  },
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7</span><span>  <span style="color:#a6e22e">plugins</span><span style="color:#f92672">:</span> [],
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8</span><span>};
+</span></span></code></pre><h2>Importing Tailwind into Svelte</h2>
 <p>To import tailwind classes into you app, add the following Tailwind directives into your <code>app.css</code> file.</p>
-<pre><code>@tailwind base;
-@tailwind components;
-@tailwind utilities;
-</code></pre>
-<p>Then import the <code>app.css</code> file into your <code>+layout.svelte</code>.</p>
-<pre><code>&lt;script&gt;
-  import &quot;../app.css&quot;;
-&lt;/script&gt;
-
-&lt;slot /&gt;
-</code></pre>
-<h3>Running</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">tailwind</span> <span style="color:#a6e22e">base</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">tailwind</span> <span style="color:#a6e22e">components</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">tailwind</span> <span style="color:#a6e22e">utilities</span>;
+</span></span></code></pre><p>Then import the <code>app.css</code> file into your <code>+layout.svelte</code>.</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>&lt;<span style="color:#f92672">script</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>  <span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#34;../app.css&#34;</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>&lt;/<span style="color:#f92672">script</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span>&lt;<span style="color:#f92672">slot</span> /&gt;
+</span></span></code></pre><h3>Running</h3>
 <p>Now Tailwind should be up and running, test it by running the following command.</p>
-<pre><code>npm run dev
-</code></pre>
-</main>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>npm run dev
+</span></span></code></pre></main>
   </body>
 </html>

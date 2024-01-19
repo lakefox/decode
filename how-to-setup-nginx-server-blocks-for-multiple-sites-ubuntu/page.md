@@ -100,7 +100,7 @@ server {
 
 Once added save the file and then we need to link the configuration file to the `sites-enabled` directory
 
-```
+```sh
 sudo ln -s /etc/nginx/sites-available/@{domain}/etc/nginx/sites-enabled/
 ```
 
@@ -108,13 +108,13 @@ This will keep both configuration files in sync between `sites-available` and `s
 
 Next to prevent a possible hash bucket memory problem, open `/etc/nginx/nginx.conf`.
 
-```
+```sh
 sudo nano /etc/nginx/nginx.conf
 ```
 
 un-comment the line below in the `http` block
 
-```
+```sh
 server_names_hash_bucket_size 64;
 ```
 
@@ -122,13 +122,13 @@ server_names_hash_bucket_size 64;
 
 Now everything should be set up, you can run the command to make sure all the formatting is done properly.
 
-```
+```sh
 sudo nginx -t
 ```
 
 If no warning show up you are good to restart the server.
 
-```
+```sh
 sudo systemctl restart nginx
 ```
 
@@ -139,5 +139,3 @@ To configure more than one domain on the same server just repeat steps 2-4.
 #### Next learn how to set up Node.JS for production.
 
 [Setting up Node.JS for Production](/setting-up-node-js-for-production)
-
-</div>
