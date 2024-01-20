@@ -6,6 +6,7 @@
     <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
     <link rel="stylesheet" href="/style.css" />
     <title>Mapping Wildcard Paths - Express Endpoints</title>
+    <meta name="description" content="Learn how to map wildcard paths to system paths for Svelte like endpoints in Express." />
   </head>
   <body>
     <nav>
@@ -16,52 +17,50 @@
     <main><h1>Mapping Wildcard Paths - Express Endpoints</h1>
 <p>Learn how to map wildcard paths to system paths for Svelte like endpoints in Express.</p>
 <p>This is a continuation of a series on how to build a routing system like Svelte with Express JS.</p>
-<h3>Previous Tutorials</h3>
+<h2>Previous Tutorials</h2>
 <ul>
 <li><a href="https://decode.sh/node-js-read-file-directory">Node JS Read File Directory</a></li>
 </ul>
 <p>The previous tutorial gives you a function that is able to pull all of the file paths from a directory and put them into an array. In this tutorial, we will map the file routes to endpoints that we can call and return with express.</p>
-<h5>The End Goal</h5>
+<h3>The End Goal</h3>
 <p>The end goal is to take paths from the file system like below and extract any variables and return the full URL and variables in an object. The variables will be defined by putting the variable name inside of square brackets and the endpoint function will be a file in the last folder named <code>+server.js</code>.</p>
-<pre><code>[
-	'./src/accounts/create',
-	'./src/accounts/delete',
-	'./src/assets/[collection][name]',
-	'./src/templates/[name]'
-]
-</code></pre>
-<h5>Code</h5>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>[
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>  <span style="color:#e6db74">&#34;./src/accounts/create&#34;</span>,
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>  <span style="color:#e6db74">&#34;./src/accounts/delete&#34;</span>,
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>  <span style="color:#e6db74">&#34;./src/assets/[collection][name]&#34;</span>,
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span>  <span style="color:#e6db74">&#34;./src/templates/[name]&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span>]
+</span></span></code></pre><h3>Code</h3>
 <p>Here is the function I used to take the file paths and collapse them into paths that can be matched by our routing function in the next tutorial. I've added comments explaining how it works line by line.</p>
-<pre><code>// paths are the file paths from the getFiles() function in the last tutorial
-function collapsePaths(paths) {
-	// We will store the Objects that contain the URL and Params here
-    let collapsed = [];
-	// Loop through the paths
-    for (let i = 0; i &lt; paths.length; i++) {
-        const path = paths[I];
-		// Use RegExp to get all the [variables] from the path
-		// vals will only contain the variable names not the square brackets
-        let vals = path.match(/([^[]+(?=]))/g);
-		// If you have the directories setup correctly each path should end in 
-		// &quot;+server.js&quot; here we will remove that
-        let ast = path.replace(&quot;+server.js&quot;, &quot;&quot;).slice(5);
-		// Here's where we check if the path has varibles
-        if (vals) {
-			// If it does we need to replace them with the wildcard indicator &quot;*&quot;
-            for (let i = 0; i &lt; vals.length; i++) {
-                ast = ast.replace(`[${vals[i]}]`, &quot;*&quot;);
-            }
-        }
-		// Add the processed path to the array
-        collapsed.push({
-            url: ast,
-            params: vals
-        });
-    }
-    return collapsed;
-}
-</code></pre>
-<p>This function will only be run once to get the location and variables of the endpoints on the server for further processing. In the next tutorial, we will take the collapsed paths and feed them into a function the will match them to any incoming request to our server.</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#75715e">// paths are the file paths from the getFiles() function in the last tutorial
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">collapsePaths</span>(<span style="color:#a6e22e">paths</span>) {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span>  <span style="color:#75715e">// We will store the Objects that contain the URL and Params here
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">collapsed</span> <span style="color:#f92672">=</span> [];
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span>  <span style="color:#75715e">// Loop through the paths
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">paths</span>.<span style="color:#a6e22e">length</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">path</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">paths</span>[<span style="color:#a6e22e">I</span>];
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span><span>    <span style="color:#75715e">// Use RegExp to get all the [variables] from the path
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span><span><span style="color:#75715e"></span>    <span style="color:#75715e">// vals will only contain the variable names not the square brackets
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">vals</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">path</span>.<span style="color:#a6e22e">match</span>(<span style="color:#e6db74">/([^[]+(?=]))/g</span>);
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11</span><span>    <span style="color:#75715e">// If you have the directories setup correctly each path should end in
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12</span><span><span style="color:#75715e"></span>    <span style="color:#75715e">// &#34;+server.js&#34; here we will remove that
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13</span><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">ast</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">path</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">&#34;+server.js&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>).<span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">5</span>);
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14</span><span>    <span style="color:#75715e">// Here&#39;s where we check if the path has varibles
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15</span><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">vals</span>) {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16</span><span>      <span style="color:#75715e">// If it does we need to replace them with the wildcard indicator &#34;*&#34;
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17</span><span><span style="color:#75715e"></span>      <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">vals</span>.<span style="color:#a6e22e">length</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18</span><span>        <span style="color:#a6e22e">ast</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ast</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">`[</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">vals</span>[<span style="color:#a6e22e">i</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">]`</span>, <span style="color:#e6db74">&#34;*&#34;</span>);
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19</span><span>      }
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20</span><span>    }
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21</span><span>    <span style="color:#75715e">// Add the processed path to the array
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22</span><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">collapsed</span>.<span style="color:#a6e22e">push</span>({
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23</span><span>      <span style="color:#a6e22e">url</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">ast</span>,
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24</span><span>      <span style="color:#a6e22e">params</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">vals</span>,
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25</span><span>    });
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26</span><span>  }
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27</span><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">collapsed</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28</span><span>}
+</span></span></code></pre><p>This function will only be run once to get the location and variables of the endpoints on the server for further processing. In the next tutorial, we will take the collapsed paths and feed them into a function the will match them to any incoming request to our server.</p>
 </main>
   </body>
 </html>

@@ -6,6 +6,7 @@
     <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
     <link rel="stylesheet" href="/style.css" />
     <title>PicoCSS Dynamic Templates</title>
+    <meta name="description" content="Pico CSS has the ability to customize the dark and light templates here is how to change the template colors with JS." />
   </head>
   <body>
     <nav>
@@ -16,15 +17,14 @@
     <main><h1>PicoCSS Dynamic Templates</h1>
 <p>Pico CSS has the ability to customize the dark and light templates here is how to change the template colors with JS.</p>
 <p>The Pico CSS template utilizes CSS variables to dynamically alter the appearance of the website. In this scenario, the intention was to extract the color information from a database and dynamically customize the visual presentation of the site. All CSS variables are defined at the <code>:root</code> level and can be manipulated using JavaScript's <code>setProperty</code> method, as demonstrated below.</p>
-<pre><code>let color = &quot;#00A1FE&quot;
-
-let root = document.querySelector(':root');
-root.style.setProperty('--primary', color);
-root.style.setProperty('--primary-hover', color);
-root.style.setProperty('--primary-focus', color + '40');
-root.style.setProperty('--primary-inverse', '#fff');
-</code></pre>
-<p>To ensure that the template colors are not pre-loaded prior to dynamically setting them, it is recommended to set the template colors to transparent, as demonstrated below:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">color</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;#00A1FE&#34;</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">root</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">querySelector</span>(<span style="color:#e6db74">&#34;:root&#34;</span>);
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span><span style="color:#a6e22e">root</span>.<span style="color:#a6e22e">style</span>.<span style="color:#a6e22e">setProperty</span>(<span style="color:#e6db74">&#34;--primary&#34;</span>, <span style="color:#a6e22e">color</span>);
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span><span style="color:#a6e22e">root</span>.<span style="color:#a6e22e">style</span>.<span style="color:#a6e22e">setProperty</span>(<span style="color:#e6db74">&#34;--primary-hover&#34;</span>, <span style="color:#a6e22e">color</span>);
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span><span style="color:#a6e22e">root</span>.<span style="color:#a6e22e">style</span>.<span style="color:#a6e22e">setProperty</span>(<span style="color:#e6db74">&#34;--primary-focus&#34;</span>, <span style="color:#a6e22e">color</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;40&#34;</span>);
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7</span><span><span style="color:#a6e22e">root</span>.<span style="color:#a6e22e">style</span>.<span style="color:#a6e22e">setProperty</span>(<span style="color:#e6db74">&#34;--primary-inverse&#34;</span>, <span style="color:#e6db74">&#34;#fff&#34;</span>);
+</span></span></code></pre><p>To ensure that the template colors are not pre-loaded prior to dynamically setting them, it is recommended to set the template colors to transparent, as demonstrated below:</p>
 <pre><code>/* Deep-purple Light scheme (Default) */
 /* Can be forced with data-theme=&quot;light&quot; */
 :root:not([data-theme=dark]),

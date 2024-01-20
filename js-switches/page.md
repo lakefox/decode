@@ -1,10 +1,12 @@
 # JS Switches
+
 The switch statement is a control structure used to perform multiple operations based on different cases, often as an alternative to if-else statements.
 
 Here's the basic syntax:
 
 ## Syntax
-```
+
+```javascript
 switch (expression) {
   case value1:
     // code to be executed if expression matches value1
@@ -17,14 +19,15 @@ switch (expression) {
     // code to be executed if expression doesn't match any cases
 }
 ```
-* `expression` is the value that is being tested against each case.
-* `value1`, `value2`, ... are the possible values for the expression.
-* `break` is used to exit the switch statement and prevent execution from continuing to the next case.
-* `default` is an optional case that will be executed if none of the other cases match the expression.
+
+- `expression` is the value that is being tested against each case.
+- `value1`, `value2`, ... are the possible values for the expression.
+- `break` is used to exit the switch statement and prevent execution from continuing to the next case.
+- `default` is an optional case that will be executed if none of the other cases match the expression.
 
 ### Example 1:
 
-```
+```javascript
 let day = "Monday";
 switch (day) {
   case "Monday":
@@ -44,7 +47,7 @@ switch (day) {
 
 ### Example 2:
 
-```
+```javascript
 let grade = "A";
 switch (grade) {
   case "A":

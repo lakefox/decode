@@ -6,6 +6,7 @@
     <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
     <link rel="stylesheet" href="/style.css" />
     <title>Installing Nginx on Ubuntu</title>
+    <meta name="description" content="NGINX (pronounced &#34;engine x&#34;) is a free, open-source, high-performance HTTP server and reverse proxy. It is known for its high performance and low resource consumption, making it a popular choice for web servers and microservices architectures. In this article, we will go over the steps to install NGINX on an Ubuntu machine." />
   </head>
   <body>
     <nav>
@@ -16,49 +17,41 @@
     <main><h1>Installing Nginx on Ubuntu</h1>
 <p>NGINX (pronounced &quot;engine x&quot;) is a free, open-source, high-performance HTTP server and reverse proxy. It is known for its high performance and low resource consumption, making it a popular choice for web servers and microservices architectures. In this article, we will go over the steps to install NGINX on an Ubuntu machine.</p>
 <p>Before we begin, make sure that your Ubuntu machine is up to date by running the following command:</p>
-<pre><code>sudo apt update &amp;&amp; sudo apt upgrade
-</code></pre>
-<h5>Install NGINX</h5>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>sudo apt update <span style="color:#f92672">&amp;&amp;</span> sudo apt upgrade
+</span></span></code></pre><h2>Install NGINX</h2>
 <p>To install NGINX, we can use the package manager apt. Run the following command:</p>
-<pre><code>sudo apt install nginx
-</code></pre>
-<p>This will install NGINX and all the necessary dependencies.</p>
-<h5>Start NGINX</h5>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>sudo apt install nginx
+</span></span></code></pre><p>This will install NGINX and all the necessary dependencies.</p>
+<h2>Start NGINX</h2>
 <p>Once the installation is complete, start the NGINX service with the following command:</p>
-<pre><code>sudo systemctl start nginx
-</code></pre>
-<p>To make sure that NGINX starts automatically when the machine is booted, run the following command:</p>
-<pre><code>sudo systemctl enable nginx
-</code></pre>
-<h5>Test NGINX</h5>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>sudo systemctl start nginx
+</span></span></code></pre><p>To make sure that NGINX starts automatically when the machine is booted, run the following command:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>sudo systemctl enable nginx
+</span></span></code></pre><h2>Test NGINX</h2>
 <p>To verify that NGINX is running, we can check the status of the service with the following command:</p>
-<pre><code>sudo systemctl status nginx
-</code></pre>
-<p>You should see an output similar to the following:</p>
-<pre><code>nginx.service - A high performance web server and a reverse proxy server
-   Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
-   Active: active (running) since Mon 2020-01-01 00:00:00 UTC; 1h 2min ago
-     Docs: man:nginx(8)
- Main PID: 12345 (nginx)
-    Tasks: 2 (limit: 2353)
-   Memory: 3.6M
-   CGroup: /system.slice/nginx.service
-           ├─12345 nginx: master process /usr/sbin/nginx -g daemon on; master_process on;
-           └─12346 nginx: worker process
-</code></pre>
-<p>To test that NGINX is working properly, we can try accessing the default NGINX page from a web browser. Open your web browser and navigate to <code>http://localhost</code>. You should see the default NGINX welcome page.</p>
-<h5>Configure NGINX</h5>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>sudo systemctl status nginx
+</span></span></code></pre><p>You should see an output similar to the following:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span>nginx.service - A high performance web server and a reverse proxy server
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span>   Loaded: loaded <span style="color:#f92672">(</span>/lib/systemd/system/nginx.service; enabled; vendor preset: enabled<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span>   Active: active <span style="color:#f92672">(</span>running<span style="color:#f92672">)</span> since Mon 2020-01-01 00:00:00 UTC; 1h 2min ago
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span>     Docs: man:nginx<span style="color:#f92672">(</span>8<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span> Main PID: <span style="color:#ae81ff">12345</span> <span style="color:#f92672">(</span>nginx<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span><span>    Tasks: <span style="color:#ae81ff">2</span> <span style="color:#f92672">(</span>limit: 2353<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span>   Memory: 3.6M
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span><span>   CGroup: /system.slice/nginx.service
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span><span>           ├─12345 nginx: master process /usr/sbin/nginx -g daemon on; master_process on;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span>           └─12346 nginx: worker process
+</span></span></code></pre><p>To test that NGINX is working properly, we can try accessing the default NGINX page from a web browser. Open your web browser and navigate to <code>http://localhost</code>. You should see the default NGINX welcome page.</p>
+<h2>Configure NGINX</h2>
 <p>The default NGINX configuration is stored in the file /etc/nginx/nginx.conf. You can edit this file to customize your NGINX setup. For example, you can specify the root directory for your website, set up server blocks for multiple sites, and configure other options such as SSL/TLS support and caching.</p>
 <ul>
 <li><a href="https://decode.sh/how-to-setup-nginx-server-blocks-for-multiple-sites">How to setup Nginx server blocks for multiple sites - Ubuntu</a></li>
 </ul>
 <p>Once you have made changes to the configuration file, you need to check for syntax errors by running the following command:</p>
-<pre><code>sudo nginx -t
-</code></pre>
-<p>If there are no syntax errors, you can apply the changes by reloading NGINX with the following command:</p>
-<pre><code>sudo systemctl reload nginx
-</code></pre>
-<p>That's it! You have successfully installed and configured NGINX on your Ubuntu machine. You can now use NGINX to serve your website or web application.</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>sudo nginx -t
+</span></span></code></pre><p>If there are no syntax errors, you can apply the changes by reloading NGINX with the following command:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>sudo systemctl reload nginx
+</span></span></code></pre><p>That's it! You have successfully installed and configured NGINX on your Ubuntu machine. You can now use NGINX to serve your website or web application.</p>
 <p>I hope this article has been helpful in getting you started with NGINX on Ubuntu. If you have any questions or need further assistance, don't hesitate to ask.</p>
 </main>
   </body>

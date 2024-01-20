@@ -6,6 +6,7 @@
     <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
     <link rel="stylesheet" href="/style.css" />
     <title>Remove Duplicate Items in an Array</title>
+    <meta name="description" content="Eliminating duplicate items from an array can be challenging, but this simple one-liner makes it easy to do so in any situation." />
   </head>
   <body>
     <nav>
@@ -16,10 +17,9 @@
     <main><h1>Remove Duplicate Items in an Array</h1>
 <p>Eliminating duplicate items from an array can be challenging, but this simple one-liner makes it easy to do so in any situation.</p>
 <p>The <code>Set</code> object in JavaScript is a collection of unique values. It can be used to store and manipulate a collection of primitive values (such as strings or numbers) or object references. We can use this to remove all repeat values from an array by initializing the <code>Set</code> object with an array as an argument. This will create a <code>Set</code> object, the next step to convert it back to an array is to use the spread operator to spread the object into an array</p>
-<h4>Example</h4>
-<pre><code>let array1 = [1,1,2,2,3,3,4,4];
-let array2 = [...new Set(array1)];
-</code></pre>
-</main>
+<h2>Example</h2>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">array1</span> <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">4</span>];
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">array2</span> <span style="color:#f92672">=</span> [...<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Set</span>(<span style="color:#a6e22e">array1</span>)];
+</span></span></code></pre></main>
   </body>
 </html>

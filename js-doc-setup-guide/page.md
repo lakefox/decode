@@ -1,21 +1,24 @@
 # JSDoc Setup Guide
+
 JSDoc is a popular tool used to generate documentation for JavaScript code. It allows developers to document their code in a standardized format, making it easier for others to understand and use their code.
 
 Here is a step-by-step tutorial on how to set up JSDoc for your JavaScript project:
 
-### Install JSDoc
+## Install JSDoc
+
 You can install JSDoc using npm (the Node.js package manager). Open your terminal or command prompt and run the following command:
 
-```
+```sh
 npm install -g jsdoc
 ```
 
 This command will install JSDoc globally on your system, so you can use it for any JavaScript project.
 
-### Create a JSDoc configuration file
+## Create a JSDoc configuration file
+
 JSDoc requires a configuration file to specify how the documentation should be generated. Create a new file named jsdoc.json in the root directory of your project, and add the following code:
 
-```
+```javascript
 {
   "source": {
     "include": ["./src"],
@@ -42,12 +45,13 @@ JSDoc requires a configuration file to specify how the documentation should be g
 
 This configuration file tells JSDoc to generate documentation for all JavaScript files in the `./src` directory, and save the output in the `./docs` directory. It also specifies that JSDoc should use the markdown plugin to support Markdown syntax in the documentation, and specifies some options for the Markdown parser.
 
-### Add JSDoc comments to your code
+## Add JSDoc comments to your code
+
 JSDoc uses special comments in your code to generate documentation. These comments start with the `/**` characters and contain tags that describe the code element being documented.
 
 For example, here's how you can document a JavaScript function using JSDoc comments:
 
-```
+```javascript
 /**
  * Add two numbers together.
  * @param {number} a - The first number.
@@ -61,10 +65,11 @@ function add(a, b) {
 
 In this example, the `@param` tag is used to document the function's parameters, and the `@returns` tag is used to document the return value.
 
-### Generate the documentation
+## Generate the documentation
+
 To generate the documentation, run the following command in your terminal or command prompt:
 
-```
+```sh
 jsdoc -c jsdoc.json
 ```
 

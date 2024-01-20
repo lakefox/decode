@@ -6,6 +6,7 @@
     <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
     <link rel="stylesheet" href="/style.css" />
     <title>PocketBase Installation on Digital Ocean</title>
+    <meta name="description" content="PocketBase is a fast growing beginner friendly database built in GO." />
   </head>
   <body>
     <nav>
@@ -15,16 +16,14 @@
     </nav>
     <main><h1>PocketBase Installation on Digital Ocean</h1>
 <p>PocketBase is a fast growing beginner friendly database built in GO.</p>
-<h3>Installation</h3>
+<h2>Installation</h2>
 <p>PocketBase is a single file database that includes an admin GUI and is ready out of the box. Simply use curl to download it to your server.</p>
-<pre><code>curl https://github.com/pocketbase/pocketbase/releases/download/v0.12.2/pocketbase_0.12.2_linux_amd64.zip
-</code></pre>
-<h3>Configuration</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>curl https://github.com/pocketbase/pocketbase/releases/download/v0.12.2/pocketbase_0.12.2_linux_amd64.zip
+</span></span></code></pre><h2>Configuration</h2>
 <p>PocketBase supports flags for changing the host and the port to run PocketBase use this command, adding the flags is optional.</p>
-<pre><code>./pocketbase serve —http=127.0.0.1 —port=8080
-</code></pre>
-<p>Optionally you can add this command to a shell script if you are using a service like <code>PM2</code>.</p>
-<h3>Using a reverse proxy</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>./pocketbase serve —http<span style="color:#f92672">=</span>127.0.0.1 —port<span style="color:#f92672">=</span><span style="color:#ae81ff">8080</span>
+</span></span></code></pre><p>Optionally you can add this command to a shell script if you are using a service like <code>PM2</code>.</p>
+<h2>Using a reverse proxy</h2>
 <p>PocketBase can be used like any server out there, to use NGINX you can follow the guide below to set up NGNIX for you server. Make sure to use the correct port when serving the database.</p>
 <ul>
 <li><a href="/installing-nginx-on-ubuntu">Installing NGNIX on Ubuntu</a></li>

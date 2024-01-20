@@ -1,38 +1,48 @@
 # Installing Nginx on Ubuntu
+
 NGINX (pronounced "engine x") is a free, open-source, high-performance HTTP server and reverse proxy. It is known for its high performance and low resource consumption, making it a popular choice for web servers and microservices architectures. In this article, we will go over the steps to install NGINX on an Ubuntu machine.
 
 Before we begin, make sure that your Ubuntu machine is up to date by running the following command:
 
-```
+```sh
 sudo apt update && sudo apt upgrade
 ```
 
-##### Install NGINX
+## Install NGINX
+
 To install NGINX, we can use the package manager apt. Run the following command:
 
-```
+```sh
 sudo apt install nginx
 ```
+
 This will install NGINX and all the necessary dependencies.
 
-##### Start NGINX
+## Start NGINX
+
 Once the installation is complete, start the NGINX service with the following command:
-```
+
+```sh
 sudo systemctl start nginx
 ```
+
 To make sure that NGINX starts automatically when the machine is booted, run the following command:
-```
+
+```sh
 sudo systemctl enable nginx
 ```
 
-##### Test NGINX
+## Test NGINX
+
 To verify that NGINX is running, we can check the status of the service with the following command:
-```
+
+```sh
 sudo systemctl status nginx
 ```
+
 You should see an output similar to the following:
 
-```
+```sh
 nginx.service - A high performance web server and a reverse proxy server
    Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
    Active: active (running) since Mon 2020-01-01 00:00:00 UTC; 1h 2min ago
@@ -47,17 +57,21 @@ nginx.service - A high performance web server and a reverse proxy server
 
 To test that NGINX is working properly, we can try accessing the default NGINX page from a web browser. Open your web browser and navigate to `http://localhost`. You should see the default NGINX welcome page.
 
-##### Configure NGINX
+## Configure NGINX
+
 The default NGINX configuration is stored in the file /etc/nginx/nginx.conf. You can edit this file to customize your NGINX setup. For example, you can specify the root directory for your website, set up server blocks for multiple sites, and configure other options such as SSL/TLS support and caching.
 
-* [How to setup Nginx server blocks for multiple sites - Ubuntu](https://decode.sh/how-to-setup-nginx-server-blocks-for-multiple-sites)
+- [How to setup Nginx server blocks for multiple sites - Ubuntu](https://decode.sh/how-to-setup-nginx-server-blocks-for-multiple-sites)
 
 Once you have made changes to the configuration file, you need to check for syntax errors by running the following command:
-```
+
+```sh
 sudo nginx -t
 ```
+
 If there are no syntax errors, you can apply the changes by reloading NGINX with the following command:
-```
+
+```sh
 sudo systemctl reload nginx
 ```
 

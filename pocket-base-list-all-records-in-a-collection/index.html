@@ -6,6 +6,7 @@
     <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
     <link rel="stylesheet" href="/style.css" />
     <title>PocketBase list all records in a collection</title>
+    <meta name="description" content="When using the getList() method to fetch queries from your collection, you can run into issues where as your database grows, you are no longer collecting all the records. To fix this you can use the getFullList method." />
   </head>
   <body>
     <nav>
@@ -15,13 +16,12 @@
     </nav>
     <main><h1>PocketBase list all records in a collection</h1>
 <p>When using the getList() method to fetch queries from your collection, you can run into issues where as your database grows, you are no longer collecting all the records. To fix this you can use the getFullList method.</p>
-<h3>getFullList</h3>
+<h2>getFullList</h2>
 <p><code>getFullList</code> is a method of the <code>collection</code> used to fetch the entire contents of a collection. It returns when all the records are fetched. It takes two arguments, the first is the batch size and the second one is the sort/filter object. The batch size is the number of records to fetch at a time. Regardless of the batch size, all the records will be fetched, but the batch size does affect how long the function takes to return all of the records. If your records contain a lot of data in each one, I would recommend setting the batch size lower so as to not error out each request, but if your records are fairly small, it is best to set the batch size higher. Below is an example of using the <code>getFullList</code> method to fetch records out of a collection name <code>posts</code>.</p>
-<pre><code>const results = await pb.collection('posts').getFullList(200, {
-			filter: `author = &quot;${user.id}&quot;`
-		});
-</code></pre>
-<p>The output will be different from the <code>.getList</code> method, which returns an object with the records being stored in <code>.items</code>. Instead, it will return an array with all of your records.</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">results</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">collection</span>(<span style="color:#e6db74">&#34;posts&#34;</span>).<span style="color:#a6e22e">getFullList</span>(<span style="color:#ae81ff">200</span>, {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>  <span style="color:#a6e22e">filter</span><span style="color:#f92672">:</span> <span style="color:#e6db74">`author = &#34;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">id</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;`</span>,
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>});
+</span></span></code></pre><p>The output will be different from the <code>.getList</code> method, which returns an object with the records being stored in <code>.items</code>. Instead, it will return an array with all of your records.</p>
 </main>
   </body>
 </html>

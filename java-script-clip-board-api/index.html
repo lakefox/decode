@@ -6,6 +6,7 @@
     <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
     <link rel="stylesheet" href="/style.css" />
     <title>JavaScript ClipBoard API</title>
+    <meta name="description" content="The JavaScript clipboard API provide the ability to programmatically interface with the devices clipboard, enabling cutting, copying, and pasting without user input." />
   </head>
   <body>
     <nav>
@@ -15,24 +16,19 @@
     </nav>
     <main><h1>JavaScript ClipBoard API</h1>
 <p>The JavaScript clipboard API provide the ability to programmatically interface with the devices clipboard, enabling cutting, copying, and pasting without user input.</p>
-<h3>Checking for clipboard access</h3>
+<h2>Checking for clipboard access</h2>
 <p>The first step in using any <code>navigator</code> feature is to make sure you have the correct permissions to use the feature. To check the <code>clipboard</code> feature use <code>navigator.permissions.query</code> and pass an object with the key of <code>write-on-clipboard</code>. This will return <code>granted</code> if the user has granted permission.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#a6e22e">navigator</span>.<span style="color:#a6e22e">permissions</span>.<span style="color:#a6e22e">query</span>({ <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;write-on-clipboard&#34;</span> }).<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">result</span>) =&gt; {
-</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>	<span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">state</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;granted&#34;</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">state</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;prompt&#34;</span>) {
-</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>	<span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#34;Write access granted!&#34;</span>);
-</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>}
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">state</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;granted&#34;</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">state</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;prompt&#34;</span>) {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>    <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#34;Write access granted!&#34;</span>);
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>  }
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span>});
-</span></span></code></pre><h3>Reading from the clipboard</h3>
+</span></span></code></pre><h2>Reading from the clipboard</h2>
 <p>Reading from the clipboard uses the <code>readText</code> method which return a promise with the resulting values.</p>
-<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#a6e22e">navigator</span>.<span style="color:#a6e22e">clipboard</span>
-</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>	.<span style="color:#a6e22e">readText</span>()
-</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>	.<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>)
-</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>	.<span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>);
-</span></span></code></pre><h3>Writing to the clipboard</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#a6e22e">navigator</span>.<span style="color:#a6e22e">clipboard</span>.<span style="color:#a6e22e">readText</span>().<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>).<span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>);
+</span></span></code></pre><h2>Writing to the clipboard</h2>
 <p>Writing to the clip board is the same as reading from the clipboard. Use the <code>writeText</code> method and pass the text you want to be written.</p>
-<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#a6e22e">navigator</span>.<span style="color:#a6e22e">clipboard</span>
-</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>	.<span style="color:#a6e22e">writeText</span>(<span style="color:#a6e22e">text</span>)
-</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>	.<span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>);
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#a6e22e">navigator</span>.<span style="color:#a6e22e">clipboard</span>.<span style="color:#a6e22e">writeText</span>(<span style="color:#a6e22e">text</span>).<span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>);
 </span></span></code></pre><p>The clipboard API is an awesome tool to use to improve the user experience of your application and reduce the friction a user has to go through. DECODE uses this function for code copying and pasting. If you want to learn how we do it read the post below, we use CSS pseudo-element to render the <code>COPY</code> text in the right-hand corner and listen for a click event, then code the code to the clipboard.</p>
 <ul>
 <li><a href="/css-pseudo-elements">CSS Pseudo Elements</a></li>
