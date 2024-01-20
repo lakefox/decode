@@ -4,7 +4,7 @@
 
 ## Install
 
-```
+```text
 npm install flexsearch
 ```
 
@@ -18,9 +18,9 @@ npm install flexsearch
 
 Most of you probably need just one of them according to your scenario. To import via the npm package you will need to import just the single index you want below is an example of `Index` and `Document` being imported into a project:
 
-```
-import Document from 'flexsearch/src/document';
-import Index from 'flexsearch/src/index';
+```javascript
+import Document from "flexsearch/src/document";
+import Index from "flexsearch/src/index";
 ```
 
 > NOTE: if you are importing into Svelte you will need to edit the `package.json` of the module and add `"type": "module"` or Svelte will not allow it to be imported
