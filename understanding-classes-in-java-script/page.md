@@ -1,10 +1,12 @@
 # Understanding Classes in JavaScript
+
 Classes are blueprints for creating objects (a type of data structure), providing initial values for state (using a constructor), and implementations of behavior (member functions or methods). They support inheritance and polymorphism, which are fundamental concepts in object-oriented programming.
 
 JavaScript classes were introduced in ECMAScript 2015 (ES6) and are a way to define a constructor function and a set of methods all at once. The class syntax is a shorthand for defining constructor functions and their prototypes.
 
 Example:
-```
+
+```javascript
 class Person {
   constructor(name) {
     this.name = name;

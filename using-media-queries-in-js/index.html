@@ -17,21 +17,19 @@
     <main><h1>Using Media Queries in JS</h1>
 <p>With media queries, developers can ensure that a website looks good and is easy to use on all types of devices, from smartphones to tablets to desktop computers. By optimizing the layout and design for each device, users can enjoy a seamless browsing experience no matter where they are accessing the website from.</p>
 <p>Media Queries are defined and used in CSS to transform your page based on user-set criteria. CSS might not be able to adapt your design perfectly, instead, you might consider using JavaScript. The traditional way of determining if a device meets the Media Query criteria would be to use DOM attributes like <code>innerWidth</code>. However, now you are able to use Media Queries in JavaScript using the <code>window.matchMedia</code> function.</p>
-<h3>matchMedia</h3>
+<h2>matchMedia</h2>
 <p>The <code>window.matchMedia</code> function in JavaScript is used to check if a particular media query applies to the current device or browser window. It returns a <code>MediaQueryList</code> object that contains information about the media query, such as the media type, media features, and whether the query matches the current device or not. Using the <code>addEventListener</code> method you can listen for changes to the media query and execute different code based on the result.</p>
-<pre><code>window.matchMedia('(max-width: 600px)');
-// MediaQueryList {media: '(max-width: 600px)', matches: false, onchange: null}
-</code></pre>
-<h3>Listening for changes</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>window.<span style="color:#a6e22e">matchMedia</span>(<span style="color:#e6db74">&#34;(max-width: 600px)&#34;</span>);
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#75715e">// MediaQueryList {media: &#39;(max-width: 600px)&#39;, matches: false, onchange: null}
+</span></span></span></code></pre><h2>Listening for changes</h2>
 <p>The <code>matchMedia</code> function returns a <code>MediaQueryList</code> that defines the current state of the query. The <code>MediaQueryList</code> also has a <code>onchange</code> event that will fire once the media query has been met. Below is an example of it in use.</p>
-<pre><code>let mq = window.matchMedia('(max-width: 600px)');
-
-mq.onchange = (e) =&gt; {
-	console.log(e);
-}
-
-// MediaQueryListEvent {isTrusted: true, media: '(max-width: 600px)', matches: true, type: 'change', target: MediaQueryList, …}
-</code></pre>
-</main>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">mq</span> <span style="color:#f92672">=</span> window.<span style="color:#a6e22e">matchMedia</span>(<span style="color:#e6db74">&#34;(max-width: 600px)&#34;</span>);
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span><span style="color:#a6e22e">mq</span>.<span style="color:#a6e22e">onchange</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">e</span>) =&gt; {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">e</span>);
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span>};
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7</span><span><span style="color:#75715e">// MediaQueryListEvent {isTrusted: true, media: &#39;(max-width: 600px)&#39;, matches: true, type: &#39;change&#39;, target: MediaQueryList, …}
+</span></span></span></code></pre></main>
   </body>
 </html>

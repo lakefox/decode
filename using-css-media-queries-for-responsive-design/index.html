@@ -16,35 +16,33 @@
     </nav>
     <main><h1>Using CSS Media Queries for Responsive Design</h1>
 <p>Media queries in CSS are a powerful tool that allow you to adjust the layout and design of your website based on the characteristics of the device that is being used to view it. In this tutorial, we will cover the basics of using media queries in CSS.</p>
-<h3>What is a media query?</h3>
+<h2>What is a media query?</h2>
 <p>A media query is a block of CSS code that is used to apply certain styles to a web page based on the characteristics of the device that is being used to view it. For example, you might want to adjust the layout of your page when it is viewed on a mobile device, or you might want to apply different styles to a page when it is printed.</p>
-<h3>Using media queries in CSS</h3>
+<h2>Using media queries in CSS</h2>
 <p>To use media queries in CSS, you need to follow a few simple steps.</p>
 <ol>
 <li>Define the media query
 The first step is to define the media query using the <code>@media</code> rule. The syntax for the <code>@media</code> rule is as follows:</li>
 </ol>
-<pre><code>@media media-type and (media-feature) {
-  /* CSS styles go here */
-}
-</code></pre>
-<p>The <code>media-type</code> is optional, but can be used to specify the type of media that the query is targeting. Common media types include <code>screen</code> (for computer screens), <code>print</code> (for printed pages), and <code>speech</code> (for screen readers).</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>@<span style="color:#66d9ef">media</span> <span style="color:#f92672">media-type</span> <span style="color:#f92672">and</span> <span style="color:#f92672">(</span><span style="color:#f92672">media-feature</span><span style="color:#f92672">)</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>  <span style="color:#75715e">/* CSS styles go here */</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>}
+</span></span></code></pre><p>The <code>media-type</code> is optional, but can be used to specify the type of media that the query is targeting. Common media types include <code>screen</code> (for computer screens), <code>print</code> (for printed pages), and <code>speech</code> (for screen readers).</p>
 <p>The <code>media-feature</code> is the characteristic of the device that the query is targeting. Common media features include <code>max-width</code> (the maximum width of the device), <code>min-width</code> (the minimum width of the device), <code>orientation</code> (the orientation of the device), and <code>resolution</code> (the resolution of the device).</p>
 <ol start="2">
 <li>Write CSS styles for the media query
 Once you have defined the media query, you can write the CSS styles that you want to apply to the page when the media query is triggered. For example, you might want to adjust the font size and layout of your page when it is viewed on a mobile device.</li>
 </ol>
-<pre><code>@media screen and (max-width: 480px) {
-  body {
-    font-size: 16px;
-  }
-  .container {
-    width: 100%;
-    padding: 0;
-  }
-}
-</code></pre>
-<p>In this example, the media query targets screens with a maximum width of 480 pixels. The CSS styles inside the block will be applied to the page when the media query is triggered. The <code>font-size</code> of the body element will be set to 16 pixels, and the <code>width</code> and <code>padding</code> of the <code>.container</code> element will be adjusted to fit the smaller screen.</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>@<span style="color:#66d9ef">media</span> <span style="color:#f92672">screen</span> <span style="color:#f92672">and</span> <span style="color:#f92672">(</span><span style="color:#f92672">max-width</span><span style="color:#f92672">:</span> <span style="color:#f92672">480px</span><span style="color:#f92672">)</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>  <span style="color:#f92672">body</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>    <span style="color:#66d9ef">font-size</span>: <span style="color:#ae81ff">16</span><span style="color:#66d9ef">px</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>  }
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span>  .<span style="color:#a6e22e">container</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span>    <span style="color:#66d9ef">width</span>: <span style="color:#ae81ff">100</span><span style="color:#66d9ef">%</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7</span><span>    <span style="color:#66d9ef">padding</span>: <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8</span><span>  }
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9</span><span>}
+</span></span></code></pre><p>In this example, the media query targets screens with a maximum width of 480 pixels. The CSS styles inside the block will be applied to the page when the media query is triggered. The <code>font-size</code> of the body element will be set to 16 pixels, and the <code>width</code> and <code>padding</code> of the <code>.container</code> element will be adjusted to fit the smaller screen.</p>
 <ol start="3">
 <li>Test the media query
 Once you have written your media query and CSS styles, it's important to test them on different devices to make sure they are working correctly. You can use a tool like the Chrome DevTools to test your media queries and see how your page will look on different devices.</li>

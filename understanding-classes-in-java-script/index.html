@@ -18,19 +18,18 @@
 <p>Classes are blueprints for creating objects (a type of data structure), providing initial values for state (using a constructor), and implementations of behavior (member functions or methods). They support inheritance and polymorphism, which are fundamental concepts in object-oriented programming.</p>
 <p>JavaScript classes were introduced in ECMAScript 2015 (ES6) and are a way to define a constructor function and a set of methods all at once. The class syntax is a shorthand for defining constructor functions and their prototypes.</p>
 <p>Example:</p>
-<pre><code>class Person {
-  constructor(name) {
-    this.name = name;
-  }
-  sayHello() {
-    console.log(`Hello, my name is ` + this.name);
-  }
-}
-
-let person1 = new Person(&quot;John&quot;);
-person1.sayHello(); // Output: &quot;Hello, my name is John&quot;
-</code></pre>
-<p>Here, &quot;Person&quot; is a class, person1 is an object created from the class, and sayHello() is a method of the class.</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span>  <span style="color:#a6e22e">constructor</span>(<span style="color:#a6e22e">name</span>) {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">name</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">name</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span>  }
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span>  <span style="color:#a6e22e">sayHello</span>() {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`Hello, my name is `</span> <span style="color:#f92672">+</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">name</span>);
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span>  }
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span><span>}
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">person1</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Person</span>(<span style="color:#e6db74">&#34;John&#34;</span>);
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11</span><span><span style="color:#a6e22e">person1</span>.<span style="color:#a6e22e">sayHello</span>(); <span style="color:#75715e">// Output: &#34;Hello, my name is John&#34;
+</span></span></span></code></pre><p>Here, &quot;Person&quot; is a class, person1 is an object created from the class, and sayHello() is a method of the class.</p>
 </main>
   </body>
 </html>

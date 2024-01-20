@@ -1,10 +1,11 @@
 # Ternary Operators in JS
+
 A ternary operator is a type of conditional operator that allows for inline if statements. The ternary operator is suer useful once you know how to use it and can reduce the amount of logic in an application and are often used when you need to assign a value to a variable based on a condition.
 
 The basic syntax of a ternary operator is as follows:
 
 ```javascript
-condition ? expressionIfTrue : expressionIfFalse
+condition ? expressionIfTrue : expressionIfFalse;
 ```
 
 The condition is evaluated first. If it's true, the `expressionIfTrue` is executed and its result is returned. If it's false, the `expressionIfFalse` is executed and its result is returned.
@@ -22,7 +23,7 @@ Step 2: Write the ternary operator
 Next, you can write the ternary operator using the condition you identified in step 1.
 
 ```javascript
-const result = condition ? 'Yes' : 'No';
+const result = condition ? "Yes" : "No";
 ```
 
 In this example, if the condition is true, the string 'Yes' is returned. If it's false, the string 'No' is returned.
@@ -39,7 +40,7 @@ Here's a more complex example that demonstrates how you can use ternary operator
 ```javascript
 const age = 25;
 const isAdult = age >= 18 ? true : false;
-const message = isAdult ? 'You are an adult' : 'You are not an adult';
+const message = isAdult ? "You are an adult" : "You are not an adult";
 console.log(message); // Output: 'You are an adult'
 ```
 

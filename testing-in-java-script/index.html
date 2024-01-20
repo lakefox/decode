@@ -17,19 +17,16 @@
     <main><h1>Testing in JavaScript</h1>
 <p>Testing in Javascript can be done on your own, by writing application-specific tests to ensure your code is working the way you want it to or, it can be done with a testing library that can help remove some of the extra code.</p>
 <p>Testing is usually done at a library level if you make a custom library for example named <code>sum.js</code> the best way to manage your test would be to put them into a <code>sum.text.js</code> file. This method of storing your tests removes the testing part of your application from the rest of it and makes sure none of the tests get bundled and sent to the client.</p>
-<h3>Installing Jest</h3>
+<h2>Installing Jest</h2>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>npm install --save-dev jest
-</span></span></code></pre><div share data-width="500" data-height="500" data-padding="50px">
-<h3>Building tests with Jest</h3>
+</span></span></code></pre><h2>Building tests with Jest</h2>
 <p>Jest is one of the most popular testing libraries out there and is one of my favorites to use. Jest makes writing tests easy by using an almost plain English syntax like below.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#a6e22e">test</span>(<span style="color:#e6db74">&#34;adds 1 + 2 to equal 3&#34;</span>, () =&gt; {
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>  <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">sum</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>)).<span style="color:#a6e22e">toBe</span>(<span style="color:#ae81ff">3</span>);
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>});
-</span></span></code></pre></div>
-<p>This is a test for a function that adds two numbers called <code>sum</code>. We first define the test inside of the <code>test</code> function. The first argument is the text that displays when the function passes the test. The next argument is the function to run during the test, inside this function we use the Jest syntax to configure the test. <code>expect</code> is the main function where we put the <code>sum</code> function with test parameters. Then off of that function, we are expecting the sum function when giving the parameters <code>1</code> and <code>2</code> to be <code>3</code>. All of Jest's testing criteria are written this way making the experience super easy to get started with.</p>
+</span></span></code></pre><p>This is a test for a function that adds two numbers called <code>sum</code>. We first define the test inside of the <code>test</code> function. The first argument is the text that displays when the function passes the test. The next argument is the function to run during the test, inside this function we use the Jest syntax to configure the test. <code>expect</code> is the main function where we put the <code>sum</code> function with test parameters. Then off of that function, we are expecting the sum function when giving the parameters <code>1</code> and <code>2</code> to be <code>3</code>. All of Jest's testing criteria are written this way making the experience super easy to get started with.</p>
 <p>To get a full list of all of the matches visit the jest docs <a href="https://jestjs.io/docs/using-matchers" title="Jest Documentation">here</a></p>
-<div share data-width="500" data-height="500" data-padding="50px">
-<h3>Running tests</h3>
+<h2>Running tests</h2>
 <p>To set up Jest to run tests first you will need to edit your project's <code>package.json</code> file and add the test script. Most <code>package.json</code> files include a test script like below.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#e6db74">&#34;scripts&#34;</span><span style="color:#f92672">:</span> {
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>   <span style="color:#e6db74">&#34;test&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;echo \&#34;Error: no test specified\&#34; &amp;&amp; exit 1&#34;</span>
@@ -38,8 +35,7 @@
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#e6db74">&#34;scripts&#34;</span><span style="color:#f92672">:</span> {
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>   <span style="color:#e6db74">&#34;test&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;jest&#34;</span>
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span> },
-</span></span></code></pre></div>
-<p>To run the tests run <code>npm test</code> in a terminal and the output will look something like this:
+</span></span></code></pre><p>To run the tests run <code>npm test</code> in a terminal and the output will look something like this:
 <img src="./screen_shot_2023_04_03_at_3_29_09_pm_IJ2MRHMrvx.png" alt="Jest Output" /></p>
 </main>
   </body>

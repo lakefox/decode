@@ -16,10 +16,10 @@
     </nav>
     <main><h1>Svelte Full Text Search - flexsearch</h1>
 <p>&quot;flexsearch&quot; is a JavaScript library for fast, flexible, and robust search and indexing. It provides a high-performance search engine that is optimized for search and indexing, and can be used in both client-side and server-side applications. It supports a range of features including full-text search, fuzzy search, query highlighting, and auto-suggestions. Here's how to implement it into a Svelte project.</p>
-<h3>Install</h3>
+<h2>Install</h2>
 <pre><code>npm install flexsearch
 </code></pre>
-<h3>Importing into your project</h3>
+<h2>Importing into your project</h2>
 <p><code>flexsearch</code> has three types of indexes:</p>
 <ul>
 <li>Index is a flat high performance index that stores id-content-pairs.</li>
@@ -33,45 +33,42 @@ import Index from 'flexsearch/src/index';
 <blockquote>
 <p>NOTE: if you are importing into Svelte you will need to edit the <code>package.json</code> of the module and add <code>&quot;type&quot;: &quot;module&quot;</code> or Svelte will not allow it to be imported</p>
 </blockquote>
-<h3>Using it in Svelte</h3>
-<h4>Adding the documents</h4>
+<h2>Using it in Svelte</h2>
+<h3>Adding the documents</h3>
 <p><code>new Document</code> will create a <code>flexsearch</code> document index that allows you to add your documents to the index. It takes a document descriptor which contains a document object with the index field being the key of the object you want indexed.</p>
-<pre><code>let findDocument = new Document({
-	document: {
-		index: ['title', 'description', 'content']
-	}
-});
-for (let i = 0; i &lt; data.docs.length; i++) {
-	findDocument.add(docs[i]);
-}
-</code></pre>
-<h4>Search functions</h4>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">findDocument</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Document</span>({
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>  document<span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>    <span style="color:#a6e22e">index</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#34;title&#34;</span>, <span style="color:#e6db74">&#34;description&#34;</span>, <span style="color:#e6db74">&#34;content&#34;</span>],
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>  },
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span>});
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">docs</span>.<span style="color:#a6e22e">length</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7</span><span>  <span style="color:#a6e22e">findDocument</span>.<span style="color:#a6e22e">add</span>(<span style="color:#a6e22e">docs</span>[<span style="color:#a6e22e">i</span>]);
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8</span><span>}
+</span></span></code></pre><h3>Search functions</h3>
 <p>To search the document index use the index you created, in this case, <code>findDocument</code>. Use the <code>.search</code> function and pass your search query to the function. This will return an object with the keys being the same as the index field of the <code>document</code> you passed upon initiation. The keys will contain arrays of the ids of the documents that match the search query. Here I am flattening the object into an array of IDs and then filtering them using svelte in the <code>{#each }</code> loop only if there is a search query.</p>
-<pre><code>let search = &quot;&quot;;
-let results = [];
-function findDocuments() {
-	results = findDocument
-		.search(search)
-		.map((e) =&gt; e.result)
-		.flat();
-}
-</code></pre>
-<h4>Svelte elements</h4>
-<pre><code>&lt;input
-	type=&quot;search&quot;
-	id=&quot;search&quot;
-	placeholder=&quot;Search&quot;
-	bind:value={search}
-	on:keydown={findDocuments}
-/&gt;
-
-// Filter the documents if the search term is not blank
-{#each docs as doc}
-	{#if search == '' || results.indexOf(doc.id) != -1}
-		// Search Results
-	{/if}
-{/each}
-</code></pre>
-</main>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">search</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">results</span> <span style="color:#f92672">=</span> [];
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">findDocuments</span>() {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>  <span style="color:#a6e22e">results</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">findDocument</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span>    .<span style="color:#a6e22e">search</span>(<span style="color:#a6e22e">search</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span>    .<span style="color:#a6e22e">map</span>((<span style="color:#a6e22e">e</span>) =&gt; <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">result</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7</span><span>    .<span style="color:#a6e22e">flat</span>();
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8</span><span>}
+</span></span></code></pre><h3>Svelte elements</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">input</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;search&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;search&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span> <span style="color:#a6e22e">placeholder</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Search&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span> <span style="color:#a6e22e">bind</span><span style="color:#f92672">:</span><span style="color:#a6e22e">value</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">search</span>}
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span><span> <span style="color:#a6e22e">on</span><span style="color:#f92672">:</span><span style="color:#a6e22e">keydown</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">findDocuments</span>}
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span><span style="color:#960050;background-color:#1e0010">/&gt;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span><span><span style="color:#75715e">// Filter the documents if the search term is not blank
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span><span style="color:#75715e"></span>{<span style="color:#960050;background-color:#1e0010">#</span><span style="color:#a6e22e">each</span> <span style="color:#a6e22e">docs</span> <span style="color:#a6e22e">as</span> <span style="color:#a6e22e">doc</span>}
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11</span><span> {<span style="color:#960050;background-color:#1e0010">#</span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">search</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;&#39;</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">results</span>.<span style="color:#a6e22e">indexOf</span>(<span style="color:#a6e22e">doc</span>.<span style="color:#a6e22e">id</span>) <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>}
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12</span><span>  <span style="color:#75715e">// Search Results
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13</span><span><span style="color:#75715e"></span> {<span style="color:#960050;background-color:#1e0010">/if}</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14</span><span>{<span style="color:#960050;background-color:#1e0010">/each}</span>
+</span></span></code></pre></main>
   </body>
 </html>

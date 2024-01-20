@@ -4,7 +4,7 @@ Warp terminal claims to be a "a blazingly fast, rust-based terminal reimagined f
 
 ![Warp Terminal screen shot](./screen_shot_2023_01_27_at_12_45_46_pm_fo516_vhb_av_62OOICRfAY.png)
 
-### Installing
+## Installing
 
 If you are on Mac you can head over to [Warp.dev](https://www.warp.dev/) and download it from there or you can use `brew` to install Warp with the following command:
 
@@ -12,7 +12,7 @@ If you are on Mac you can head over to [Warp.dev](https://www.warp.dev/) and dow
 brew install --cask warp
 ```
 
-### Features
+## Features
 
 The idea of Warp is to bring the default terminal into the future by adding ease-of-use features like the following:
 

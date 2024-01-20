@@ -43,10 +43,10 @@ Before we get into how each variable type differs from each other let's do a qui
 <blockquote>
 <p>[quiz1]{!@{ans}[0] &amp;&amp; !@{ans}[1] &amp;&amp; !@{ans}[2] &amp;&amp; @{ans}[3]};</p>
 </blockquote>
-<p>?{@{quiz1} &amp;&amp; @{showquiz}}
+<p>?{@{quiz1} &amp;&amp; @{showquiz}}</p>
 <article>
 Correct! Variables can be used as a container to store data.
-</article></p>
+</article>
 <p>?{@{quiz1} || !@{showquiz}}</p>
 <pre><code>### What's the difference between `var`, `let`, and `const`?
 Let's start off easy with `const`, `const` lets you define a variable that contains a set chunk of data that cannot be set to anything else. This is the only variable assigner that will not let you change the data stored in it.
@@ -70,24 +70,23 @@ for (let i = 0; i &lt; 2; i++) {
   console.log(i);
 }
 console.log(i);
-``` 
+```
 </code></pre>
 <p>?{@{showquiz} &amp;&amp; @{quiz1}}
-Let's see what you learned about scope:
-<article>
-##### What is the scope?
+Let's see what you learned about scope:</p>
+<article> ##### What is the scope?
 @[#ans2:radio]{false} The part of the program where a variable is accessible
 @[#ans2:radio]{false} The range of values that a variable can take
 @[#ans2:radio]{false} The lifespan of a variable
 @[#ans2:radio]{false} The amount of memory allocated to a variable
-</article></p>
+</article>
 <blockquote>
 <p>[quiz2]{@{ans2}[0] &amp;&amp; !@{ans2}[1] &amp;&amp; !@{ans2}[2] &amp;&amp; !@{ans2}[3]};</p>
 </blockquote>
-<p>?{@{quiz2} &amp;&amp; @{quiz1} &amp;&amp; @{showquiz}}
+<p>?{@{quiz2} &amp;&amp; @{quiz1} &amp;&amp; @{showquiz}}</p>
 <article>
 Correct! The scope is the part of the program where a variable is accessible.
-</article></p>
+</article>
 <p>?{@{quiz2} &amp;&amp; @{quiz1} || !@{showquiz}}
 Learning what variables do and how the scope of variables operate is fundamental to know how your code runs and being about to effectively debug your code. If you liked this interactive lesson please let us know! There will be many more to come.</p>
 </main>

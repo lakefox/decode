@@ -16,28 +16,26 @@
     </nav>
     <main><h1>Svelte Static Site Generation</h1>
 <p>Svelte is a great platform to create any type of site. If you want to create a site and host it on Github Pages, you can use Svelte to generate a static site and upload the files to the desired GitHub repository. Here's how!</p>
-<h3>Adapter</h3>
+<h2>Adapter</h2>
 <p>Install the static adapter with the command below:</p>
-<pre><code>npm i -D @sveltejs/adapter-static
-</code></pre>
-<h3>Configuration</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>npm i -D @sveltejs/adapter-static
+</span></span></code></pre><h2>Configuration</h2>
 <p>Replace your <code>svetle.config.js</code> file with the contents below:</p>
-<pre><code>import adapter from '@sveltejs/adapter-static';
- 
-export default {
-  kit: {
-    adapter: adapter({
-      // default options are shown. On some platforms
-      // these options are set automatically — see below
-      pages: 'build',
-      assets: 'build',
-      fallback: null,
-      precompress: false,
-      strict: true
-    })
-  }
-};
-</code></pre>
-</main>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">adapter</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;@sveltejs/adapter-static&#34;</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span>  <span style="color:#a6e22e">kit</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span>    <span style="color:#a6e22e">adapter</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">adapter</span>({
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span><span>      <span style="color:#75715e">// default options are shown. On some platforms
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span><span style="color:#75715e"></span>      <span style="color:#75715e">// these options are set automatically — see below
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span><span><span style="color:#75715e"></span>      <span style="color:#a6e22e">pages</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;build&#34;</span>,
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span><span>      <span style="color:#a6e22e">assets</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;build&#34;</span>,
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span>      <span style="color:#a6e22e">fallback</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">null</span>,
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11</span><span>      <span style="color:#a6e22e">precompress</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12</span><span>      <span style="color:#a6e22e">strict</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13</span><span>    }),
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14</span><span>  },
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15</span><span>};
+</span></span></code></pre></main>
   </body>
 </html>

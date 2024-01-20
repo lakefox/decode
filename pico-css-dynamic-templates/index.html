@@ -25,47 +25,46 @@
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span><span style="color:#a6e22e">root</span>.<span style="color:#a6e22e">style</span>.<span style="color:#a6e22e">setProperty</span>(<span style="color:#e6db74">&#34;--primary-focus&#34;</span>, <span style="color:#a6e22e">color</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;40&#34;</span>);
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7</span><span><span style="color:#a6e22e">root</span>.<span style="color:#a6e22e">style</span>.<span style="color:#a6e22e">setProperty</span>(<span style="color:#e6db74">&#34;--primary-inverse&#34;</span>, <span style="color:#e6db74">&#34;#fff&#34;</span>);
 </span></span></code></pre><p>To ensure that the template colors are not pre-loaded prior to dynamically setting them, it is recommended to set the template colors to transparent, as demonstrated below:</p>
-<pre><code>/* Deep-purple Light scheme (Default) */
-/* Can be forced with data-theme=&quot;light&quot; */
-:root:not([data-theme=dark]),
-[data-theme=light] {
-    --primary: #00000000;
-    --primary-hover: #00000000;
-    --primary-focus: #00000000;
-    --primary-inverse: #FFF;
-    --logo-text: #000;
-}
-
-/* Deep-purple Dark scheme (Auto) */
-/* Automatically enabled if user has Dark mode enabled */
-@media only screen and (prefers-color-scheme: dark) {
-    :root:not([data-theme=&quot;light&quot;]) {
-        --primary: #00000000;
-        --primary-hover: #00000000;
-        --primary-focus: #00000000;
-        --primary-inverse: #FFF;
-        --logo-text: #FFF;
-    }
-}
-
-/* Deep-purple Dark scheme (Forced) */
-/* Enabled if forced with data-theme=&quot;dark&quot; */
-[data-theme=&quot;dark&quot;] {
-    --primary: #00000000;
-    --primary-hover: #00000000;
-    --primary-focus: #00000000;
-    --primary-inverse: #FFF;
-    --logo-text: #FFF;
-}
-
-/* Deep-purple (Common styles) */
-:root {
-    --form-element-active-border-color: var(--primary);
-    --form-element-focus-color: var(--primary-focus);
-    --switch-color: var(--primary-inverse);
-    --switch-checked-background-color: var(--primary);
-}
-</code></pre>
-</main>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#75715e">/* Deep-purple Light scheme (Default) */</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span><span style="color:#75715e">/* Can be forced with data-theme=&#34;light&#34; */</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span>:<span style="color:#a6e22e">root</span>:<span style="color:#a6e22e">not</span><span style="color:#f92672">([</span><span style="color:#f92672">data-theme</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;dark&#34;</span><span style="color:#f92672">]),</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span><span style="color:#f92672">[</span><span style="color:#f92672">data-theme</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;light&#34;</span><span style="color:#f92672">]</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span>  --primary: <span style="color:#ae81ff">#000000</span><span style="color:#ae81ff">00</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span><span>  --primary-hover: <span style="color:#ae81ff">#000000</span><span style="color:#ae81ff">00</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span>  --primary-focus: <span style="color:#ae81ff">#000000</span><span style="color:#ae81ff">00</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span><span>  --primary-inverse: <span style="color:#ae81ff">#fff</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span><span>  --logo-text: <span style="color:#ae81ff">#000</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span>}
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12</span><span><span style="color:#75715e">/* Deep-purple Dark scheme (Auto) */</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13</span><span><span style="color:#75715e">/* Automatically enabled if user has Dark mode enabled */</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14</span><span>@<span style="color:#66d9ef">media</span> <span style="color:#f92672">only</span> <span style="color:#f92672">screen</span> <span style="color:#f92672">and</span> <span style="color:#f92672">(</span><span style="color:#f92672">prefers-color-scheme</span><span style="color:#f92672">:</span> <span style="color:#f92672">dark</span><span style="color:#f92672">)</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15</span><span>  :<span style="color:#a6e22e">root</span>:<span style="color:#a6e22e">not</span><span style="color:#f92672">([</span><span style="color:#f92672">data-theme</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;light&#34;</span><span style="color:#f92672">])</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16</span><span>    --primary: <span style="color:#ae81ff">#000000</span><span style="color:#ae81ff">00</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17</span><span>    --primary-hover: <span style="color:#ae81ff">#000000</span><span style="color:#ae81ff">00</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18</span><span>    --primary-focus: <span style="color:#ae81ff">#000000</span><span style="color:#ae81ff">00</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19</span><span>    --primary-inverse: <span style="color:#ae81ff">#fff</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20</span><span>    --logo-text: <span style="color:#ae81ff">#fff</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21</span><span>  }
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22</span><span>}
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24</span><span><span style="color:#75715e">/* Deep-purple Dark scheme (Forced) */</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25</span><span><span style="color:#75715e">/* Enabled if forced with data-theme=&#34;dark&#34; */</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26</span><span><span style="color:#f92672">[</span><span style="color:#f92672">data-theme</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;dark&#34;</span><span style="color:#f92672">]</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27</span><span>  --primary: <span style="color:#ae81ff">#000000</span><span style="color:#ae81ff">00</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28</span><span>  --primary-hover: <span style="color:#ae81ff">#000000</span><span style="color:#ae81ff">00</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29</span><span>  --primary-focus: <span style="color:#ae81ff">#000000</span><span style="color:#ae81ff">00</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30</span><span>  --primary-inverse: <span style="color:#ae81ff">#fff</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31</span><span>  --logo-text: <span style="color:#ae81ff">#fff</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32</span><span>}
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34</span><span><span style="color:#75715e">/* Deep-purple (Common styles) */</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35</span><span>:<span style="color:#a6e22e">root</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36</span><span>  --form-element-active-border-color: <span style="color:#a6e22e">var</span>(<span style="color:#f92672">--</span>primary);
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37</span><span>  --form-element-focus-color: <span style="color:#a6e22e">var</span>(<span style="color:#f92672">--</span>primary<span style="color:#f92672">-</span>focus);
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38</span><span>  --switch-color: <span style="color:#a6e22e">var</span>(<span style="color:#f92672">--</span>primary<span style="color:#f92672">-</span>inverse);
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39</span><span>  --switch-checked-background-color: <span style="color:#a6e22e">var</span>(<span style="color:#f92672">--</span>primary);
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40</span><span>}
+</span></span></code></pre></main>
   </body>
 </html>

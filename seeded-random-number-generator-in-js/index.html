@@ -18,40 +18,37 @@
 <p>Random numbers are an essential tool for developers, whether it's for generating random colors for page elements, creating dynamic content on canvas, or any other purpose. However, one issue with the default Math.random() function is you can not repeat the results. This can be a problem if you want to generate randomness but still need some control over the output.</p>
 <p>Seeded random numbers can be helpful if you want to create randomness but also need to control the output. Below is an example of a simple seeded random number generator that is a drop-in replacement for <code>Math.random()</code>.</p>
 <example>
-<pre><code>function random(seed) {
-    var m = 2 ** 35 - 31
-    var a = 185852
-    var s = seed % m
-    return function () {
-        return (s = s * a % m) / m
-    }
-}
-</code></pre>
-</example>
-<h4>How it works</h4>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">random</span>(<span style="color:#a6e22e">seed</span>) {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">m</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">**</span> <span style="color:#ae81ff">35</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">31</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">185852</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">s</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">seed</span> <span style="color:#f92672">%</span> <span style="color:#a6e22e">m</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">function</span> () {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span>    <span style="color:#66d9ef">return</span> (<span style="color:#a6e22e">s</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">s</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">a</span>) <span style="color:#f92672">%</span> <span style="color:#a6e22e">m</span>) <span style="color:#f92672">/</span> <span style="color:#a6e22e">m</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7</span><span>  };
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8</span><span>}
+</span></span></code></pre></example>
+<h2>How it works</h2>
 <p>Linear congruential generators (LCGs) work by using a linear equation to generate a sequence of numbers that appears to be random. The general form of the equation is:</p>
-<pre><code>Xn+1 = (aXn + c) % m
-</code></pre>
-<p>Where <code>Xn</code> is the current random number, <code>a</code> is the multiplier, <code>c</code> is the increment, and <code>m</code> is the modulus. To start the sequence, a seed value <code>(X0)</code> is used to generate the first random number <code>(X1)</code>. The next number in the sequence is then generated using the value of <code>X1</code>, and so on. The resulting sequence of numbers will appear to be random but are actually determined by the values of <code>a</code>, <code>c</code>, and <code>m</code>. These values can be chosen to produce an extended period (the number of random numbers that can be generated before the sequence repeats). However, LCGs are still limited by their tendency to produce sequences of numbers that are not evenly distributed.</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#a6e22e">Xn</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">aXn</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">c</span>) <span style="color:#f92672">%</span> <span style="color:#a6e22e">m</span>
+</span></span></code></pre><p>Where <code>Xn</code> is the current random number, <code>a</code> is the multiplier, <code>c</code> is the increment, and <code>m</code> is the modulus. To start the sequence, a seed value <code>(X0)</code> is used to generate the first random number <code>(X1)</code>. The next number in the sequence is then generated using the value of <code>X1</code>, and so on. The resulting sequence of numbers will appear to be random but are actually determined by the values of <code>a</code>, <code>c</code>, and <code>m</code>. These values can be chosen to produce an extended period (the number of random numbers that can be generated before the sequence repeats). However, LCGs are still limited by their tendency to produce sequences of numbers that are not evenly distributed.</p>
 <p>In the code above <code>m</code> or the modulus is 2 to the power of 35 then 31 is subtracted. These numbers are not random but are pulled from <a href="https://www.ams.org/journals/mcom/1999-68-225/S0025-5718-99-00996-5/S0025-5718-99-00996-5.pdf">this paper</a>. The multiplier <code>a</code> is <code>185852</code>, then the <code>seed</code> number that you passed is modules by <code>m</code> the modulus to start the sequence. The function returns another function allowing you to continue the sequence by setting the variable <code>s</code> to the operation's output.</p>
 <p>The output of this function is not truly random so it is essential to not use this for anything that needs a secure random number generator. However, this function is a great way to quickly generate a seeded random number.</p>
-<h4>How to use</h4>
+<h2>How to use</h2>
 <p>This is a very simple function to use, below is a example:</p>
-<pre><code>function random(seed) {
-    var m = 2 ** 35 - 31
-    var a = 185852
-    var s = seed % m
-    return function () {
-        return (s = s * a % m) / m
-    }
-}
-
-let rng = random(12345);
-
-console.log(rng());
-// 0.06677416799560885
-</code></pre>
-<h4>Demo</h4>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">random</span>(<span style="color:#a6e22e">seed</span>) {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">m</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">**</span> <span style="color:#ae81ff">35</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">31</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">185852</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">s</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">seed</span> <span style="color:#f92672">%</span> <span style="color:#a6e22e">m</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">function</span> () {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span><span>    <span style="color:#66d9ef">return</span> (<span style="color:#a6e22e">s</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">s</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">a</span>) <span style="color:#f92672">%</span> <span style="color:#a6e22e">m</span>) <span style="color:#f92672">/</span> <span style="color:#a6e22e">m</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span>  };
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span><span>}
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">rng</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">random</span>(<span style="color:#ae81ff">12345</span>);
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12</span><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">rng</span>());
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13</span><span><span style="color:#75715e">// 0.06677416799560885
+</span></span></span></code></pre><h2>Demo</h2>
 <demo>
 Seed: <input type="number" value="10" onchange="changeSeed()" id="val"/>
 Results: <code id="rng"></code>
@@ -79,6 +76,7 @@ function changeSeed() {
 }
 
 </script>
-</demo></main>
+</demo>
+</main>
   </body>
 </html>
