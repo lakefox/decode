@@ -19,11 +19,11 @@
     </nav>
     <main class="list">
       <ul id="list">
-        {{range .Posts}}
+        {{range .Posts}} {{$A := "./rss"}}{{if ne .Url $A}}
         <li>
           <a href="{{.Url}}" title="{{.Data.title}}">{{.Data.title}}</a>
         </li>
-        {{end}}
+        {{end}} {{end}}
       </ul>
     </main>
   </body>

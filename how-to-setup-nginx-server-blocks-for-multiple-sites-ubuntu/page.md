@@ -20,31 +20,31 @@ sudo ufw allow 'Nginx HTTP'
 
 Replace with your domain name to auto generate the correct commands for your system.
 
-@[domain]{domain.sh}
+<input type="url" value="decode.sh" name="domain">
 
 ## Step 2
 
 Create a directory for your site and configuration files.
 
-```sh
+```text
 sudo mkdir -p /var/www/@{domain}/html
 ```
 
 Set the ownership of the directory to the `$USER` environment variable.
 
-```sh
+```text
 sudo chown -R $USER:$USER /var/www/@{domain}/html
 ```
 
 This allows you to read, write, and execute the files and lets other users read and execute files.
 
-```sh
+```text
 sudo chmod -R 755 /var/www/@{domain}
 ```
 
 Make a sample page in the directory you just created.
 
-```sh
+```text
 sudo nano /var/www/@{domain}/html/index.html
 ```
 
@@ -65,7 +65,7 @@ Add this sample HTML file
 
 ### Creating the server block
 
-```sh
+```text
 sudo nano /etc/nginx/sites-available/@{domain}
 ```
 
@@ -75,7 +75,7 @@ Add this to the created file. Change the `www` to any sub-domain you want.
 
 Replace with the correct port you want to be set.
 
-@[port]{3000}
+<input type="number" value="3000" name="port">
 
 ```nginx
 server {
@@ -139,3 +139,5 @@ To configure more than one domain on the same server just repeat steps 2-4.
 #### Next learn how to set up Node.JS for production.
 
 [Setting up Node.JS for Production](/setting-up-node-js-for-production)
+
+<script src="/plugins/mdxt.js"></script>

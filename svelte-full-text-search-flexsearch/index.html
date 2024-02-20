@@ -17,9 +17,8 @@
     <main><h1>Svelte Full Text Search - flexsearch</h1>
 <p>&quot;flexsearch&quot; is a JavaScript library for fast, flexible, and robust search and indexing. It provides a high-performance search engine that is optimized for search and indexing, and can be used in both client-side and server-side applications. It supports a range of features including full-text search, fuzzy search, query highlighting, and auto-suggestions. Here's how to implement it into a Svelte project.</p>
 <h2>Install</h2>
-<pre><code>npm install flexsearch
-</code></pre>
-<h2>Importing into your project</h2>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>npm install flexsearch
+</span></span></code></pre><h2>Importing into your project</h2>
 <p><code>flexsearch</code> has three types of indexes:</p>
 <ul>
 <li>Index is a flat high performance index that stores id-content-pairs.</li>
@@ -27,10 +26,9 @@
 <li>Document is a multi-field index that can store complex JSON documents (could also exist of worker indexes).</li>
 </ul>
 <p>Most of you probably need just one of them according to your scenario. To import via the npm package you will need to import just the single index you want below is an example of <code>Index</code> and <code>Document</code> being imported into a project:</p>
-<pre><code>import Document from 'flexsearch/src/document';
-import Index from 'flexsearch/src/index';
-</code></pre>
-<blockquote>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Document</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;flexsearch/src/document&#34;</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Index</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;flexsearch/src/index&#34;</span>;
+</span></span></code></pre><blockquote>
 <p>NOTE: if you are importing into Svelte you will need to edit the <code>package.json</code> of the module and add <code>&quot;type&quot;: &quot;module&quot;</code> or Svelte will not allow it to be imported</p>
 </blockquote>
 <h2>Using it in Svelte</h2>
