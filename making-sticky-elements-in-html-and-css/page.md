@@ -1,4 +1,4 @@
-# Making sticky elements in HTML and CSS.
+# Making sticky elements in HTML and CSS
 
 Sticky elements are a useful feature in modern web design, as they allow certain elements on a webpage to remain visible even when the user scrolls. This can be useful for elements such as the navigation bar or a call-to-action button, as it ensures that they are always accessible to the user.
 

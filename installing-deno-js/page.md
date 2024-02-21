@@ -10,25 +10,25 @@ Overall, Deno provides a modern and efficient way to build JavaScript and TypeSc
 
 ## Installation
 
-### Using Shell (macOS and Linux):
+### Using Shell (macOS and Linux)
 
 ```sh
 curl -fsSL https://deno.land/x/install/install.sh | sh
 ```
 
-### Using PowerShell (Windows):
+### Using PowerShell (Windows)
 
 ```sh
 irm https://deno.land/install.ps1 | iex
 ```
 
-### Using Homebrew (macOS):
+### Using Homebrew (macOS)
 
 ```sh
 brew install deno
 ```
 
-### Using Nix (macOS and Linux):
+### Using Nix (macOS and Linux)
 
 - [Install Nix](/nix-package-manager)
 

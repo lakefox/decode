@@ -1,14 +1,17 @@
 # Implementing GraphQL
+
 Learn to build a GraphQL query server in Node JS. Enable dynamic/high speed API endpoints with GraphQL and Express.
 
 To get started with GraphQl in Node Js first you will need to install the `graphql.js` library by the GraphQL foundation. GraphQL.js helps with building queries and allows you to build APIs with Express.
 
 ### Installing
+
 ```bash
 npm install graphql --save
 ```
 
 ### Building Schema's
+
 ```javascript
 import { buildSchema }  from 'graphql';
 
@@ -19,9 +22,11 @@ var schema = buildSchema(`
   }
 `);
 ```
-Building a schema with the javascript SDK is shown above, use the `buildSchema` method imported from the `graphql` package. Then pass a schema using the GraphQL language ([more here](https://decode.sh/graph-ql-the-basics "Basics of Graph QL")), note that the schema passed is in a template literal. 
+
+Building a schema with the javascript SDK is shown above, use the `buildSchema` method imported from the `graphql` package. Then pass a schema using the GraphQL language ([more here](https://decode.sh/graph-ql-the-basics "Basics of Graph QL")), note that the schema passed is in a template literal.
 
 ### Creating Resolvers
+
 ```javascript
 // The rootValue provides a resolver function for each API endpoint
 var rootValue = {
@@ -30,9 +35,11 @@ var rootValue = {
   },
 };
 ```
+
 After the schema is created, you can create a resolver to fill in the information asked in the query. A resolver is an object of functions with the keys corresponding to the values queried. In the resolver above the parameter `hello` will be filled by `"Hello World"`.
 
 ### Running Queries
+
 ```javascript
 import { graphql } from 'graphql';
 // Run the GraphQL query '{ hello }' and print out the response
@@ -48,6 +55,7 @@ graphql({
 Using the `graphql` function from the module of the same name, you are able to execute queries on the server against the schema you created. For the first argument pass in an object with the schema, the query (as the source), and the resolver. The `source` in the query you are trying to execute, in this case, we are asking for the resolver that is named `hello` from the `rootValue` resolver.
 
 ### Running Queries with Express
+
 Getting express running with GraphQL is done by installing the adapter `express-graphql`.
 
 ```bash
@@ -76,10 +84,10 @@ This will start a sever on port `4000` running your GraphQL server on it. The `g
 
 ```json
 {
-	"data":
-		{
-			"hello": "Hello World"		
-		}
+ "data":
+  {
+   "hello": "Hello World"  
+  }
 }
 ```
 

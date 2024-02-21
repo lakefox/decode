@@ -25,7 +25,7 @@ switch (expression) {
 - `break` is used to exit the switch statement and prevent execution from continuing to the next case.
 - `default` is an optional case that will be executed if none of the other cases match the expression.
 
-### Example 1:
+### Example 1
 
 ```javascript
 let day = "Monday";
@@ -45,7 +45,7 @@ switch (day) {
 // Output: Today is Monday.
 ```
 
-### Example 2:
+### Example 2
 
 ```javascript
 let grade = "A";

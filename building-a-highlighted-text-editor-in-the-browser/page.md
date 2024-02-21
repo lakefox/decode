@@ -48,8 +48,8 @@ For reference, this tutorial is based on this [tutorial](https://decode.sh/build
 <div editor>
   <textarea data-lang="html"></textarea>
   <pre>
-		<code></code>
-	</pre>
+  <code></code>
+ </pre>
 </div>
 ```
 

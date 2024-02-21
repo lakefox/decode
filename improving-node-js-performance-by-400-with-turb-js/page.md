@@ -1,4 +1,5 @@
 # Improving Node JS performance by 400% with Turb.js
+
 Turb.js is a function caching server that turbo charges your application with safe and fast memory management. Today we will use Turb to increase the performance of static assets in our PocketBase database. Although this example is for PocketBase, Turb can be used anywhere in your application to speed up long processes.
 
 From the description we know that turb is a function caching server, but what does that mean? Turb acts as an intermediate layer between your database's SDK and your application by storing each function call in memory. After the response is stored in memory, you won't have to request the asset from your database again! After I added turb to this site, I saw a 4x decrease in load times.
@@ -17,7 +18,7 @@ cd turb
 npm run build
 ```
 
-> After the executable is built I moved turb to the top of my application and deleted the repository. 
+> After the executable is built I moved turb to the top of my application and deleted the repository.
 
 In the folder you move the executable, create a `config.json` that looks like below. This will create a single shard named "PocketBase" that is allocated 50MB of storage.
 
@@ -32,17 +33,20 @@ In the folder you move the executable, create a `config.json` that looks like be
     "port": 6748
 }
 ```
+
 ### PocketBase API layer
+
 This is just a simple wrapper for the PocketBase JS SDK that will grab a post from the collection posts, filtering the request by the slug attribute. You might have your own way of querying your database but this is the way I like to do it as it gives me a direct function to get what I need.
+
 ```javascript
 export async function getPost(slug) {
-	return new Promise((resolve) => {
-		resolve(
-			pb.collection('posts').getFullList(200, {
-				filter: `slug = "${hostname}" && active = true`
-			})
-		);
-	});
+ return new Promise((resolve) => {
+  resolve(
+   pb.collection('posts').getFullList(200, {
+    filter: `slug = "${hostname}" && active = true`
+   })
+  );
+ });
 }
 ```
 
@@ -56,7 +60,7 @@ import { getPost } from "./pocketbase.wrapper.js";
 
 // Initiate the turb module
 let turb0 = new Turb({
-	shard: "PocketBase"
+ shard: "PocketBase"
 });
 
 // Register the function
@@ -92,6 +96,7 @@ Socket errors: connect 157, read 0, write 0, timeout 104
 Requests/sec:      3.46
 Transfer/sec:    248.94KB
 ```
+
 #### After
 
 ```text

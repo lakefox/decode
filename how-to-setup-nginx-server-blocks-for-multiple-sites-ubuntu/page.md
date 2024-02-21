@@ -71,7 +71,7 @@ sudo nano /etc/nginx/sites-available/@{domain}
 
 Add this to the created file. Change the `www` to any sub-domain you want.
 
-#### Port:
+#### Port
 
 Replace with the correct port you want to be set.
 
@@ -87,14 +87,14 @@ server {
 
         server_name @{domain};
 
-		location / {
-    	    proxy_pass http://localhost:@{port};
-   		   	proxy_http_version 1.1;
-        		proxy_set_header Upgrade $http_upgrade;
-        		proxy_set_header Connection 'upgrade';
-        		proxy_set_header Host $host;
-        		proxy_cache_bypass $http_upgrade;
-    	}
+  location / {
+         proxy_pass http://localhost:@{port};
+         proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection 'upgrade';
+          proxy_set_header Host $host;
+          proxy_cache_bypass $http_upgrade;
+     }
 }
 ```
 
@@ -136,7 +136,7 @@ sudo systemctl restart nginx
 
 To configure more than one domain on the same server just repeat steps 2-4.
 
-#### Next learn how to set up Node.JS for production.
+#### Next learn how to set up Node.JS for production
 
 [Setting up Node.JS for Production](/setting-up-node-js-for-production)
 
