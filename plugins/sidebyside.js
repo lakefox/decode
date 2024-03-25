@@ -50,14 +50,8 @@
     }
 
     style(pre[window.highlights[0][2]], { display: "block" });
-
+    let currentItem = -1;
     main.onscroll = (e) => {
-        for (let i = 0; i < window.highlights.length; i++) {
-            const element = window.highlights[i];
-            unHighlight(pre[element[2]], element);
-            style(pre[element[2]], { display: "none" });
-        }
-
         let closestItem;
         let minDistance = Infinity;
 
@@ -72,8 +66,18 @@
         });
 
         let found = window.highlights[parseInt(closestItem.dataset.index)];
-        style(pre[found[2]], { display: "block" });
-        highlight(pre[found[2]], found);
+        if (currentItem != parseInt(closestItem.dataset.index)) {
+            for (let i = 0; i < window.highlights.length; i++) {
+                const element = window.highlights[i];
+                unHighlight(pre[element[2]], element);
+                style(pre[element[2]], { display: "none" });
+            }
+
+            style(pre[found[2]], { display: "block" });
+            highlight(pre[found[2]], found);
+            view(sideCont, pre[found[2]], found);
+            currentItem = parseInt(closestItem.dataset.index);
+        }
     };
 })();
 
@@ -167,4 +171,24 @@ function isInViewport(element) {
         rect.right <=
             (window.innerWidth || document.documentElement.clientWidth)
     );
+}
+
+function view(parentElement, el, lines) {
+    let code = el.querySelector("code");
+    let childElement = code.children[lines[0] - 1];
+    const parentRect = parentElement.getBoundingClientRect();
+    const childRect = childElement.getBoundingClientRect();
+    const parentScrollTop = parentElement.scrollTop;
+
+    // Calculate the vertical position to scroll to center the child element
+    const targetScrollTop =
+        childRect.top -
+        parentRect.top -
+        (parentRect.height - childRect.height) / 2;
+
+    // Scroll the parent element to the calculated position
+    parentElement.scrollTo({
+        top: parentScrollTop + targetScrollTop,
+        behavior: "smooth", // Optional: for smooth scrolling
+    });
 }
