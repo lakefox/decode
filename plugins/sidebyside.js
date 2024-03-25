@@ -26,9 +26,7 @@
     body.appendChild(sideCont);
 
     let markedItems = [...document.querySelectorAll("blockquote > p")];
-    console.log(markedItems);
     let documents = [...pre].map(getText);
-    console.log(markedItems, documents);
 
     window.highlights = [];
     window.current = 0;
@@ -54,8 +52,6 @@
     style(pre[window.highlights[0][2]], { display: "block" });
 
     main.onscroll = (e) => {
-        console.log(e);
-
         for (let i = 0; i < window.highlights.length; i++) {
             const element = window.highlights[i];
             unHighlight(pre[element[2]], element);
