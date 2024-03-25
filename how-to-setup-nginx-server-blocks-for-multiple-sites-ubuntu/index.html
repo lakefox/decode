@@ -49,7 +49,7 @@
 <h3>Creating the server block</h3>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>sudo nano /etc/nginx/sites-available/@{domain}
 </span></span></code></pre><p>Add this to the created file. Change the <code>www</code> to any sub-domain you want.</p>
-<h4>Port:</h4>
+<h4>Port</h4>
 <p>Replace with the correct port you want to be set.</p>
 <input type="number" value="3000" name="port">
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#66d9ef">server</span> {
@@ -61,14 +61,14 @@
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span>
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span><span>        <span style="color:#f92672">server_name</span> <span style="color:#e6db74">@</span>{<span style="color:#f92672">domain}</span>;
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span><span>
-</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span>		<span style="color:#f92672">location</span> <span style="color:#e6db74">/</span> {
-</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11</span><span>    	    <span style="color:#f92672">proxy_pass</span> <span style="color:#e6db74">http://localhost:@</span>{<span style="color:#f92672">port}</span>;
-</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12</span><span>   		   	<span style="color:#f92672">proxy_http_version</span> <span style="color:#ae81ff">1</span><span style="color:#e6db74">.1</span>;
-</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13</span><span>        		<span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">Upgrade</span> $http_upgrade;
-</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14</span><span>        		<span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">Connection</span> <span style="color:#e6db74">&#39;upgrade&#39;</span>;
-</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15</span><span>        		<span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">Host</span> $host;
-</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16</span><span>        		<span style="color:#f92672">proxy_cache_bypass</span> $http_upgrade;
-</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17</span><span>    	}
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span>  <span style="color:#f92672">location</span> <span style="color:#e6db74">/</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11</span><span>         <span style="color:#f92672">proxy_pass</span> <span style="color:#e6db74">http://localhost:@</span>{<span style="color:#f92672">port}</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12</span><span>         <span style="color:#f92672">proxy_http_version</span> <span style="color:#ae81ff">1</span><span style="color:#e6db74">.1</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13</span><span>          <span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">Upgrade</span> $http_upgrade;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14</span><span>          <span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">Connection</span> <span style="color:#e6db74">&#39;upgrade&#39;</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15</span><span>          <span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">Host</span> $host;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16</span><span>          <span style="color:#f92672">proxy_cache_bypass</span> $http_upgrade;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17</span><span>     }
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18</span><span>}
 </span></span></code></pre><p>Once added save the file and then we need to link the configuration file to the <code>sites-enabled</code> directory</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>sudo ln -s /etc/nginx/sites-available/@<span style="color:#f92672">{</span>domain<span style="color:#f92672">}</span>/etc/nginx/sites-enabled/
@@ -84,7 +84,7 @@
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>sudo systemctl restart nginx
 </span></span></code></pre><h3>Setting up multiple sites</h3>
 <p>To configure more than one domain on the same server just repeat steps 2-4.</p>
-<h4>Next learn how to set up Node.JS for production.</h4>
+<h4>Next learn how to set up Node.JS for production</h4>
 <p><a href="/setting-up-node-js-for-production">Setting up Node.JS for Production</a></p>
 <script src="/plugins/mdxt.js"></script>
 </main>

@@ -67,12 +67,12 @@ function random(seed) {
 let rng = random(parseFloat(document.querySelector("#val").value));
 
 function genRandom() {
-	document.querySelector("#rng").innerHTML = rng();
+ document.querySelector("#rng").innerHTML = rng();
 }
 
 function changeSeed() {
-	rng = random(parseFloat(document.querySelector("#val").value));
-	genRandom();
+ rng = random(parseFloat(document.querySelector("#val").value));
+ genRandom();
 }
 
 </script>

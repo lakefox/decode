@@ -19,8 +19,8 @@
 <p>Below are three documents (Lorem ipsum) and a target word selector, the target word is the word you want to calculate the TF-IDF for. Further down, we will go over how to calculate the weights and what they mean.</p>
 <article>
 <p>@[target:text]{est} Target Word</p>
-<h1>#{column}
-@[#ta:textarea]{Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.} Document 1</h1>
+<h1>{column}</h1>
+<h1>@[#ta:textarea]{Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.} Document 1</h1>
 <h1>@[#ta:textarea]{Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.} Document 2</h1>
 <p>@[#ta:textarea]{Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?} Document 3</p>
 </article>
@@ -42,17 +42,17 @@
 <h3>Term Frequency</h3>
 <p>Term Frequency or how often the target word appears in a document compared to the total words within a document. Shows us how important the target is in the document. In the example above, the <code>TF</code> for the word &quot;@{target}&quot; in document one is @{tf1}, this is because &quot;@{target}&quot; appears @{ta1M} times and there are @{ta1T} words total. Below is the term frequencies calculated for all three documents, feel free to change the contents of the documents and the target word and see how they change.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span>Document 1:
-</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span>	&#34;@{target}&#34; appears @{ta1M} time(s)
-</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span>	Total Words: @{ta1T}
-</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span>	TF: (@{ta1M}/@{ta1T}) = @{tf1}
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span> &#34;@{target}&#34; appears @{ta1M} time(s)
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span> Total Words: @{ta1T}
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span> TF: (@{ta1M}/@{ta1T}) = @{tf1}
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span>Document 2:
-</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span><span>	&#34;@{target}&#34; appears @{ta2M} time(s)
-</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span>	Total Words: @{ta2T}
-</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span><span>	TF: (@{ta2M}/@{ta2T}) = @{tf2}
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span><span> &#34;@{target}&#34; appears @{ta2M} time(s)
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span> Total Words: @{ta2T}
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span><span> TF: (@{ta2M}/@{ta2T}) = @{tf2}
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span><span>Document 3:
-</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span>	&#34;@{target}&#34; appears @{ta3M} time(s)
-</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11</span><span>	Total Words: @{ta3T}
-</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12</span><span>	TF: (@{ta3M}/@{ta3T}) = @{tf3}
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span> &#34;@{target}&#34; appears @{ta3M} time(s)
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11</span><span> Total Words: @{ta3T}
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12</span><span> TF: (@{ta3M}/@{ta3T}) = @{tf3}
 </span></span></code></pre><h3>Inverse Document Frequency</h3>
 <p>Inverse document frequency is a single calculation for all documents, as it calculates how important the target word is for all the documents. In this example, we have 3 documents and &quot;@{target}&quot; appears in &gt;{Math.ceil(@{tf1})+Math.ceil(@{tf2})+Math.ceil(@{tf3})} of them. The formula for the IDF is <code>Math.log10(NumberOfDocuments/DocumentsTargetAppearsIn)</code>. Below is the IDK for the above documents.</p>
 <blockquote>
@@ -62,8 +62,8 @@
 </span></span></code></pre><h3>TF-IDF Weight Calculation</h3>
 <p>TF-IDF is calculated by multiplying the term frequency by the inverse document frequency. Below is the TF-IDF calculated for Each document:</p>
 <blockquote>
-<p>[tfidf1]{@{tf1} _ @{idf}};
-[tfidf2]{@{tf2} _ @{idf}};
+<p>[tfidf1]{@{tf1} <em>@{idf}};
+[tfidf2]{@{tf2}</em> @{idf}};
 [tfidf3]{@{tf3} * @{idf}};</p>
 </blockquote>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>TF-IDF weight for Document 1
