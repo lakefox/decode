@@ -7,7 +7,7 @@
     style(main, {
         width: "50%",
         overflowY: "auto",
-        height: "calc(100vh - 50px)",
+        height: "calc(100vh - 156px)",
         margin: "0",
         paddingBottom: "100px",
     });
