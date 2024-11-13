@@ -14,15 +14,15 @@
         ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
       >
     </nav>
-    <main><h1>Mapping Wildcard Paths - Express Endpoints</h1>
+    <main><h1 id="mapping-wildcard-paths---express-endpoints">Mapping Wildcard Paths - Express Endpoints</h1>
 <p>Learn how to map wildcard paths to system paths for Svelte like endpoints in Express.</p>
 <p>This is a continuation of a series on how to build a routing system like Svelte with Express JS.</p>
-<h2>Previous Tutorials</h2>
+<h2 id="previous-tutorials"><a class="anchor" href="#previous-tutorials">#</a> Previous Tutorials</h2>
 <ul>
 <li><a href="https://decode.sh/node-js-read-file-directory">Node JS Read File Directory</a></li>
 </ul>
 <p>The previous tutorial gives you a function that is able to pull all of the file paths from a directory and put them into an array. In this tutorial, we will map the file routes to endpoints that we can call and return with express.</p>
-<h3>The End Goal</h3>
+<h3 id="the-end-goal"><a class="anchor" href="#the-end-goal">#</a> The End Goal</h3>
 <p>The end goal is to take paths from the file system like below and extract any variables and return the full URL and variables in an object. The variables will be defined by putting the variable name inside of square brackets and the endpoint function will be a file in the last folder named <code>+server.js</code>.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>[
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>  <span style="color:#e6db74">&#34;./src/accounts/create&#34;</span>,
@@ -30,7 +30,7 @@
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>  <span style="color:#e6db74">&#34;./src/assets/[collection][name]&#34;</span>,
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span>  <span style="color:#e6db74">&#34;./src/templates/[name]&#34;</span>
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span>]
-</span></span></code></pre><h3>Code</h3>
+</span></span></code></pre><h3 id="code"><a class="anchor" href="#code">#</a> Code</h3>
 <p>Here is the function I used to take the file paths and collapse them into paths that can be matched by our routing function in the next tutorial. I've added comments explaining how it works line by line.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#75715e">// paths are the file paths from the getFiles() function in the last tutorial
 </span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">collapsePaths</span>(<span style="color:#a6e22e">paths</span>) {

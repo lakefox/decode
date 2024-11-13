@@ -14,7 +14,7 @@
         ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
       >
     </nav>
-    <main><h1>Express Plugins</h1>
+    <main><h1 id="express-plugins">Express Plugins</h1>
 <p>Express plugins can be used to process POST body data, serve static files, or serve content with CORS enabled. Learn the basics of app.use.</p>
 <p>First, we will start off with parsing a POST requests body. If you are familiar with Express v3.x you with know about <code>body-parser</code> in Express v4.x has been replaced with <code>urlencoded</code>, here's how to use it:</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">express</span>.<span style="color:#a6e22e">urlencoded</span>({ <span style="color:#a6e22e">extended</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span> }));
@@ -24,18 +24,18 @@
 </span></span></code></pre><p>If you want to serve static files like HTML documents, CSS, JS, or Media files you will need to use the <code>.static</code> adapter with the directory you want to pull from as the first argument.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">express</span>.<span style="color:#66d9ef">static</span>(<span style="color:#e6db74">&#34;public&#34;</span>));
 </span></span></code></pre><p>Those are the most important built-in functions to know how to use, however, there are a few that don't come along with express but are helpful to know how to use.</p>
-<h2>CORS</h2>
+<h2 id="cors"><a class="anchor" href="#cors">#</a> CORS</h2>
 <p>Cross-Origin Resource Sharing or CORS is the way you can share resources from different websites. This data is set in the Head of the HTTP request to automatically do this Express has the <code>cors</code> module.</p>
-<h3>Installation</h3>
+<h3 id="installation"><a class="anchor" href="#installation">#</a> Installation</h3>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>npm i cors
-</span></span></code></pre><h3>Usage</h3>
+</span></span></code></pre><h3 id="usage"><a class="anchor" href="#usage">#</a> Usage</h3>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">cors</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;cors&#34;</span>);
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">cors</span>());
-</span></span></code></pre><h2>GZIP</h2>
+</span></span></code></pre><h2 id="gzip"><a class="anchor" href="#gzip">#</a> GZIP</h2>
 <p>If you want to compress your data before sending it to the client Express has the <code>compression</code> module that auto-compresses all out bound data.</p>
-<h3>Installation</h3>
+<h3 id="installation-1"><a class="anchor" href="#installation-1">#</a> Installation</h3>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>npm i compression
-</span></span></code></pre><h3>Usage</h3>
+</span></span></code></pre><h3 id="usage-1"><a class="anchor" href="#usage-1">#</a> Usage</h3>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">compression</span>());
 </span></span></code></pre></main>
   </body>

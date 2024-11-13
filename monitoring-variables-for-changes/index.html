@@ -14,7 +14,7 @@
         ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
       >
     </nav>
-    <main><h1>Monitoring Variables for Changes</h1>
+    <main><h1 id="monitoring-variables-for-changes">Monitoring Variables for Changes</h1>
 <p>All frameworks have this ability, but what if you wanted to do it in plain JavaScript? In this tutorial, we will explore how to track the state of your application and update the DOM on the fly.</p>
 <p>In a project I am currently working on, I cannot use any frameworks due to the nature of the environment it will run in. So I went about making a traditionally built site however, I have been using Svelte so much recently I could barely stand having to keep the DOM synced with the data behind the scenes. So I attempted to create a mini framework that would help keep everything up to date. This isn't about the framework I made for myself, this is about creating reactivity in a traditional application without manually keeping track of the data.</p>
 <p>I found the easiest way to implement this is to use a borrowing system. Where a function asks for a variable from the object the state is stored in and returns the updated value once complete. After the value is updated rerunning every function that uses the changed variable.</p>

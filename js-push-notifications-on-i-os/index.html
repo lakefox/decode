@@ -14,11 +14,11 @@
         ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
       >
     </nav>
-    <main><h1>JS Push Notifications on iOS</h1>
+    <main><h1 id="js-push-notifications-on-ios">JS Push Notifications on iOS</h1>
 <p>Push notifications are a great way to keep users engaged with your web application even when they're not actively using it. In this tutorial, I will guide you on how to use push notifications in JavaScript.</p>
-<h2>Register for a Push Notification Service</h2>
+<h2 id="register-for-a-push-notification-service"><a class="anchor" href="#register-for-a-push-notification-service">#</a> Register for a Push Notification Service</h2>
 <p>To use push notifications, you need to register for a push notification service. Some popular services include Firebase Cloud Messaging, OneSignal, and Pusher. These services provide APIs for sending and receiving push notifications.</p>
-<h2>Ask for User Permission</h2>
+<h2 id="ask-for-user-permission"><a class="anchor" href="#ask-for-user-permission">#</a> Ask for User Permission</h2>
 <p>Before you can send push notifications, you need to get the user's permission. This is done using the Notification API in JavaScript. Here's an example of how to ask for permission:</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">Notification</span>.<span style="color:#a6e22e">permission</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;default&#34;</span>) {
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>  <span style="color:#a6e22e">Notification</span>.<span style="color:#a6e22e">requestPermission</span>().<span style="color:#a6e22e">then</span>(<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">permission</span>) {
@@ -28,7 +28,7 @@
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span>  });
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7</span><span>}
 </span></span></code></pre><p>This code checks the current permission status and, if necessary, prompts the user for permission. If the user grants permission, a message is logged to the console.</p>
-<h2>Create a Service Worker</h2>
+<h2 id="create-a-service-worker"><a class="anchor" href="#create-a-service-worker">#</a> Create a Service Worker</h2>
 <p>To receive push notifications, you need to create a service worker. A service worker is a JavaScript file that runs in the background of your web application, independent of the user interface. Here's an example of how to create a service worker:</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#a6e22e">self</span>.<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#34;push&#34;</span>, <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">event</span>) {
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">data</span>) {
@@ -44,7 +44,7 @@
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12</span><span>  }
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13</span><span>});
 </span></span></code></pre><p>This code listens for the <code>push</code> event and displays a notification when a push notification is received. The notification includes a title, body, and icon.</p>
-<h2>Send Push Notifications</h2>
+<h2 id="send-push-notifications"><a class="anchor" href="#send-push-notifications">#</a> Send Push Notifications</h2>
 <p>To send a push notification, you need to use the API provided by your push notification service. Here's an example of how to send a push notification using Firebase Cloud Messaging:</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#34;https://fcm.googleapis.com/fcm/send&#34;</span>, {
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span>  <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;POST&#34;</span>,
@@ -68,7 +68,7 @@
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20</span><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;Error sending push notification&#34;</span>, <span style="color:#a6e22e">error</span>);
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21</span><span>  });
 </span></span></code></pre><p>This code sends a push notification to the device with the specified registration token. The notification includes a title, body, and icon.</p>
-<h2>Handle Clicks on Notifications</h2>
+<h2 id="handle-clicks-on-notifications"><a class="anchor" href="#handle-clicks-on-notifications">#</a> Handle Clicks on Notifications</h2>
 <p>When the user clicks on a notification, you can handle the event in your service worker. Here's an example of how to handle clicks on notifications:</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#a6e22e">self</span>.<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#34;notificationclick&#34;</span>, <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">event</span>) {
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Notification clicked&#34;</span>);

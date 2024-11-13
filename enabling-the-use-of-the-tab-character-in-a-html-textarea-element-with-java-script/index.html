@@ -14,7 +14,7 @@
         ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
       >
     </nav>
-    <main><h1>Enabling the Use of the Tab Character in a HTML textarea Element with JavaScript</h1>
+    <main><h1 id="enabling-the-use-of-the-tab-character-in-a-html-textarea-element-with-javascript">Enabling the Use of the Tab Character in a HTML textarea Element with JavaScript</h1>
 <p>How to enable the use of the tab character in a HTML textarea element using JavaScript. It describes the process of adding an event listener to the textarea element that listens for the keydown event and checking the keyCode property of the event object to determine if the tab key has been pressed. If the tab key has been pressed, the default behavior of the tab key is prevented and a tab character is inserted into the textarea element using the insertText function. An example of the code required to implement this functionality is also provided.</p>
 <p><img src="./tab.webp" alt="A picture of the keyboard key tab" /></p>
 <p>The tab character, represented by the ASCII code 9, is a useful way to allow users to quickly navigate through a form or document. Unfortunately, the HTML textarea element does not support the use of the tab character by default. However, it is possible to enable the use of the tab character in a textarea element by using JavaScript.</p>
@@ -22,7 +22,7 @@
 <p>Inside the event listener, you can check if the tab key has been pressed by checking the keyCode property of the event object. If the tab key has been pressed, you can prevent the default behavior of the tab key (which is to move focus to the next element on the page) by calling the preventDefault method on the event object.</p>
 <p>You can then insert a tab character into the textarea element by using the insertText function. This function takes the text to be inserted as an argument and inserts it at the current cursor position in the textarea element.</p>
 <p>Here is an example of how you can enable the use of the tab character in a textarea element using JavaScript:</p>
-<h2>Code</h2>
+<h2 id="code"><a class="anchor" href="#code">#</a> Code</h2>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span>document.<span style="color:#a6e22e">querySelector</span>(<span style="color:#e6db74">&#34;textarea&#34;</span>).<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#34;keydown&#34;</span>, (<span style="color:#a6e22e">e</span>) =&gt; {
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">key</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;Tab&#34;</span>) {
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span>    <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">preventDefault</span>();

@@ -14,13 +14,13 @@
         ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
       >
     </nav>
-    <main><h1>TOML Basics</h1>
+    <main><h1 id="toml-basics">TOML Basics</h1>
 <p>TOML is a configuration file format that is designed to be easy to read and write for both humans and machines. It stands for &quot;Tom's Obvious, Minimal Language&quot; and was created by Tom Preston-Werner, the co-founder of GitHub. In this tutorial, we will explore how to use TOML.</p>
-<h2>Installing TOML</h2>
+<h2 id="installing-toml"><a class="anchor" href="#installing-toml">#</a> Installing TOML</h2>
 <p>TOML is a simple file format, so you don't need to install any specific software to use it. You can create and edit TOML files using any plain text editor such as Notepad, Sublime Text, or Atom.</p>
-<h2>Creating a TOML file</h2>
+<h2 id="creating-a-toml-file"><a class="anchor" href="#creating-a-toml-file">#</a> Creating a TOML file</h2>
 <p>To create a new TOML file, simply create a new text file with the &quot;.toml&quot; extension. For example, if you want to create a configuration file for your application, you can create a file named &quot;config.toml&quot;.</p>
-<h2>Basic syntax of TOML</h2>
+<h2 id="basic-syntax-of-toml"><a class="anchor" href="#basic-syntax-of-toml">#</a> Basic syntax of TOML</h2>
 <p>The basic syntax of TOML is simple and easy to learn. Here's an example of a TOML file:</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#a6e22e">title</span> = <span style="color:#e6db74">&#34;My Awesome Website&#34;</span>
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span><span style="color:#a6e22e">language</span> = <span style="color:#e6db74">&#34;en-US&#34;</span>
@@ -37,7 +37,7 @@
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13</span><span><span style="color:#a6e22e">database</span> = <span style="color:#e6db74">&#34;my_database&#34;</span><span style="color:#960050;background-color:#1e0010">&#39;</span>
 </span></span></code></pre><p>The above TOML file has three sections, <code>title</code>, <code>owner</code>, and <code>database</code>, and each section contains one or more key-value pairs. The key-value pairs are separated by the equal sign (=) and each key-value pair must be on its own line. The values can be of different types such as strings, numbers, and booleans.</p>
 <p>You can also define nested sections in TOML using square brackets ([]). In the above example, the <code>owner</code> and <code>database</code> sections are nested under the main section.</p>
-<h2>Reading a TOML file</h2>
+<h2 id="reading-a-toml-file"><a class="anchor" href="#reading-a-toml-file">#</a> Reading a TOML file</h2>
 <p>To read a TOML file in your application, you can use a TOML parser. There are several TOML parsers available for different programming languages. Here's an example of how to read the above TOML file in Python:</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">toml</span>
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>
@@ -46,7 +46,7 @@
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span><span style="color:#a6e22e">print</span>(<span style="color:#a6e22e">config</span>[<span style="color:#e6db74">&#39;owner&#39;</span>][<span style="color:#e6db74">&#39;name&#39;</span>])
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span><span style="color:#a6e22e">print</span>(<span style="color:#a6e22e">config</span>[<span style="color:#e6db74">&#39;database&#39;</span>][<span style="color:#e6db74">&#39;database&#39;</span>])
 </span></span></code></pre><p>The above code imports the <code>toml</code> module and uses the load function to read the contents of the <code>config.toml</code> file. The load function returns a dictionary object that contains all the key-value pairs defined in the TOML file.</p>
-<h2>Conclusion</h2>
+<h2 id="conclusion"><a class="anchor" href="#conclusion">#</a> Conclusion</h2>
 <p>TOML is a simple and intuitive file format for configuration files. Its syntax is easy to learn and it is supported by many programming languages. If you need to store configuration data for your application, TOML is a great choice.</p>
 </main>
   </body>

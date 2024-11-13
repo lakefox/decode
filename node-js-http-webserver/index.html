@@ -14,12 +14,12 @@
         ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
       >
     </nav>
-    <main><h1>Node JS HTTP Webserver</h1>
+    <main><h1 id="node-js-http-webserver">Node JS HTTP Webserver</h1>
 <p>Node JS comes out of the box with a built in HTTP module that can handle Hypertext Transfer Protocol requests. You can use this to build a web server without installing anything.</p>
 <p>The HTTP module can be used to create an HTTP server that can process requests can write back to the client.</p>
-<h2>Importing HTTP</h2>
+<h2 id="importing-http"><a class="anchor" href="#importing-http">#</a> Importing HTTP</h2>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">http</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;http&#34;</span>);
-</span></span></code></pre><h2>Processing Requests</h2>
+</span></span></code></pre><h2 id="processing-requests"><a class="anchor" href="#processing-requests">#</a> Processing Requests</h2>
 <p>Here is a basic HTTP server using the HTTP module in Node JS. To create the server use the <code>http.createServer</code> function in the HTTP library. You need to pass in a function to handle the request and the response. The request will provide you the information on what has been sent to you and the response will be what goes to the user. Responses need to have content written to them, you can use <code>res.write</code> to add any type of data. Then to send it you close the response with <code>res.end</code>. To set the port the server listens to and to start the sever, add <code>.listen(port)</code> to the <code>http.createServer</code> function.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">http</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;http&#34;</span>);
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>
@@ -30,32 +30,32 @@
 </span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7</span><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>(); <span style="color:#75715e">//end the response
 </span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8</span><span><span style="color:#75715e"></span>  })
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9</span><span>  .<span style="color:#a6e22e">listen</span>(<span style="color:#ae81ff">8080</span>); <span style="color:#75715e">//the server object listens on port 8080
-</span></span></span></code></pre><h2>Adding Headers</h2>
+</span></span></span></code></pre><h2 id="adding-headers"><a class="anchor" href="#adding-headers">#</a> Adding Headers</h2>
 <p>It is important to the client what type of data is being sent, you can do this using headers. To learn more about what types of headers there are you can read <a href="https://decode.sh/http-headers-basics">this article</a>. Just as you use <code>res.write</code> to write the body information of the request, you use <code>res.writeHead</code> to write headers and statuses to the head of the request.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#75715e">// 200 is the HTTP status code for `OK`
 </span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#75715e">// The second argument is the headers you want to set
 </span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span><span style="color:#75715e"></span><span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">200</span>, { <span style="color:#e6db74">&#34;Content-Type&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;text/html&#34;</span> });
-</span></span></code></pre><h2>Routing Requests</h2>
+</span></span></code></pre><h2 id="routing-requests"><a class="anchor" href="#routing-requests">#</a> Routing Requests</h2>
 <p>For any web server to send information you need to know where the data needs to be sent. All of that data is in the request variable, you can read the <a href="https://nodejs.org/api/http.html">docs</a> to learn all methods but we will go over the main ones that can help you route your requests.</p>
-<h3>Headers</h3>
+<h3 id="headers"><a class="anchor" href="#headers">#</a> Headers</h3>
 <ul>
 <li>To see the headers passed from the browser use <code>req.getHeaders()</code>.</li>
 </ul>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">headers</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">getHeaders</span>();
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#75715e">// headers === { foo: &#39;bar&#39; }
-</span></span></span></code></pre><h3>URL</h3>
+</span></span></span></code></pre><h3 id="url"><a class="anchor" href="#url">#</a> URL</h3>
 <ul>
 <li>The URL contains the full URL sent to your web server to access use <code>req.url</code></li>
 </ul>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">url</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">url</span>;
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#75715e">// path === &#34;/node-js-http-webserver&#34;
-</span></span></span></code></pre><h3>Method</h3>
+</span></span></span></code></pre><h3 id="method"><a class="anchor" href="#method">#</a> Method</h3>
 <ul>
 <li>Knowing the method of the request is important so you aren't treating a <code>GET</code> request as a <code>POST</code> request or vice versa. To see the method use <code>req.method</code>.</li>
 </ul>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">method</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">method</span>;
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#75715e">// method === &#34;GET&#34;
-</span></span></span></code></pre><h2>Parsing the URL</h2>
+</span></span></span></code></pre><h2 id="parsing-the-url"><a class="anchor" href="#parsing-the-url">#</a> Parsing the URL</h2>
 <p>To better handle the request you can use the <code>url</code> module built into Node JS here's an example of using it to parse a URL.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">url</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;url&#34;</span>);
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">adr</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://decode.sh/node-js-http-webserver?admin=false&#34;</span>;

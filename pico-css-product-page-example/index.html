@@ -14,10 +14,10 @@
         ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
       >
     </nav>
-    <main><h1>PicoCSS product page example</h1>
+    <main><h1 id="picocss-product-page-example">PicoCSS product page example</h1>
 <p>Pico CSS is a great tool for building low code interfaces, today we will be going through the process of creating a product page for a ecommerce store. The image below shows what you will have at the end.</p>
 <p><img src="./localhost_5173_products_XONOYt44nT.webp" alt="Product Page Example" /></p>
-<h2>Header</h2>
+<h2 id="header"><a class="anchor" href="#header">#</a> Header</h2>
 <p>The header takes advantage of Pico’s built in styles with a few lines of extra CSS.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#75715e">&lt;!— HTML —&gt;</span>
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span>&lt;<span style="color:#f92672">nav</span>&gt;
@@ -40,7 +40,7 @@
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span><span>  <span style="color:#66d9ef">margin-top</span>: <span style="color:#ae81ff">-5</span><span style="color:#66d9ef">px</span>;
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span>  <span style="color:#66d9ef">margin-right</span>: <span style="color:#ae81ff">5</span><span style="color:#66d9ef">px</span>;
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11</span><span>}
-</span></span></code></pre><h3>The container</h3>
+</span></span></code></pre><h3 id="the-container"><a class="anchor" href="#the-container">#</a> The container</h3>
 <p>This is the core of our page, the <code>main</code> element containes all of our content for the page so we can pass style from it to the other element reducing the amount of CSS that is needed.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#75715e">&lt;!— HTML —&gt;</span>
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>&lt;<span style="color:#f92672">main</span>&gt;
@@ -64,7 +64,7 @@
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15</span><span>  <span style="color:#66d9ef">flex-wrap</span>: <span style="color:#66d9ef">wrap</span>;
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16</span><span>  <span style="color:#66d9ef">justify-content</span>: <span style="color:#66d9ef">center</span>;
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17</span><span>}
-</span></span></code></pre><h3>The cards</h3>
+</span></span></code></pre><h3 id="the-cards"><a class="anchor" href="#the-cards">#</a> The cards</h3>
 <p>The card will contain the actual product information in it, as long with any images we want to add in. We will use the <code>h4</code> and <code>h6</code> elements for the label formating and the <code>button</code> element to add the product to the cart. Add these cards into the <code>#products</code> div to add a new product.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#75715e">&lt;!— HTML —&gt;</span>
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;card”&gt;
@@ -88,7 +88,7 @@
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13</span><span>.<span style="color:#a6e22e">right</span> {
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14</span><span>  <span style="color:#66d9ef">text-align</span>: <span style="color:#66d9ef">end</span>;
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15</span><span>}
-</span></span></code></pre><h3>Everything together</h3>
+</span></span></code></pre><h3 id="everything-together"><a class="anchor" href="#everything-together">#</a> Everything together</h3>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#75715e">&lt;!— HTML —&gt;</span>
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span>&lt;<span style="color:#f92672">nav</span>&gt;
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span>  &lt;<span style="color:#f92672">ul</span>&gt;

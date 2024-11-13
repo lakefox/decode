@@ -14,28 +14,28 @@
         ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
       >
     </nav>
-    <main><h1>Building a Highlighted Text Editor in the Browser</h1>
+    <main><h1 id="building-a-highlighted-text-editor-in-the-browser">Building a Highlighted Text Editor in the Browser</h1>
 <p>Trying to get highlighted code to be editable on your website can be tricky to implement. The idea behind successfully doing it is to display a code tag and highlight the code in there, then overlay a textarea with the font color and background set to transparent.</p>
 <p>Now that you know what we will build, let's learn how to implement it.</p>
-<h2>Code Highlighting</h2>
+<h2 id="code-highlighting"><a class="anchor" href="#code-highlighting">#</a> Code Highlighting</h2>
 <p>We will need to highlight the code in the editor we are building, so for this, we will use the library I use, and the most popular, highlight.js.</p>
-<h3>Importing</h3>
+<h3 id="importing"><a class="anchor" href="#importing">#</a> Importing</h3>
 <p>All of the code we will go over here will be in the browser, but highlight.js is an NPM package, so we can use unpkg to host our files. Highlight.js needs at least two files, the javascript and the CSS styling. If you want to use a non-default CSS layout, you can pick one from <a href="https://highlightjs.org/static/demo/" title="Demo">here</a>.</p>
-<h4>JS</h4>
+<h4 id="js"><a class="anchor" href="#js">#</a> JS</h4>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>&lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://unpkg.com/@highlightjs/cdn-assets@11.7.0/highlight.min.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
-</span></span></code></pre><h5>Default CSS</h5>
+</span></span></code></pre><h5 id="default-css"><a class="anchor" href="#default-css">#</a> Default CSS</h5>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>&lt;<span style="color:#f92672">link</span>
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>  <span style="color:#a6e22e">rel</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stylesheet&#34;</span>
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>  <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;//unpkg.com/@highlightjs/cdn-assets@11.7.0/styles/default.min.css&#34;</span>
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>/&gt;
-</span></span></code></pre><h5>Custom CSS</h5>
+</span></span></code></pre><h5 id="custom-css"><a class="anchor" href="#custom-css">#</a> Custom CSS</h5>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>&lt;<span style="color:#f92672">link</span>
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>  <span style="color:#a6e22e">rel</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stylesheet&#34;</span>
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>  <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://unpkg.com/@highlightjs/cdn-assets@11.7.0/styles/atom-one-dark.min.css&#34;</span>
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>/&gt;
-</span></span></code></pre><h4>Custom Bundles</h4>
+</span></span></code></pre><h4 id="custom-bundles"><a class="anchor" href="#custom-bundles">#</a> Custom Bundles</h4>
 <p>If you know what languages you want to highlight, you can reduce the amount of javascript shipped to the browser by using highlight.js custom tool to assemble a bundle. Go <a href="https://highlightjs.org/download/" title="Custom Bundle Generator">here</a> and select which languages you will be using, then download the zip file and extract the highlight.min.js file.</p>
-<h3>Structure</h3>
+<h3 id="structure"><a class="anchor" href="#structure">#</a> Structure</h3>
 <p>For reference, this tutorial is based on this <a href="https://decode.sh/building-a-code-pen-type-editor-from-scratch">tutorial</a>, so we will carry over some of the same concepts like adding the <code>data-lang</code> attribute and using a custom attribute to define our component (<code>editor</code>).</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">editor</span>&gt;
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>  &lt;<span style="color:#f92672">textarea</span> <span style="color:#a6e22e">data-lang</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;html&#34;</span>&gt;&lt;/<span style="color:#f92672">textarea</span>&gt;
@@ -43,7 +43,7 @@
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>  &lt;<span style="color:#f92672">code</span>&gt;&lt;/<span style="color:#f92672">code</span>&gt;
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span> &lt;/<span style="color:#f92672">pre</span>&gt;
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span>&lt;/<span style="color:#f92672">div</span>&gt;
-</span></span></code></pre><h3>Binding the textarea and the code block</h3>
+</span></span></code></pre><h3 id="binding-the-textarea-and-the-code-block"><a class="anchor" href="#binding-the-textarea-and-the-code-block">#</a> Binding the textarea and the code block</h3>
 <p>Now that we have our foundation, let's build the code that will bind our textarea and code block. The code below has comments explaining each step, so you can skip the rest of this paragraph if you don't want to read how it works. Once the <code>spawnEditors</code> function is called, it grabs all of the textarea's that have the <code>data-lang</code> property. Then it loops over those, firstly setting the value of the code tag to be the contents of the textarea highlighted with highlight.js. Next, it binds the scroll of the <code>pre</code> tag to the textarea to keep them synced up. Lastly, it adds an event listener to update the code as it changes.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">spawnEditors</span>() {
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span>  <span style="color:#75715e">// Select textarea&#39;s
@@ -68,7 +68,7 @@
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21</span><span>    });
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22</span><span>  }
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23</span><span>}
-</span></span></code></pre><h3>Styling</h3>
+</span></span></code></pre><h3 id="styling"><a class="anchor" href="#styling">#</a> Styling</h3>
 <p>Normally I don't like to talk too much about styling and CSS, but for this project, it is one of the most important parts. We will use CSS to turn the text area and the code block into one editor. We will need to make the code tag and textarea line up with the same font type and size. Then set the <code>z-index</code> of the textarea higher than the code block and change the cursor's color.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#f92672">[</span><span style="color:#f92672">code</span><span style="color:#f92672">]</span> {
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span>  <span style="color:#66d9ef">position</span>: <span style="color:#66d9ef">relative</span>;
@@ -107,7 +107,7 @@
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35</span><span>  <span style="color:#66d9ef">display</span>: <span style="color:#66d9ef">block</span>;
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36</span><span>  <span style="color:#66d9ef">white-space</span>: <span style="color:#66d9ef">pre-wrap</span>;
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37</span><span>}
-</span></span></code></pre><h3>Demo</h3>
+</span></span></code></pre><h3 id="demo"><a class="anchor" href="#demo">#</a> Demo</h3>
 <p>This is a demo of a <a href="https://decode.sh/building-a-code-pen-type-editor-from-scratch" title="Previous Tutorial">Codepen Like Editor</a> I build a few days ago. In the linked tutorial, I did not cover the code highlighting, but here it is with it working. !{If the code is not showing, try refreshing the page. This is still a WIP, but I felt it was appropriate to show it here}</p>
 <div editor>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>&lt;<span style="color:#f92672">h1</span>&gt;Hello&lt;/<span style="color:#f92672">h1</span>&gt;

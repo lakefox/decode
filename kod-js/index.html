@@ -14,12 +14,12 @@
         ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
       >
     </nav>
-    <main><h1>Kod.js</h1>
+    <main><h1 id="kodjs">Kod.js</h1>
 <p>Kod.js is a code preview image generator that runs both in the browser and on Node JS. It is built using highlight.js and uses it for the themes and syntax highlighting.</p>
 <p><img src="./download_Vm0BO0hxzw.png" alt="Kod.js client or server generated code captures" /></p>
-<h2>Basic Usage</h2>
+<h2 id="basic-usage"><a class="anchor" href="#basic-usage">#</a> Basic Usage</h2>
 <p>Here's a basic example that generates an image with <code>console.log(&quot;Hello World&quot;)</code> in it.</p>
-<h3>Node JS</h3>
+<h3 id="node-js"><a class="anchor" href="#node-js">#</a> Node JS</h3>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">fs</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;fs&#34;</span>;
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span><span style="color:#75715e">// Import the canvas module from NPM
 </span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">createCanvas</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;canvas&#34;</span>;
@@ -49,7 +49,7 @@
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27</span><span>      });
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28</span><span>    });
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29</span><span>});
-</span></span></code></pre><h4>Browser</h4>
+</span></span></code></pre><h4 id="browser"><a class="anchor" href="#browser">#</a> Browser</h4>
 <p>Include the script and add a canvas element to your document.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>&lt;<span style="color:#f92672">canvas</span>&gt;&lt;/<span style="color:#f92672">canvas</span>&gt;
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>&lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://unpkg.com/kodjs/dist/kod.min.js&#34;</span>&gt;

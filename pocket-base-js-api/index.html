@@ -14,46 +14,46 @@
         ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
       >
     </nav>
-    <main><h1>PocketBase JS API</h1>
+    <main><h1 id="pocketbase-js-api">PocketBase JS API</h1>
 <p>Unlock the full potential of PocketBase's JS SDK with this comprehensive guide covering everything you need to know to avoid confusion.</p>
 <p><img src="./untitled_cVi0LEjGOG.webp" alt="pocketbase" /></p>
-<h2>Prerequisite</h2>
+<h2 id="prerequisite"><a class="anchor" href="#prerequisite">#</a> Prerequisite</h2>
 <ul>
 <li><a href="pocket-base-installation-on-digital-ocean">PocketBase Installation on Digital Ocean</a></li>
 </ul>
-<h2>Install</h2>
-<h3>Browser (manuel)</h3>
+<h2 id="install"><a class="anchor" href="#install">#</a> Install</h2>
+<h3 id="browser-manuel"><a class="anchor" href="#browser-manuel">#</a> Browser (manuel)</h3>
 <p>You can use any NPM CDN to load the SDK or you can download it and host it yourself.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://unpkg.com/pocketbase/dist/pocketbase.umd.js&#34;</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
-</span></span></code></pre><h4>Import as a Module</h4>
+</span></span></code></pre><h4 id="import-as-a-module"><a class="anchor" href="#import-as-a-module">#</a> Import as a Module</h4>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;module&#34;</span><span style="color:#f92672">&gt;</span>
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>  <span style="color:#66d9ef">import</span> <span style="color:#a6e22e">PocketBase</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;https://unpkg.com/pocketbase/dist/pocketbase.umd.js&#39;</span>
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>  ...
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
-</span></span></code></pre><h5>NPM</h5>
+</span></span></code></pre><h5 id="npm"><a class="anchor" href="#npm">#</a> NPM</h5>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>npm i pocketbase
 </span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#75715e">// Using ES modules (default)
 </span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">PocketBase</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;pocketbase&#34;</span>;
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span><span style="color:#75715e">// OR if you are using CommonJS modules
 </span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">PocketBase</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;pocketbase/cjs&#34;</span>);
-</span></span></code></pre><h3>Usage</h3>
+</span></span></code></pre><h3 id="usage"><a class="anchor" href="#usage">#</a> Usage</h3>
 <p>Connecting to your PocketBase instance is very straightforward, after importing the module create a <code>new</code> PocketBase instance and pass your DataBase URL as the first argument.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">PocketBase</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;pocketbase&#34;</span>;
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">pb</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">PocketBase</span>(<span style="color:#e6db74">&#34;http://127.0.0.1:8090&#34;</span>);
-</span></span></code></pre><h4>Collections</h4>
+</span></span></code></pre><h4 id="collections"><a class="anchor" href="#collections">#</a> Collections</h4>
 <p>Every PocketBase request will start by first defining which collection you want to pull or put information in.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">collection</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">collection</span>(<span style="color:#e6db74">&#34;example&#34;</span>);
 </span></span></code></pre><p>In this example, we are getting the collection <code>example</code>. The collection object has methods for searching and authentication.</p>
-<h5>Getting Information</h5>
+<h5 id="getting-information"><a class="anchor" href="#getting-information">#</a> Getting Information</h5>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">collection</span>(<span style="color:#e6db74">&#34;example&#34;</span>).<span style="color:#a6e22e">getList</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">20</span>);
 </span></span></code></pre><p>This will get the first 20 results from the <code>example</code> collection. If you want to filter your results the <code>getList</code> method allows for a configuration object to be passed.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">collection</span>(<span style="color:#e6db74">&#34;example&#34;</span>).<span style="color:#a6e22e">getList</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">20</span>, {
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>  <span style="color:#a6e22e">filter</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;status = true &amp;&amp; created &gt; &#34;2022-08-01 10:00:00&#34;&#39;</span>,
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>});
 </span></span></code></pre><p>PocketBase uses standard SQL syntax for the filtering.</p>
-<h5>Authentication</h5>
+<h5 id="authentication"><a class="anchor" href="#authentication">#</a> Authentication</h5>
 <p>PocketBase has built-in methods for account creation and authentication. Once you authenticate a user at the <code>pb</code> object level the user will remain authenticated until you deauth them. This is great if you have permissions set for a user, they will not be able to access collections you don't want them in.</p>
 <p>Here is an example of logging in a user with their email and password:</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">userData</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">pb</span>
@@ -61,7 +61,7 @@
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>  .<span style="color:#a6e22e">authWithPassword</span>(<span style="color:#e6db74">&#34;test@example.com&#34;</span>, <span style="color:#e6db74">&#34;123456&#34;</span>);
 </span></span></code></pre><p>After authentication, the promise will return the user's data so there is no need to make an additional request. If you want to deauth a user call the function below anywhere and it will clear out the authStore:</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">authStore</span>.<span style="color:#a6e22e">clear</span>();
-</span></span></code></pre><h4>File Uploading</h4>
+</span></span></code></pre><h4 id="file-uploading"><a class="anchor" href="#file-uploading">#</a> File Uploading</h4>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">PocketBase</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;pocketbase&#39;</span>;
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span>
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">pb</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">PocketBase</span>(<span style="color:#e6db74">&#39;http://127.0.0.1:8090&#39;</span>);

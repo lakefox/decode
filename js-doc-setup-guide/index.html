@@ -14,14 +14,14 @@
         ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
       >
     </nav>
-    <main><h1>JSDoc Setup Guide</h1>
+    <main><h1 id="jsdoc-setup-guide">JSDoc Setup Guide</h1>
 <p>JSDoc is a popular tool used to generate documentation for JavaScript code. It allows developers to document their code in a standardized format, making it easier for others to understand and use their code.</p>
 <p>Here is a step-by-step tutorial on how to set up JSDoc for your JavaScript project:</p>
-<h2>Install JSDoc</h2>
+<h2 id="install-jsdoc"><a class="anchor" href="#install-jsdoc">#</a> Install JSDoc</h2>
 <p>You can install JSDoc using npm (the Node.js package manager). Open your terminal or command prompt and run the following command:</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>npm install -g jsdoc
 </span></span></code></pre><p>This command will install JSDoc globally on your system, so you can use it for any JavaScript project.</p>
-<h2>Create a JSDoc configuration file</h2>
+<h2 id="create-a-jsdoc-configuration-file"><a class="anchor" href="#create-a-jsdoc-configuration-file">#</a> Create a JSDoc configuration file</h2>
 <p>JSDoc requires a configuration file to specify how the documentation should be generated. Create a new file named jsdoc.json in the root directory of your project, and add the following code:</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span>{
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span>  <span style="color:#e6db74">&#34;source&#34;</span><span style="color:#f92672">:</span> {
@@ -46,7 +46,7 @@
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21</span><span>  }
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22</span><span>}
 </span></span></code></pre><p>This configuration file tells JSDoc to generate documentation for all JavaScript files in the <code>./src</code> directory, and save the output in the <code>./docs</code> directory. It also specifies that JSDoc should use the markdown plugin to support Markdown syntax in the documentation, and specifies some options for the Markdown parser.</p>
-<h2>Add JSDoc comments to your code</h2>
+<h2 id="add-jsdoc-comments-to-your-code"><a class="anchor" href="#add-jsdoc-comments-to-your-code">#</a> Add JSDoc comments to your code</h2>
 <p>JSDoc uses special comments in your code to generate documentation. These comments start with the <code>/**</code> characters and contain tags that describe the code element being documented.</p>
 <p>For example, here's how you can document a JavaScript function using JSDoc comments:</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#75715e">/**
@@ -59,7 +59,7 @@
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8</span><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">b</span>;
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9</span><span>}
 </span></span></code></pre><p>In this example, the <code>@param</code> tag is used to document the function's parameters, and the <code>@returns</code> tag is used to document the return value.</p>
-<h2>Generate the documentation</h2>
+<h2 id="generate-the-documentation"><a class="anchor" href="#generate-the-documentation">#</a> Generate the documentation</h2>
 <p>To generate the documentation, run the following command in your terminal or command prompt:</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>jsdoc -c jsdoc.json
 </span></span></code></pre><p>This command tells JSDoc to use the jsdoc.json configuration file to generate the documentation. The output will be saved in the <code>./docs</code> directory (as specified in the configuration file).</p>

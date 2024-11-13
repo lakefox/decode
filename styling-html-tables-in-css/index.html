@@ -14,10 +14,10 @@
         ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
       >
     </nav>
-    <main><h1>Styling HTML Tables in CSS</h1>
+    <main><h1 id="styling-html-tables-in-css">Styling HTML Tables in CSS</h1>
 <p>Tables in HTML play an important role in laying out complex sets of data. By default the table styling is boring, with this guide learn how to create awesome tables.</p>
 <p><img src="./css_tables_header_lhtn7xcmxz.webp" alt="CSS Tables" /></p>
-<h2>Overview</h2>
+<h2 id="overview"><a class="anchor" href="#overview">#</a> Overview</h2>
 <p>CSS Tables are formed out of four main elements, <code>&lt;table&gt;</code>, <code>&lt;tr&gt;</code>, <code>&lt;th&gt;</code>, and <code>&lt;td&gt;</code>.</p>
 <ul>
 <li>Table Element
@@ -41,9 +41,9 @@
 </ul>
 </li>
 </ul>
-<h3>Other Elements</h3>
+<h3 id="other-elements"><a class="anchor" href="#other-elements">#</a> Other Elements</h3>
 <p>There are two other elements that are not required to use but make the styling of your data much easy. They are the <code>&lt;thead&gt;</code> and <code>&lt;tbody&gt;</code> elements, all that they do is specify which rows are part of the body and head. If you do not declare these elements then they default to the tbody.</p>
-<h2>Usage</h2>
+<h2 id="usage"><a class="anchor" href="#usage">#</a> Usage</h2>
 <p>Using tables is very straightforward, put all of the contents into the main tag. Wrap each row in a <code>&lt;tr&gt;</code> tag. The tags inside of the <code>&lt;tr&gt;</code> tag can be either a <code>&lt;th&gt;</code> or a <code>&lt;td&gt;</code> tag. For the column you want to style as the header, make sure to put all of the elements in a <code>&lt;th&gt;</code> tag. Wrap each column in a <code>&lt;td&gt;</code> tag for the rest of the data.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span>&lt;<span style="color:#f92672">table</span>&gt;
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span>  &lt;<span style="color:#f92672">thead</span>&gt;
@@ -71,7 +71,7 @@
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24</span><span>    &lt;/<span style="color:#f92672">tr</span>&gt;
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25</span><span>  &lt;/<span style="color:#f92672">tbody</span>&gt;
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26</span><span>&lt;/<span style="color:#f92672">table</span>&gt;
-</span></span></code></pre><h3>Result</h3>
+</span></span></code></pre><h3 id="result"><a class="anchor" href="#result">#</a> Result</h3>
 <table>
 <thead>
 <tr>
@@ -99,7 +99,7 @@
 </tbody>
 </table>
 <p>This table is styled with PicoCSS, which is a great option (along with any other CSS framework) if you don't want to manually style your entire page.</p>
-<h2>Styling the table</h2>
+<h2 id="styling-the-table"><a class="anchor" href="#styling-the-table">#</a> Styling the table</h2>
 <p><img src="./users_masonwright_desktop_social_css_table_html_yCbtonpg1M.png" alt="Table Example" /></p>
 <p>Breaking out each section of the table using the <code>&lt;th&gt;</code> and <code>&lt;td&gt;</code> tags makes styling very intuitive. The best way I have found to style the table it to style the tags directly so the entire page's tables all look the same. Here is the code for the table above.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#f92672">table</span> {
@@ -139,7 +139,7 @@
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35</span><span><span style="color:#f92672">table</span> <span style="color:#f92672">tbody</span> <span style="color:#f92672">tr</span>:<span style="color:#a6e22e">last-child</span> {
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36</span><span>  <span style="color:#66d9ef">border</span>: <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37</span><span>}
-</span></span></code></pre><h2>Aligning table items</h2>
+</span></span></code></pre><h2 id="aligning-table-items"><a class="anchor" href="#aligning-table-items">#</a> Aligning table items</h2>
 <p>By default, all the text inside of the table will be right aligned, if you want to align the items in other way the best method is to create some custom classes. The classes below will align the text inside of a table <code>td</code> or <code>th</code> element by adding an <code>l</code>, <code>c</code>, or <code>r</code> class.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#f92672">table</span> <span style="color:#f92672">td</span><span style="color:#f92672">,</span>
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span><span style="color:#f92672">table</span> <span style="color:#f92672">th</span> {
@@ -160,7 +160,7 @@
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17</span><span><span style="color:#f92672">table</span> <span style="color:#f92672">th</span>.<span style="color:#a6e22e">r</span> {
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18</span><span>  <span style="color:#66d9ef">text-align</span>: <span style="color:#66d9ef">center</span>;
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19</span><span>}
-</span></span></code></pre><h2>Styling specific rows</h2>
+</span></span></code></pre><h2 id="styling-specific-rows"><a class="anchor" href="#styling-specific-rows">#</a> Styling specific rows</h2>
 <p>Styling specific rows can be useful when you want to create tables that have alternating rows or different parts of the data that need to look different for better readability. This can be done using the <code>:nth-child</code> selector like below.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#f92672">tbody</span> <span style="color:#f92672">&gt;</span> <span style="color:#f92672">tr</span>:<span style="color:#a6e22e">nth-child</span><span style="color:#f92672">(</span><span style="color:#f92672">2n</span> <span style="color:#f92672">+</span> <span style="color:#f92672">1</span><span style="color:#f92672">)</span> {
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>  <span style="color:#66d9ef">background-color</span>: <span style="color:#ae81ff">#fff</span>;

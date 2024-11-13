@@ -14,21 +14,21 @@
         ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
       >
     </nav>
-    <main><h1>Setting up Node.JS for production</h1>
+    <main><h1 id="setting-up-nodejs-for-production">Setting up Node.JS for production</h1>
 <p>Node.js is a popular JavaScript runtime that allows developers to build server-side applications with JavaScript. PM2 is a process manager for Node.js applications that helps to keep your applications running smoothly and automatically restart them in the event of any failures. Here's a guide on how to set up Node.js with PM2 and Let's Encrypt:</p>
 <p><img src="./node.png" alt="Node JS Logo" /></p>
-<h2>Overview</h2>
+<h2 id="overview"><a class="anchor" href="#overview">#</a> Overview</h2>
 <ul>
 <li>Install Node.JS</li>
 <li>Install and configure PM2</li>
 <li>Setting up Let's Encrypt</li>
 </ul>
-<h2>Prerequisites</h2>
+<h2 id="prerequisites"><a class="anchor" href="#prerequisites">#</a> Prerequisites</h2>
 <ul>
 <li><a href="https://decode.sh/how-to-setup-nginx-server-blocks-for-multiple-sites-ubuntu">How to setup Nginx server blocks for multiple sites - Ubuntu</a></li>
 </ul>
 <p>First, make sure you have Node.js installed on your system. If you don't have it already, you can install it from the official website or by following the steps below.</p>
-<h3>Installing Node.JS</h3>
+<h3 id="installing-nodejs"><a class="anchor" href="#installing-nodejs">#</a> Installing Node.JS</h3>
 <p>Download <code>NVM</code> via curl and install it.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 </span></span></code></pre><p>Export <code>NVM</code> as a command to your terminal.</p>
@@ -39,7 +39,7 @@
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>source ~/.bash_profile
 </span></span></code></pre><p>Install Node.js's latest <code>lts</code> version</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>nvm install --lts
-</span></span></code></pre><h3>Installing PM2</h3>
+</span></span></code></pre><h3 id="installing-pm2"><a class="anchor" href="#installing-pm2">#</a> Installing PM2</h3>
 <p>Next, install PM2 using the following command:</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>npm install -g pm2
 </span></span></code></pre><p>Now, you can start a new Node.js application using PM2 with the following command:</p>
@@ -53,7 +53,7 @@
 </span></span></code></pre><p>To restart an application, use the following command:</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>pm2 restart app
 </span></span></code></pre><p>By using PM2 to manage your Node.js applications, you can ensure that they are always running and automatically restart them in the event of any failures. This can save you a lot of time and effort in the long run.</p>
-<h3>Using HTTPS with Certbot</h3>
+<h3 id="using-https-with-certbot"><a class="anchor" href="#using-https-with-certbot">#</a> Using HTTPS with Certbot</h3>
 <p>Let's Encrypt is a free, automated, and open certificate authority that provides SSL/TLS certificates to secure websites and protect them from cyber threats.</p>
 <p>Install the Certbot client, which is a command-line tool that allows you to request and renew SSL/TLS certificates from Let's Encrypt. You can install Certbot from the official website or with the command below.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>sudo apt install certbot python3-certbot-nginx

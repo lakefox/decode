@@ -14,15 +14,15 @@
         ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
       >
     </nav>
-    <main><h1>Building GraphQL Resolvers</h1>
+    <main><h1 id="building-graphql-resolvers">Building GraphQL Resolvers</h1>
 <p>Figuring out how to make GraphQL resolvers is tricky when you get past the basic static routes. Here's a straight forward tutorial that goes over creating resolvers.</p>
-<h3>Prerequisite</h3>
+<h3 id="prerequisite"><a class="anchor" href="#prerequisite">#</a> Prerequisite</h3>
 <ul>
 <li><a href="https://decode.sh/graph-ql-the-basics">GraphQL: The basics</a></li>
 <li><a href="https://decode.sh/implementing-graph-ql">Implementing GraphQL</a></li>
 </ul>
 <p>The previous tutorials cover what GraphQL is and how to implement it in an express server. In this tutorial, we will try to establish how GrpahQL uses resolvers to fill data in a request and how to write the resolvers.</p>
-<h3>Setting up the Schema</h3>
+<h3 id="setting-up-the-schema"><a class="anchor" href="#setting-up-the-schema">#</a> Setting up the Schema</h3>
 <p>Building a modular schema is fundamental to building a good API. The first step in building a good schema is knowing what the data you want to get out looks like. Here we will want to be able to make three types of queries, the first being pulling information about a book. The second and third are filtering books by authors and getting all of the books we have in the database. We will be using the following JSON object as our &quot;database&quot;.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#75715e">// Some dummy data
 </span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">books</span> <span style="color:#f92672">=</span> [
@@ -54,7 +54,7 @@
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>    <span style="color:#a6e22e">books</span>(<span style="color:#a6e22e">author</span><span style="color:#f92672">:</span> String<span style="color:#f92672">!</span>)<span style="color:#f92672">:</span> [<span style="color:#a6e22e">Book</span>]
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>    <span style="color:#a6e22e">all</span><span style="color:#f92672">:</span> [<span style="color:#a6e22e">Book</span>]
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span>  }
-</span></span></code></pre><h4>Where to put this at?</h4>
+</span></span></code></pre><h4 id="where-to-put-this-at"><a class="anchor" href="#where-to-put-this-at">#</a> Where to put this at?</h4>
 <p>Up to this point, the code examples have not been &quot;full&quot; code examples. When it comes to building the schema for your API you need to put these objects inside of the <code>buildSchema</code> function.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#75715e">// Construct a schema using GraphQL schema language
 </span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">schema</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">buildSchema</span>(<span style="color:#e6db74">`
@@ -70,7 +70,7 @@
 </span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12</span><span><span style="color:#e6db74">  author: String
 </span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13</span><span><span style="color:#e6db74">}
 </span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14</span><span><span style="color:#e6db74">`</span>);
-</span></span></code></pre><h3>Building the Resolvers</h3>
+</span></span></code></pre><h3 id="building-the-resolvers"><a class="anchor" href="#building-the-resolvers">#</a> Building the Resolvers</h3>
 <p>Resolvers act as the keys in the query, to better understand this here is a GraphQL query.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>{
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>  <span style="color:#a6e22e">book</span>(<span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">3</span>) {
@@ -93,7 +93,7 @@
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span>    }
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span>  }
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7</span><span>}
-</span></span></code></pre><h3>Full Code Example</h3>
+</span></span></code></pre><h3 id="full-code-example"><a class="anchor" href="#full-code-example">#</a> Full Code Example</h3>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">express</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;express&#34;</span>;
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">graphqlHTTP</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;express-graphql&#39;</span>;
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">buildSchema</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;graphql&#39;</span>;

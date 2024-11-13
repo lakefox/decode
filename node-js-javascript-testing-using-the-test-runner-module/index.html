@@ -14,24 +14,24 @@
         ><img src="/assets/logo.png" alt="" title="DECODE" /> DECODE</a
       >
     </nav>
-    <main><h1>NodeJS/Javascript Testing Using the Test Runner Module</h1>
+    <main><h1 id="nodejsjavascript-testing-using-the-test-runner-module">NodeJS/Javascript Testing Using the Test Runner Module</h1>
 <p>The test runner API is a new set of built-in tools allowing you to natively create tests for your code. No more need for Jest, Mocha, or Ava! This will bring Node up with most modern languages (Dart, Rust, GO) and reduce the package size of your code base.</p>
 <p>The test runner API is not a drop-in replacement for other frameworks, so you must migrate all of your tests to the new syntax. However, its syntax is very straightforward and takes inspiration from the existing frameworks. This will make transitioning to the built-in test runner much easier.</p>
-<h2>Getting Started</h2>
-<h3>Installing Node v19.0.0</h3>
+<h2 id="getting-started"><a class="anchor" href="#getting-started">#</a> Getting Started</h2>
+<h3 id="installing-node-v1900"><a class="anchor" href="#installing-node-v1900">#</a> Installing Node v19.0.0</h3>
 <p>To get the latest version of Node, you can either install version <code>v19.0.0</code> from the Node.JS website <a href="https://nodejs.org/en" title="Node JS Website">here</a>, or you can install <code>nvm</code>. NVM is a node version manager, allowing you to run multiple versions of Node on your computer.</p>
-<h4>Installing NVM</h4>
+<h4 id="installing-nvm"><a class="anchor" href="#installing-nvm">#</a> Installing NVM</h4>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 </span></span></code></pre><p>To install Node <code>v19.0.0</code></p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>nvm install <span style="color:#ae81ff">19</span>
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>node -v
 </span></span></code></pre><p>To install a specific version use the <code>nvm install</code> command if you want to switch to a certain version of Node that you have previously installed</p>
-<h3>Importing the Test Runner</h3>
+<h3 id="importing-the-test-runner"><a class="anchor" href="#importing-the-test-runner">#</a> Importing the Test Runner</h3>
 <p>The test runner module lives inside <code>node:test</code>, below is the basic syntax for importing it into your script.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">test</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;node:test&#34;</span>;
 </span></span></code></pre><p>To run the tests, use the <code>--test</code> flag on Node and specify the folder where the tests are located at.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>node --test src/*.mjs
-</span></span></code></pre><h2>Syntax</h2>
+</span></span></code></pre><h2 id="syntax"><a class="anchor" href="#syntax">#</a> Syntax</h2>
 <p>Test is the main method that will be used to define the tests and it can be used synchronously or asynchronously. The examples below will be using the assert module which is also a built-in method.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">test</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;node:test&#34;</span>;
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">assert</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;node:assert/strict&#34;</span>;
@@ -48,7 +48,7 @@
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13</span><span>});
 </span></span></code></pre><p>To run this test, save the code above as a <code>mjs</code> file and run the following command.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>node --test ./*.mjs
-</span></span></code></pre><h3>Output</h3>
+</span></span></code></pre><h3 id="output"><a class="anchor" href="#output">#</a> Output</h3>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span>✔ synchronous passing test <span style="color:#f92672">(</span>0.72425ms<span style="color:#f92672">)</span>
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span>✔ asynchronous passing test <span style="color:#f92672">(</span>0.050875ms<span style="color:#f92672">)</span>
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span>ℹ tests <span style="color:#ae81ff">2</span>
@@ -59,11 +59,11 @@
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span><span>ℹ skipped <span style="color:#ae81ff">0</span>
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span><span>ℹ todo <span style="color:#ae81ff">0</span>
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span>ℹ duration_ms 54.186084
-</span></span></code></pre><h2>Assert</h2>
+</span></span></code></pre><h2 id="assert"><a class="anchor" href="#assert">#</a> Assert</h2>
 <p>Now that we have run a test, let's dive into how the assert method works. Assert is a method that enables a deeper level of comparison than the traditional <code>if</code> statements allow. Assert also throw <code>AssertionError's</code> notifying you of potential issues within your tests.</p>
 <p>We won't go over every method of the assert module here but I feel it's important to go over a few so you can have some background knowledge for the rest of this tutorial. <code>deepEqual</code> enables deep comparison of objects and their nested values. Below is a comparison of two multi-dimensional arrays with one value changed to a string <code>'3'</code> this will throw an assertion error</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#a6e22e">assert</span>.<span style="color:#a6e22e">deepEqual</span>([[[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>]], <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>], [[[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;3&#34;</span>]], <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>]);
-</span></span></code></pre><h3>Outputs</h3>
+</span></span></code></pre><h3 id="outputs"><a class="anchor" href="#outputs">#</a> Outputs</h3>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span>AssertionError: Expected values to be strictly deep-equal:
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span>  + actual - expected
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span>
@@ -80,11 +80,11 @@
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14</span><span>      <span style="color:#ae81ff">5</span>
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15</span><span>    <span style="color:#f92672">]</span>
 </span></span></code></pre><p>To learn more about the other methods provided by <code>assert</code> check out the official documentation <a href="https://nodejs.org/api/assert.html" title="Assert Documentation">here</a>.</p>
-<h2>Describe/It</h2>
+<h2 id="describeit"><a class="anchor" href="#describeit">#</a> Describe/It</h2>
 <p>Describe/It is an alternative syntax to the regular <code>test()</code> syntax. Describe defines the suite of tests and It defines the test inside.</p>
-<h3>Importing</h3>
+<h3 id="importing"><a class="anchor" href="#importing">#</a> Importing</h3>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">describe</span>, <span style="color:#a6e22e">it</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;node:test&#34;</span>;
-</span></span></code></pre><h3>Syntax</h3>
+</span></span></code></pre><h3 id="syntax-1"><a class="anchor" href="#syntax-1">#</a> Syntax</h3>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#a6e22e">describe</span>(<span style="color:#e6db74">&#34;A thing&#34;</span>, () =&gt; {
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span>  <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#34;should work&#34;</span>, () =&gt; {
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span>    <span style="color:#a6e22e">assert</span>.<span style="color:#a6e22e">strictEqual</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>);

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Go WebAssembly</title>
+  </head>
+  <body>
+    <pre id="output"></pre>
+    <script src="wasm_exec.js"></script>
+    <script>
+      // Initialize WebAssembly
+      const go = new Go();
+
+      // Redirect console.log to our div
+      const outputDiv = document.getElementById("output");
+      const originalConsoleLog = console.log;
+      console.log = function (message) {
+        outputDiv.innerHTML += message + "<br>";
+        originalConsoleLog.apply(console, arguments);
+      };
+
+      WebAssembly.instantiateStreaming(fetch("main.wasm"), go.importObject)
+        .then((result) => {
+          go.run(result.instance);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    </script>
+  </body>
+</html>
