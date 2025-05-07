@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Wrapper & Text Center</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a; /* Darkest background */
+            color: #f8fafc;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: start;
+            min-height: 100vh;
+            padding-top: 20px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background-color: #1e293b; /* Darker container background */
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 6px 10px -2px rgba(0, 0, 0, 0.4); /* Deeper shadow */
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #f1f5f9;
+            text-align: center;
+            margin-bottom: 32px;
+            font-size: 28px;
+        }
+
+        .input-group {
+            margin-bottom: 24px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #e2e8f0;
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        .input-group input {
+            width: calc(100% - 20px);
+            padding: 12px;
+            border: 1px solid #334155; /* Darker border */
+            border-radius: 6px;
+            background-color: #1e293b; /* Darker input background */
+            color: #f8fafc;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #6ee7b7;
+            box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.3);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #e2e8f0;
+            font-size: 16px;
+        }
+
+        .radio-group input[type="radio"] {
+            margin: 0;
+            cursor: pointer;
+            /* Remove default radio button appearance and style it ourselves */
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            width: 16px; /* Custom size */
+            height: 16px;
+            border: 1px solid #4b5563; /* Darker border */
+            border-radius: 50%; /* Make it a circle */
+            outline: none; /* Remove default outline */
+            background-color: transparent;
+            transition: border-color 0.3s ease;
+            position: relative; /* Allows us to position the checked indicator */
+        }
+
+        .radio-group input[type="radio"]:checked {
+            border-color: #6ee7b7; /* Highlight when checked */
+            background-color: #6ee7b7;
+        }
+
+        .radio-group input[type="radio"]:checked::before {
+            content: ''; /* Empty content, but we'll style it */
+            display: block;
+            width: 8px; /* Size of the inner dot */
+            height: 8px;
+            border-radius: 50%; /* Make it a circle */
+            background-color: #0f172a; /* Darkest color for the dot */
+            position: absolute; /* Position absolutely within the radio button */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Center the dot */
+        }
+
+
+        .text-area-group {
+            margin-bottom: 24px;
+        }
+
+        .text-area-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #e2e8f0;
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        .text-area-group textarea {
+            width: calc(100% - 20px);
+            padding: 12px;
+            border: 1px solid #334155; /* Darker border */
+            border-radius: 6px;
+            background-color: #1e293b; /* Darker textarea background */
+            color: #f8fafc;
+            font-size: 16px;
+            resize: none;
+            min-height: 120px;
+            transition: border-color 0.3s ease;
+        }
+
+        .text-area-group textarea:focus {
+            outline: none;
+            border-color: #6ee7b7;
+            box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.3);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 24px;
+        }
+
+        .button-group button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Slightly darker shadow */
+        }
+
+        .button-group button.copy-button {
+            background-color: #6ee7b7; /* Green */
+            color: #0f172a;
+        }
+
+        .button-group button.copy-button:hover {
+            background-color: #34d399; /* A darker shade of green */
+        }
+
+        .button-group button.reset-button {
+            background-color: #ef4444; /* Red */
+            color: #f8fafc;
+        }
+
+        .button-group button.reset-button:hover {
+            background-color: #dc2626; /* A darker shade of red */
+        }
+	#text {
+            margin-top: 24px;
+            padding: 16px;
+            border: 1px solid #334155; /* Darker border */
+            border-radius: 6px;
+            background-color: #1e293b; /* Darker output background */
+            color: #f8fafc;
+            font-size: 16px;
+            white-space: pre-wrap;
+            text-align: left;
+	    width: calc(100% - 28px);
+            min-height: 80px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        #outputWrap {
+            margin-top: 24px;
+            padding: 16px;
+            border: 1px solid #334155; /* Darker border */
+            border-radius: 6px;
+            background-color: #1e293b; /* Darker output background */
+            color: #f8fafc;
+            font-size: 16px;
+            white-space: pre-wrap;
+            text-align: left;
+            min-height: 80px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #outputCenter {
+            margin-top: 24px;
+            padding: 16px;
+            border: 1px solid #334155; /* Darker border */
+            border-radius: 6px;
+            background-color: #1e293b; /* Darker output background */
+            color: #f8fafc;
+            font-size: 16px;
+            white-space: pre-wrap;
+            min-height: 80px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+                padding: 16px;
+            }
+
+            .input-group input,
+            .text-area-group textarea {
+                width: calc(100% - 16px);
+                padding: 10px;
+            }
+
+            .button-group {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .button-group button {
+                width: 100%;
+                text-align: center;
+                padding: 10px 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .radio-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Word Wrapper & Text Center</h1>
+
+        <div class="input-group">
+            <label for="text">Text:</label>
+            <textarea id="text" placeholder="Enter your text here..."></textarea>
+        </div>
+
+        <div class="input-group">
+            <label for="width">Width:</label>
+            <input type="number" id="width" value="106" min="1">
+        </div>
+
+        <div class="input-group">
+            <label>Word Option:</label>
+            <div class="radio-group">
+                <label>
+                    <input type="radio" name="wordOption" value="break">
+                    Break
+                </label>
+                <label>
+                    <input type="radio" name="wordOption" value="keep" checked>
+                    Keep
+                </label>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="centerWidth">Center Width:</label>
+            <input type="number" id="centerWidth" value="54" min="1">
+        </div>
+
+        <div class="button-group">
+            <button class="copy-button" id="copyWrap">Copy Wrap</button>
+            <button class="copy-button" id="copyCenter">Copy Center</button>
+            <button class="reset-button" id="reset">Reset</button>
+        </div>
+
+        <div class="text-area-group">
+            <label for="outputWrap">Wrapped Output:</label>
+            <textarea id="outputWrap" readonly placeholder="Output will appear here..."></textarea>
+        </div>
+        <div class="text-area-group">
+            <label for="outputCenter">Centered Output:</label>
+            <textarea id="outputCenter" readonly placeholder="Output will appear here..."></textarea>
+        </div>
+    </div>
+
+    <script>
+        const textInput = document.getElementById('text');
+        const widthInput = document.getElementById('width');
+        const breakOption = document.querySelector('input[name="wordOption"]:checked').value;
+        const centerWidthInput = document.getElementById('centerWidth');
+        const copyWrapButton = document.getElementById('copyWrap');
+        const copyCenterButton = document.getElementById('copyCenter');
+        const resetButton = document.getElementById('reset');
+        const outputWrap = document.getElementById('outputWrap');
+        const outputCenter = document.getElementById('outputCenter');
+
+        function wordWrap(text, width, breakWord) {
+		let result = '';
+		let lines = text.split('\n');
+
+		for (let line of lines) {
+			let currentLine = '';
+			let words = line.split(' ');
+
+			for (let word of words) {
+				if (currentLine.length + word.length + (currentLine ? 1 : 0) <= width) {
+					currentLine += (currentLine ? ' ' : '') + word;
+				} else {
+					if (breakWord) {
+						let remainingSpace = width - currentLine.length;
+						if (remainingSpace > 0) {
+							let chunk = word.substring(0, remainingSpace);
+							result += currentLine ? currentLine + '\n' + chunk : chunk;
+							currentLine = word.substring(remainingSpace);
+						} else {
+							result += currentLine + '\n';
+							currentLine = word;
+						}
+						while (currentLine.length > width) {
+							let chunk = currentLine.substring(0, width);
+							result += '\n' + chunk;
+							currentLine = currentLine.substring(width);
+						}
+					} else {
+						result += currentLine + '\n';
+						currentLine = word;
+					}
+				}
+			}
+			result += currentLine + '\n';
+		}
+		return result.trim();
+	}
+
+        function centerText(text, width) {
+		if (width < 0 || width == Infinity) {
+			return;
+		}
+            let lines = text.split('\n');
+            let centeredText = '';
+            for (let line of lines) {
+                let padding = Math.floor((width - line.length) / 2);
+		    console.log(padding)
+		    if (padding < 0) {
+			padding = 0;
+		    }
+                let centeredLine = ' '.repeat(padding) + line;
+                centeredText += centeredLine + '\n';
+            }
+            return centeredText;
+        }
+
+        function updateOutput() {
+            const text = textInput.value;
+            const width = parseInt(widthInput.value);
+		console.log(width)
+            const breakWord = document.querySelector('input[name="wordOption"]:checked').value === 'break';
+            const centerWidth = parseInt(centerWidthInput.value);
+
+            const wrappedText = wordWrap(text, width, breakWord);
+            const centeredText = centerText(wrappedText, centerWidth);
+            outputWrap.value = wrappedText;
+            outputCenter.value = centeredText;
+        }
+
+        textInput.addEventListener('input', updateOutput);
+        widthInput.addEventListener('input', updateOutput);
+        centerWidthInput.addEventListener('input', updateOutput);
+        document.querySelectorAll('input[name="wordOption"]').forEach(input => {
+            input.addEventListener('change', updateOutput);
+        });
+
+        copyWrapButton.addEventListener('click', () => {
+            const text = textInput.value;
+            const width = parseInt(widthInput.value);
+            const breakWord = document.querySelector('input[name="wordOption"]:checked').value === 'break';
+            const wrappedText = wordWrap(text, width, breakWord);
+            navigator.clipboard.writeText(wrappedText).then(() => {
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        });
+
+        copyCenterButton.addEventListener('click', () => {
+            const text = textInput.value;
+            const width = parseInt(widthInput.value);
+            const breakWord = document.querySelector('input[name="wordOption"]:checked').value === 'break';
+            const centerWidth = parseInt(centerWidthInput.value);
+            const wrappedText = wordWrap(text, width, breakWord);
+            const centeredText = centerText(wrappedText, centerWidth);
+
+            navigator.clipboard.writeText(centeredText).then(() => {
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        });
+
+        resetButton.addEventListener('click', () => {
+            textInput.value = '';
+            widthInput.value = '30';
+            centerWidthInput.value = '50';
+            outputWrap.value = '';
+            outputCenter.value = '';
+            document.querySelector('input[name="wordOption"][value="break"]').checked = true;
+        });
+
+        updateOutput();
+    </script>
+</body>
+</html>
+

@@ -1,1 +1,0 @@
-Scraping search results from DuckDuckGo's Lite page using Node.js is a great way to gather data on a specific topic or group of keywords. In this blog post, we will walk through the process of scraping search results from DuckDuckGo's Lite page using the Node.js fetch and JSDOM libraries.

@@ -1,1 +1,0 @@
-Turb.js is a function caching server that turbo charges your application with safe and fast memory management. Today we will use Turb to increase the performance of static assets in our PocketBase database. Although this example is for PocketBase, Turb can be used anywhere in your application to speed up long processes.

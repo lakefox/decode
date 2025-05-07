@@ -1,0 +1,108 @@
+
+Getters/Setters vs Getter and Setter vs Universal Getter/Setter
+
+┌──────────────────────────────────────────────────────────────────────────────────────┐
+│                                                                                      │
+│     type Person structure {                                                          │
+│                                                                                      │
+│             age    int                                                               │
+│                                                                                      │
+│             name string                                                              │
+│                                                                                      │
+│     }                                                                                │
+│                                                                                      │
+└──────────────────────────────────────────────────────────────────────────────────────┘
+
+Given the Go Lang structure above, if we want to give access to 
+the private properties, we will need to add a getter and a setter.
+Here are a few ways to do this and some thoughts about each method.
+
+
+> GetValue and SetValue
+┌──────────────────────────────────────────────────────────────────────────────────────┐
+│                                                                                      │
+│      func (p *Person) GetAge() int {                                                 │
+│            return p.age                                                              │
+│      }                                                                               │
+│                                                                                      │
+│      func (p *Person) SetAge(age int) {                                              │
+│            p.age                                                                     │
+│      }                                                                               │
+│                                                                                      │
+└──────────────────────────────────────────────────────────────────────────────────────┘
+
+
+
+This is a very simple implementation of a getter and a setter.
+
+
+
+> Get and Set
+┌──────────────────────────────────────────────────────────────────────────────────────┐
+│                                                                                      │
+│      func (p *Person) Get(property string) interface{} {                             │
+│      	  var data interface{}                                                         │
+│    	  switch property {                                                            │
+│    		  case "age":                                                          │
+│    			data = p.age                                                   │
+│    	  }                                                                            │
+│    	  return data                                                                  │
+│      }                                                                               │
+│                                                                                      │
+│      func (p *Person) Set(property string, value interface{}) {                      │ 
+│    	  switch property {                                                            │ 
+│    	  case “age”:                                                                  │
+│    		p.age = value.(int)                                                    │
+│    	  }                                                                            │
+│      }                                                                               │
+│                                                                                      │
+└──────────────────────────────────────────────────────────────────────────────────────┘
+
+
+
+Universal Getter/Setter
+
+func (p *Person) Age(age ...int) int {
+	if len(age) != 0 {
+		p.age = age[0]
+	}
+	return p.age
+}
+
+
+
+0x0000 00000 (/person.go:41)	TEXT	main.(*Person).Age(SB), LEAF|NOFRAME|ABIInternal, $0-32
+0x0000 00000 (/person.go:41)	MOVD	R1, main.age+8(FP)
+0x0004 00004 (/person.go:42)	CBZ	R2, 16
+0x0008 00008 (/person.go:43)	MOVD	(R1), R1
+0x000c 00012 (/person.go:43)	MOVD	R1, (R0)
+0x0010 00016 (/person.go:45)	MOVD	(R0), R0
+0x0014 00020 (/person.go:45)	RET	(R30)
+
+
+0x0000 00000 (/person.go:15)	TEXT	main.(*Person).GetAge(SB), LEAF|NOFRAME|ABIInternal, $0-8
+0x0000 00000 (/person.go:16)	MOVD	(R0), R0
+0x0004 00004 (/person.go:16)	RET	(R30)
+
+0x0000 00000 (/person.go:19)	TEXT	main.(*Person).SetAge(SB), LEAF|NOFRAME|ABIInternal, $0-16
+0x0000 00000 (/person.go:20)	MOVD	R1, (R0)
+0x0004 00004 (/person.go:21)	RET	(R30)
+
+┌──────────────────────────────────────────────────────────┐
+│                                                          │
+│   ┌───────────────┐                                      │
+│   │               │                                      │
+│   │  R0           │                                      │
+│   └───────────────┘                                      │
+│           x                                              │
+│   ┌───────────────┐                                      │
+│   │               │                                      │
+│   │  R1           │                                      │
+│   └───────────────┘                                      │
+│           x                                              │
+│   ┌───────────────┐                                      │
+│   │               │                                      │
+│   │  R2           │                                      │
+│   └───────────────┘                                      │
+│                                                          │
+└──────────────────────────────────────────────────────────┘

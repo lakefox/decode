@@ -1,1 +1,0 @@
-Node.js is a popular JavaScript runtime that allows developers to build server-side applications with JavaScript. PM2 is a process manager for Node.js applications that helps to keep your applications running smoothly and automatically restart them in the event of any failures. Here's a guide on how to set up Node.js with PM2 and Let's Encrypt:

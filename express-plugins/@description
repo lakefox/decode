@@ -1,1 +1,0 @@
-Express plugins can be used to process POST body data, serve static files, or serve content with CORS enabled. Learn the basics of app.use.

@@ -1,1 +1,0 @@
-When building an application, if you are like me, you make multiple requests to your database per request. I recently ran into an issue with syncing the fetching of data from my database and returning a response as soon as possible. Here's how I fixed it.

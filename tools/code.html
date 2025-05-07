@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASCII Border Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+New&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Courier New', monospace; /* Monospace font for ASCII */
+            background-color: #f0f0f0;
+            color: #333;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            width: 80%;
+            max-width: 800px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 200px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace; /* Monospace font for ASCII */
+            resize: vertical;
+            box-sizing: border-box;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+                background-color: #367c39;
+        }
+
+        .button.remove {
+            background-color: #f44336;
+        }
+
+        .button.remove:hover {
+            background-color: #d32f2f;
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 10px;
+            align-items: center; /* Vertically align items */
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            margin-right: 10px;
+        }
+
+        .control-group label {
+            margin-bottom: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .control-group input, .control-group select {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            width: 100px; /* Adjust as needed */
+            box-sizing: border-box;
+        }
+        .control-group select {
+            width: 120px;
+        }
+
+        #output {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f8f8f8;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-mono">
+    <div class="container bg-white rounded-lg shadow-md p-6">
+        <h1 class="text-2xl font-bold mb-4 text-center">ASCII Border Generator</h1>
+        <textarea id="textInput" placeholder="Paste your text here..."></textarea>
+
+        <div class="button-group">
+            <button id="addBorder" class="button">Add Border</button>
+            <button id="removeBorder" class="button remove">Remove Border</button>
+        </div>
+
+        <div class="controls">
+            <div class="control-group">
+                <label for="padding">Padding:</label>
+                <input type="number" id="padding" value="1">
+            </div>
+            <div class="control-group">
+                <label for="spacing">Spacing:</label>
+                <input type="number" id="spacing" value="0">
+            </div>
+             <div class="control-group">
+                <label for="width">Width:</label>
+                <input type="number" id="width" value="51">
+            </div>
+            <div class="control-group">
+                <label for="borderStyle">Style:</label>
+                <select id="borderStyle">
+                    <option value="1">Style 1</option>
+                    <option value="2">Style 2</option>
+                    <option value="3">Style 3</option>
+                    <option value="4">Style 4</option>
+                    <option value="5">Style 5</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="cornerStyle">Corners:</label>
+                 <select id="cornerStyle">
+                    <option value="0">Square</option>
+                    <option value="1">Rounded</option>
+                    <option value="2">Fancy</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="tabSize">Tab Size:</label>
+                <input type="number" id="tabSize" value="4">
+            </div>
+        </div>
+
+        <div id="output" class="mt-4 p-4 bg-gray-50 border border-gray-300 rounded-md"></div>
+    </div>
+
+    <script>
+        const textInput = document.getElementById('textInput');
+        const addButton = document.getElementById('addBorder');
+        const removeButton = document.getElementById('removeBorder');
+        const output = document.getElementById('output');
+        const paddingInput = document.getElementById('padding');
+        const spacingInput = document.getElementById('spacing');
+        const borderStyleSelect = document.getElementById('borderStyle');
+        const cornerStyleSelect = document.getElementById('cornerStyle');
+        const widthInput = document.getElementById('width');
+        const tabSizeInput = document.getElementById('tabSize');
+
+        addButton.addEventListener('click', () => {
+            const text = textInput.value;
+            const padding = parseInt(paddingInput.value);
+            const spacing = parseInt(spacingInput.value);
+            const borderStyle = parseInt(borderStyleSelect.value);
+            const cornerStyle = parseInt(cornerStyleSelect.value);
+            const width = parseInt(widthInput.value);
+            const tabSize = parseInt(tabSizeInput.value);
+            const borderedText = addBorder(text, padding, spacing, borderStyle, cornerStyle, width, tabSize);
+            output.textContent = borderedText;
+        });
+
+        removeButton.addEventListener('click', () => {
+            const text = textInput.value;
+            const originalText = removeBorder(text);
+            output.textContent = originalText;
+        });
+
+        function addBorder(text, padding, spacing, style, cornerStyle, width, tabSize) {
+            const lines = text.split('\n');
+            let maxLineLength = 0;
+
+            // Calculate maxLineLength, accounting for tabs
+            for (const line of lines) {
+                let currentLength = 0;
+                for (let i = 0; i < line.length; i++) {
+                    if (line[i] === '\t') {
+                        currentLength += tabSize - (currentLength % tabSize); // Calculate tab expansion
+                    } else {
+                        currentLength++;
+                    }
+                }
+                maxLineLength = Math.max(maxLineLength, currentLength);
+            }
+            let totalWidth = maxLineLength + 2 * padding + 2 * spacing;
+
+            if (width > 0) {
+                totalWidth = width;
+            }
+
+            let borderChars = getBorderChars(style, cornerStyle);
+
+            let borderedText = '';
+
+            // Top border
+            borderedText += borderChars.topLeft + generateBorderLine(totalWidth, borderChars.horizontal) + borderChars.topRight + '\n';
+
+            // Top spacing
+            for (let i = 0; i < spacing; i++) {
+                borderedText += borderChars.vertical + ' '.repeat(totalWidth) + borderChars.vertical + '\n';
+            }
+
+            // Padded text
+            for (const line of lines) {
+                let paddedLine = ' '.repeat(padding);
+                let displayLength = 0;
+                for (let i = 0; i < line.length; i++) {
+                    if (line[i] === '\t') {
+                        let tabSpaces = tabSize - (displayLength % tabSize);
+                        paddedLine += ' '.repeat(tabSpaces);
+                        displayLength += tabSpaces;
+                    } else {
+                        paddedLine += line[i];
+                        displayLength++;
+                    }
+                }
+                paddedLine += ' '.repeat(padding);
+                paddedLine = paddedLine.padEnd(totalWidth - 2 * spacing, ' ').substring(0, totalWidth - 2 * spacing); // Ensure correct length and truncate if necessary.
+                borderedText += borderChars.vertical + ' '.repeat(spacing) + paddedLine + ' '.repeat(spacing) + borderChars.vertical + '\n';
+            }
+
+            // Bottom spacing
+            for (let i = 0; i < spacing; i++) {
+                borderedText += borderChars.vertical + ' '.repeat(totalWidth) + borderChars.vertical + '\n';
+            }
+
+            // Bottom border
+            borderedText += borderChars.bottomLeft + generateBorderLine(totalWidth, borderChars.horizontal) + borderChars.bottomRight + '\n';
+
+            return borderedText;
+        }
+
+        function removeBorder(text) {
+            const lines = text.split('\n');
+            if (lines.length < 3) {
+                return text; // Not enough lines for a border
+            }
+
+            const firstLineLength = lines[0].length;
+            const lastLineLength = lines[lines.length - 1].length;
+
+            if (firstLineLength < 2 || lastLineLength < 2)
+                return text;
+
+            // Check if the first and last characters of the first and last lines are border characters
+            const borderChars = {
+                topLeft: lines[0][0],
+                topRight: lines[0][firstLineLength - 1],
+                bottomLeft: lines[lines.length - 1][0],
+                bottomRight: lines[lines.length - 1][lastLineLength - 1],
+                vertical: lines[1][0], // Use the second line to get vertical
+                horizontal: lines[0][1]
+            };
+
+            const validBorderChars = [
+                '+', '-', '|',
+                '┌', '┐', '└', '┘',
+                '╔', '╗', '╚', '╝',
+                '═', '║', ' ',
+                '╭', '╮', '╰', '╯'
+            ];
+
+            if (!validBorderChars.includes(borderChars.topLeft) ||
+                !validBorderChars.includes(borderChars.topRight) ||
+                !validBorderChars.includes(borderChars.bottomLeft) ||
+                !validBorderChars.includes(borderChars.bottomRight)) {
+                return text;
+            }
+            if (!validBorderChars.includes(borderChars.vertical)) {
+                return text;
+            }
+            if (!validBorderChars.includes(borderChars.horizontal))
+                return text;
+
+
+            let extractedText = '';
+            for (let i = 1; i < lines.length - 1; i++) {
+                let line = lines[i];
+                //check if line is long enough
+                if (line.length < 2)
+                    return text;
+                extractedText += line.slice(1, line.length - 1).trimEnd() + '\n';
+            }
+            return extractedText.trimEnd();
+        }
+
+        function generateBorderLine(length, char) {
+            return char.repeat(length);
+        }
+
+        function getBorderChars(style, cornerStyle) {
+            let borderChars;
+            switch (style) {
+                case 1:
+                    borderChars = { horizontal: '-', vertical: '|' };
+                    break;
+                case 2:
+                    borderChars = { horizontal: '=', vertical: '║' };
+                    break;
+                case 3:
+                    borderChars = { horizontal: '═', vertical: '║' };
+                    break;
+                case 4:
+                    borderChars = { horizontal: '─', vertical: '│' };
+                    break;
+                case 5:
+                    borderChars = { horizontal: ' ', vertical: ' ' };
+                    break;
+                default:
+                    borderChars = { horizontal: '-', vertical: '|' };
+                    break;
+            }
+            switch (cornerStyle) {
+                case 0: // Square
+                    borderChars.topLeft = '+';
+                    borderChars.topRight = '+';
+                    borderChars.bottomLeft = '+';
+                    borderChars.bottomRight = '+';
+                    break;
+                case 1: // Rounded
+                    borderChars.topLeft = '┌';
+                    borderChars.topRight = '┐';
+                    borderChars.bottomLeft = '└';
+                    borderChars.bottomRight = '┘';
+                    break;
+                case 2: // Fancy
+                    borderChars.topLeft = '╔';
+                    borderChars.topRight = '╗';
+                    borderChars.bottomLeft = '╚';
+                    borderChars.bottomRight = '╝';
+                    break;
+                default:
+                    borderChars.topLeft = '+';
+                    borderChars.topRight = '+';
+                    borderChars.bottomLeft = '+';
+                    borderChars.bottomRight = '+';
+                    break;
+            }
+            if (style == 5) {
+                switch (cornerStyle) {
+                    case 0:
+                        borderChars.topLeft = ' ';
+                        borderChars.topRight = ' ';
+                        borderChars.bottomLeft = ' ';
+                        borderChars.bottomRight = ' ';
+                        break;
+                    case 1:
+                        borderChars.topLeft = '╭';
+                        borderChars.topRight = '╮';
+                        borderChars.bottomLeft = '╰';
+                        borderChars.bottomRight = '╯';
+                        break;
+                    case 2:
+                        borderChars.topLeft = '╭';
+                        borderChars.topRight = '╮';
+                        borderChars.bottomLeft = '╰';
+                        borderChars.bottomRight = '╯';
+                        break;
+                }
+            }
+            return borderChars;
+        }
+    </script>
+</body>
+</html>

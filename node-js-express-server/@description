@@ -1,1 +1,0 @@
-Even though Node JS has a built in HTTP request handler using a web server framework can reduce the amount of code and increase the reliability of your site. There are many options to choose from however express is one of the most popular for it's easy to use syntax and wide support.

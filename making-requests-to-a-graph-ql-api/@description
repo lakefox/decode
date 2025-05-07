@@ -1,1 +1,0 @@
-Interfacing with a GraphQL API can be done with dedicated libraries, or with custom helper functions you create. We will only be covering the custom method here.

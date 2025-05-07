@@ -1,1 +1,0 @@
-The Fetch API is a interface for making http requests using javascript in the browser and with node version +18. If you are familiar with the XMLHttpRequest or ajax() from jQuery this will feel familiar.

@@ -1,1 +1,0 @@
-The test runner API is a new set of built-in tools allowing you to natively create tests for your code. No more need for Jest, Mocha, or Ava! This will bring Node up with most modern languages (Dart, Rust, GO) and reduce the package size of your code base.

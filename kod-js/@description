@@ -1,1 +1,0 @@
-Kod.js is a code preview image generator that runs both in the browser and on Node JS. It is built using highlight.js and uses it for the themes and syntax highlighting.

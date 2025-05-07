@@ -1,0 +1,304 @@
+
+
+
+
+ /$$$$$$$  /$$$$$$$$                    
+| $$__  $$| $$_____/                    
+| $$  \ $$| $$                          
+| $$  | $$| $$$$$                       
+| $$  | $$| $$__/                       
+| $$  | $$| $$                          
+| $$$$$$$/| $$$$$$$$                    
+|_______/ |________/                    
+                                        
+                                        
+                                        
+  /$$$$$$   /$$$$$$  /$$$$$$$  /$$$$$$$$
+ /$$__  $$ /$$__  $$| $$__  $$| $$_____/
+| $$  \__/| $$  \ $$| $$  \ $$| $$      
+| $$      | $$  | $$| $$  | $$| $$$$$   
+| $$      | $$  | $$| $$  | $$| $$__/   
+| $$    $$| $$  | $$| $$  | $$| $$      
+|  $$$$$$/|  $$$$$$/| $$$$$$$/| $$$$$$$$
+ \______/  \______/ |_______/ |________/
+                                        
+                                        
+
+                                                                                                   
+Building a CodePen Type Editor from Scratch
+
+=====================================================
+Edited: May 4th 2025 
+Written by Mason Wright
+=====================================================
+
+Wanting to show live examples of code on your websites very common, if you want to do it today 
+there are a few services that provide that ability. However, if you are like me, you would rather roll 
+your own. In this tutorial, I will be building my own codepen like editor for this site.
+
+
+| Editors note: When you see "this site" referenced 
+| in this blog I am refering to a older version
+
+My goal with this is more complex than most people's use case because this site uses a markdown compiler 
+called MDXT (https://www.npmjs.com/package/mdxt); I want to include the code here into the MDXT language. 
+So with that in mind, I will have two versions and review how each works. The first version will cover 
+how to link the textarea inputs with the iframe and dynamically update it. The second one will keep the 
+core aspects of the first but will be designed to handle multiple editors on the same page.
+
+| To keep this document clean, I will not include 
+| the boilerplate HTML in the examples, but if you 
+| need it, type doc into VSCode and paste the 
+| examples in the body tag.
+
+
+
+
+		Stand Alone Editor
+
+Starting with the editor's markup, we will have three <textarea> tags in the body of the page along with a
+<iframe>. If you jump ahead and look below, you can see each textarea has a data-lang attribute. This 
+will give us a very sexy method of interacting with the document updater when we get to that point. I 
+am not including styles with this tutorial because I have yet to style my editor. I finished styling 
+the editor and have added what I came up with. I will link a breakdown of styling and adding text 
+highlighting soon.
+
++---------------------------------------------------+
+|                                                   |
+|   <textarea                                       |
+|       data-lang="html"                            |
+|       cols="30"                                   |
+|       rows="10">                                  |
+|   </textarea>                                     |
+|   <textarea                                       |
+|       data-lang="css"                             |
+|       cols="30"                                   |
+|       rows="10">                                  |
+|   </textarea>                                     |
+|   <textarea                                       |
+|       data-lang="js"                              |
+|       cols="30"                                   |
+|       rows="10">                                  |
+|   </textarea>                                     |
+|   <iframe frameborder="0"></iframe>               |
+|                                                   |
++---------------------------------------------------+
+
+Getting into the Javascript, we will encapsulate everything in a function called makeEditor. For this 
+snippet, we are not detecting iframes that will be editor previews, so I elected to grab the element 
+iframe from the document. The editable code will be stored in an object, and we will update the document 
+values as they are edited. Next, we need to get the textareas, so we use the [data-lang] attribute we 
+added to each one. Then we loop over the textarea objects setting the virtual document (the doc object) 
+to equal the value of the current state of the textarea. This is important to allow for static 
+rendering on the page load. We are using the data-lang attribute's value as the key for the 
+object; this is (in my opinion) the cleanest way to do it. It removes the need to have if statements 
+checking whether or not we have the correct input.
+
+We will use the keyup event to update the document in the iframe with the changed code. Again we are using 
+the event target's value and dataset to select and set the document state. Now getting into the part 
+where we create a virtual document, we are using the update() function to take the state of the doc object 
+that we are keeping up to date with the event listeners and transform the values into an HTML 
+document string. Once we have the HTML document, we can convert the text into a Blob that contains the 
+page. Using the URL.createObjectURL, we can take the output of the Blob and virtually create a local file 
+that we can take and set to the source of the iframe! We call the update() function at the end of the for 
+loop to initially create the iframe preview with the initial state of the textareas. This is what gives us 
+the ability to render the editor statically.
+
++---------------------------------------------------+
+|                                                   |
+|   function makeEditor() {                         |
+|    const frame = document.querySelector("iframe") |
+|    let doc = {                                    |
+|      html: "",                                    |
+|      css: "",                                     |
+|      js: "",                                      |
+|    };                                             |
+|                                                   |
+|   let ta = document.querySelectorAll( 	    |
+|			"[data-lang]"		    |
+|		);				    |
+|                                                   |
+|    for (let i = 0; i < ta.length; i++) {          |
+|      doc[ta[i].dataset.lang] = ta[i].value;       |
+|      ta[i].addEventListener("keyup", (e) => {     |
+|       doc[e.target.dataset.lang] = e.target.value |
+|       update();                                   |
+|      });                                          |
+|   }                                               |
+|   update();                                       |
+|   function update() {                             |
+|       const html = `                              |
+|       <!DOCTYPE html>                             |
+|           <html>                                  |
+|              <head>                               |
+|                 <style>${doc.css}</style>         |
+|              </head>                              |
+|          <body>                                   |
+|           ${doc.html}                             |
+|           <script>${doc.js}</script>              |
+|              </body>                              |
+|       </html>`;                                   |
+|        const blob = new Blob(`[html]`,            |
+|               { type: "text/html" }               |
+|       );                                          |
+|       frame.src = URL.createObjectURL(blob);      |
+|     }                                             |
+|   }                                               |
+|                                                   |
+|   makeEditor();                                   |
+|                                                   |
++---------------------------------------------------+
+
+
+
+
+	Creating an Editor Component
+
+http://decode.sh/screenshots/codepen-editor.png
+
+I'll be the first person to admit that I am not the greatest designer. That is why I use CSS libraries 
+for most of my styling. However, above is a screenshot of the editor we will make in this next 
+part. This version will differ from the previous, as we will be looking to render multiple editors within 
+a page without overflowing the data between them.
+
+		The Component
+
+Below is the HTML structure of the component; it works the same way as the previous one. This one is
+more structured, with the textarea's on the bottom and the iframe on top. The container div has a 
+custom editor attribute that will let us search for it in the new makeEditor function we will create. 
+From this editor div, we can style the elements inside; here, we gave the text area labels that tell
+the user what is what.
+
++---------------------------------------------------+
+|                                                   |
+|   <div editor>                                    |
+|          <iframe frameborder="0"></iframe>        |
+|          <div>                                    |
+|            <label for="html">                     |
+|              HTML                                 |
+|              <textarea                            |
+|               name="html"                         |
+|               data-lang="html"                    |
+|               cols="30"                           |
+|               rows="10">                          |
+|           </textarea>                             |
+|            </label>                               |
+|            <label for="css">                      |
+|              CSS                                  |
+|              <textarea                            |
+|                   name="css"                      |
+|               data-lang="css"                     |
+|               cols="30"                           |
+|               rows="10">                          |
+|           </textarea>                             |
+|            </label>                               |
+|            <label for="js">                       |
+|              JS                                   |
+|              <textarea                            |
+|                   name="js"                       |
+|               data-lang="js"                      |
+|               cols="30"                           |
+|               rows="10">                          |
+|           </textarea>                             |
+|            </label>                               |
+|          </div>                                   |
+|       </div>                                      |
+|                                                   |
++---------------------------------------------------+
+
+
+The Javascript works the same way as above, but we use a method of scoping the values inside of 
+functions to keep the global namespace clean. Going line by line, wefirst grab all elements with an 
+editor attribute, this is the container we defined before. We know what's inside the editor, so we can 
+pass each into a new function called spawn. The spawn function is the same code as the previous one, 
+so we can skip most of it, but one significant change we made was to pass the iframe and the doc into the 
+update function so it knows which document to pull from and where to put it at.
+
++---------------------------------------------------+
+|                                                   |
+|   function makeEditor() {                         |
+|    const frame = document.querySelector("iframe") |
+|    let doc = {                                    |
+|      html: "",                                    |
+|      css: "",                                     |
+|      js: "",                                      |
+|    };                                             |
+|                                                   |
+|   let ta = document.querySelectorAll( 	    |
+|			"[data-lang]"		    |
+|		);				    |
+|                                                   |
+|    for (let i = 0; i < ta.length; i++) {          |
+|      doc[ta[i].dataset.lang] = ta[i].value;       |
+|      ta[i].addEventListener("keyup", (e) => {     |
+|       doc[e.target.dataset.lang] = e.target.value |
+|       update();                                   |
+|      });                                          |
+|   }                                               |
+|   update();                                       |
+|   function update() {                             |
+|       const html = `                              |
+|       <!DOCTYPE html>                             |
+|           <html>                                  |
+|              <head>                               |
+|                 <style>${doc.css}</style>         |
+|              </head>                              |
+|          <body>                                   |
+|           ${doc.html}                             |
+|           <script>${doc.js}</script>              |
+|              </body>                              |
+|       </html>`;                                   |
+|        const blob = new Blob(`[html]`,            |
+|               { type: "text/html" }               |
+|       );                                          |
+|       frame.src = URL.createObjectURL(blob);      |
+|     }                                             |
+|   }                                               |
+|                                                   |
+|   makeEditor();                                   |
+|                                                   |
++---------------------------------------------------+
+
+Here is the CSS used in the screenshot if you want an idea of how I went about styling that one.
+
++---------------------------------------------------+
+|                                                   |
+|   [editor] {                                      |
+|        width: 100%;                               |
+|        background: #18232c;                       |
+|        padding: 10px;                             |
+|        margin: 20px;                              |
+|        border-radius: 4px;                        |
+|   }                                               |
+|   [editor] > iframe {                             |
+|        background: #fff;                          |
+|        width: 100%;                               |
+|        height: 300px;                             |
+|   }                                               |
+|   [editor] > div {                                |
+|        display: flex;                             |
+|        justify-content: space-between;            |
+|        height: 300px;                             |
+|        padding-top: 10px;                         |
+|   }                                               |
+|   [editor] > div > label {                        |
+|        margin-bottom: 20px;                       |
+|        color: #fff;                               |
+|        background: #cdcdcd;                       |
+|        font-family: Arial, Helvetica, sans-serif; |
+|   }                                               |
+|   [editor] > div > label > textarea {             |
+|        background: #1c2a36;                       |
+|        color: #cdcdcd;                            |
+|        padding: 10px;                             |
+|        width: 100%;                               |
+|        height: 100%;                              |
+|        border-radius: 4px;                        |
+|   }                                               |
+|                                                   |
++---------------------------------------------------+
+
+
+To add highlighting into your editor, I have built a second tutorial that shows the completed product:
+
+https://decode.sh/building-a-highlighted-text-editor-in-the-browser.txt

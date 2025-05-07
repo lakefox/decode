@@ -1,0 +1,190 @@
+
+
+
+
+ /$$$$$$$  /$$$$$$$$                    
+| $$__  $$| $$_____/                    
+| $$  \ $$| $$                          
+| $$  | $$| $$$$$                       
+| $$  | $$| $$__/                       
+| $$  | $$| $$                          
+| $$$$$$$/| $$$$$$$$                    
+|_______/ |________/                    
+                                        
+                                        
+                                        
+  /$$$$$$   /$$$$$$  /$$$$$$$  /$$$$$$$$
+ /$$__  $$ /$$__  $$| $$__  $$| $$_____/
+| $$  \__/| $$  \ $$| $$  \ $$| $$      
+| $$      | $$  | $$| $$  | $$| $$$$$   
+| $$      | $$  | $$| $$  | $$| $$__/   
+| $$    $$| $$  | $$| $$  | $$| $$      
+|  $$$$$$/|  $$$$$$/| $$$$$$$/| $$$$$$$$
+ \______/  \______/ |_______/ |________/
+                                        
+                                        
+                                        
+
+How to setup Nginx server blocks for multiple sites - Ubuntu
+
+=====================================================
+Edited: May 5th 2025 
+Written by Mason Wright
+=====================================================
+
+Setting up nginx server blocks is a process that allows you to host multiple websites on a single server.
+It is a useful technique for those who want to host multiple websites or applications on a single machine,
+as it allows you to use a single IP address and port to host multiple domains. In this article, we will
+explain how to set up nginx server blocks on a Ubuntu server.
+
+                    Prerequisites
+
+* Install Nginx for Ubuntu
+	- https://decode.sh/installing-nginx-on-ubuntu
+
+Step 1:
+Allow Nginx to pass through your firewall.
+
++---------------------------------------------------+
+|                                                   |
+|  sudo ufw allow 'Nginx HTTP'                      |
+|                                                   |
++---------------------------------------------------+
+
+Step 2:
+Create a directory for your site and configuration files.
+
++---------------------------------------------------+
+|                                                   |
+|  sudo mkdir -p /var/www/{{your_domain}}/html      |
+|                                                   |
++---------------------------------------------------+
+
+Set the ownership of the directory to the $USER environment variable.
+
++----------------------------------------------------------+
+|                                                          |
+|  sudo chown -R $USER:$USER /var/www/{{your_domain}}/html |
+|                                                          |
++----------------------------------------------------------+
+
+This allows you to read, write, and execute the files and lets other users read and execute files.
+
++---------------------------------------------------+
+|                                                   |
+|  sudo chmod -R 755 /var/www/{{your_domain}}       |
+|                                                   |
++---------------------------------------------------+
+
+Make a sample page in the directory you just created.
+
++---------------------------------------------------+
+|                                                   |
+| sudo nano /var/www/{{your_domain}}/html/index.html|
+|                                                   |
++---------------------------------------------------+
+
+Add this sample HTML file
+
++---------------------------------------------------+
+|                                                   |
+| <html>                                            |
+|   <head>                                          |
+|     <title>Welcome to {{your_domain}}!!</title>   |
+|   </head>                                         |
+|   <body>                                          |
+|     <h1>Success!</h1>                             |
+|   </body>                                         |
+| </html>                                           |
+|                                                   |
+|                                                   |
++---------------------------------------------------+
+
+Step 3:
+Creating the server block
+
++----------------------------------------------------------+
+|                                                          |
+| sudo nano /etc/nginx/sites-available/{{your_domain}}     |
+|                                                          |
++----------------------------------------------------------+
+
+Add this to the created file. Change the www to any sub-domain you want.
+
+Port
+Replace {{your_port}} with the correct port you want to be set.
+
++------------------------------------------------------------+
+|                                                            |
+| server {                                                   |
+|         listen 80;                                         |
+|         listen [::]:80;                                    |
+|                                                            |
+|         root /var/www/{{your_domain}}/html;                |
+|         index index.html index.htm index.nginx-debian.html |
+|                                                            |
+|         server_name {{your_domain}};                       |
+|                                                            |
+|   location / {                                             |
+|          proxy_pass http://localhost:{{your_port}};        |
+|          proxy_http_version 1.1;                           |
+|           proxy_set_header Upgrade $http_upgrade;          |
+|           proxy_set_header Connection 'upgrade';           |
+|           proxy_set_header Host $host;                     |
+|           proxy_cache_bypass $http_upgrade;                |
+|      }                                                     |
+| }                                                          |
+|                                                            |
++------------------------------------------------------------+
+
+Once added save the file and then we need to link the configuration file to the sites-enabled directory
+
++-------------------------------------------------------------------------------------+
+|                                                                                     |
+| sudo ln -s /etc/nginx/sites-available/{{your_domain}}/etc/nginx/sites-enabled/      |
+|                                                                                     |
++-------------------------------------------------------------------------------------+
+
+This will keep both configuration files in sync between sites-available and sites-enabled
+
+Next to prevent a possible hash bucket memory problem, open /etc/nginx/nginx.conf.
+
++---------------------------------------------------+
+|                                                   |
+| sudo nano /etc/nginx/nginx.conf                   |
+|                                                   |
++---------------------------------------------------+
+
+un-comment the line below in the http block
+
++---------------------------------------------------+
+|                                                   |
+| server_names_hash_bucket_size 64;                 |
+|                                                   |
++---------------------------------------------------+
+
+Step 4:
+Now everything should be set up, you can run the command to make sure all the formatting is done properly.
+
++---------------------------------------------------+
+|                                                   |
+| sudo nginx -t                                     |
+|                                                   |
++---------------------------------------------------+
+
+If no warning show up you are good to restart the server.
+
++---------------------------------------------------+
+|                                                   |
+| sudo systemctl restart nginx                      |
+|                                                   |
++---------------------------------------------------+
+
+              Setting up multiple sites
+
+To configure more than one domain on the same server just repeat steps 2-4.
+
+   Next learn how to set up Node.JS for production
+
+* Setting up Node.JS for Production
+	- https://decode.sh/setting-up-node-js-for-production.txt

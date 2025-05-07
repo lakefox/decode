@@ -1,1 +1,0 @@
-Here's a simple function that uses generators to chunk an array. Generators are a type of function that returns an iterator and traverse it one at a time if you use the spread operator with a generator you get a very efficient function that is easy to work with.
